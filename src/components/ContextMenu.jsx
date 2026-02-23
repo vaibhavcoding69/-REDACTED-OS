@@ -1,29 +1,30 @@
 import { useEffect, useRef } from 'react'
+import { MdRefresh, MdVisibility, MdSort, MdNote, MdSettings, MdPalette } from 'react-icons/md'
 import Settings from './apps/Settings'
 
 const MENU_ITEMS = [
-  { label: 'Refresh', icon: '🔄', action: 'refresh' },
+  { label: 'Refresh', icon: MdRefresh, action: 'refresh' },
   { type: 'divider' },
-  { label: 'View', icon: '👁️', submenu: [
+  { label: 'View', icon: MdVisibility, submenu: [
     { label: 'Large icons' },
     { label: 'Medium icons' },
     { label: 'Small icons' },
   ]},
-  { label: 'Sort by', icon: '📊', submenu: [
+  { label: 'Sort by', icon: MdSort, submenu: [
     { label: 'Name' },
     { label: 'Size' },
     { label: 'Date modified' },
     { label: 'Type' },
   ]},
   { type: 'divider' },
-  { label: 'New', icon: '📄', submenu: [
+  { label: 'New', icon: MdNote, submenu: [
     { label: 'Folder' },
     { label: 'Text Document' },
     { label: 'Shortcut' },
   ]},
   { type: 'divider' },
-  { label: 'Display settings', icon: '🖥️', action: 'display' },
-  { label: 'Personalize', icon: '🎨', action: 'personalize' },
+  { label: 'Display settings', icon: MdSettings, action: 'display' },
+  { label: 'Personalize', icon: MdPalette, action: 'personalize' },
 ]
 
 export default function ContextMenu({ x, y, onClose, onOpenApp }) {
@@ -74,13 +75,16 @@ export default function ContextMenu({ x, y, onClose, onOpenApp }) {
         if (item.type === 'divider') {
           return <div key={i} className="ctx-divider" />
         }
+        const IconComponent = item.icon
         return (
           <div
             key={i}
             className="ctx-item"
             onClick={() => handleAction(item.action)}
           >
-            <span className="ctx-icon">{item.icon}</span>
+            <span className="ctx-icon">
+              {typeof IconComponent === 'function' ? <IconComponent size={16} /> : IconComponent}
+            </span>
             <span className="ctx-label">{item.label}</span>
             {item.submenu && <span className="ctx-arrow">›</span>}
           </div>

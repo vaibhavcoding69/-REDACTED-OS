@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { MdSignalCellularAlt, MdVolumeUp, MdNotifications, MdLock, MdMenu } from 'react-icons/md'
 
 /**
  * BatteryIcon component - displays battery level with charging indicator
@@ -34,17 +35,11 @@ function BatteryIcon({ level, charging }) {
  */
 function WifiIcon() {
   return (
-    <svg
+    <MdSignalCellularAlt
       className="tb-icon"
-      viewBox="0 0 24 24"
-      width="17"
-      height="17"
-      fill="white"
-      opacity="0.85"
+      size={17}
       title="Wi-Fi"
-    >
-      <path d="M1.5 8.5C5.2 4.7 10.4 3 12 3s6.8 1.7 10.5 5.5l-2 2C17.7 7.7 14.8 6 12 6S6.3 7.7 3.5 10.5l-2-2zm10.5 2c-1.7 0-3.2.7-4.2 1.8l2 2c.5-.5 1.3-.8 2.2-.8s1.7.3 2.2.8l2-2C15.2 12.7 13.7 12 12 12zm0-5C8.7 7 5.7 8.3 3.5 10.5l2 2C7.2 10.8 9.5 10 12 10s4.8.8 6.5 2.5l2-2C18.3 8.3 15.3 7 12 7zm0 10c-.6 0-1.1.2-1.5.6L12 19l1.5-1.4c-.4-.4-.9-.6-1.5-.6z" />
-    </svg>
+    />
   )
 }
 
@@ -53,17 +48,11 @@ function WifiIcon() {
  */
 function VolumeIcon() {
   return (
-    <svg
+    <MdVolumeUp
       className="tb-icon"
-      viewBox="0 0 24 24"
-      width="17"
-      height="17"
-      fill="white"
-      opacity="0.85"
+      size={17}
       title="Volume"
-    >
-      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 s-2.99-7.86-7-8.77z" />
-    </svg>
+    />
   )
 }
 
@@ -72,17 +61,11 @@ function VolumeIcon() {
  */
 function NotifIcon() {
   return (
-    <svg
+    <MdNotifications
       className="tb-icon"
-      viewBox="0 0 24 24"
-      width="17"
-      height="17"
-      fill="white"
-      opacity="0.85"
+      size={17}
       title="Notifications"
-    >
-      <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6V11c0-3.07-1.63 -5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
-    </svg>
+    />
   )
 }
 
@@ -147,9 +130,7 @@ export default function Taskbar({
     <div className="taskbar">
       <div className="taskbar-start">
         <button className="start-button" onClick={onStartClick}>
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-          </svg>
+          <MdMenu size={16} style={{ marginRight: '4px' }} />
           Start
         </button>
       </div>
@@ -162,7 +143,11 @@ export default function Taskbar({
             onClick={() => onWindowClick(win.id)}
             title={win.title}
           >
-            {win.icon && <span className="taskbar-app-icon">{win.icon}</span>}
+            {win.icon && (
+              <span className="taskbar-app-icon">
+                {typeof win.icon === 'function' ? <win.icon size={16} /> : win.icon}
+              </span>
+            )}
             {win.title}
           </button>
         ))}
@@ -183,7 +168,7 @@ export default function Taskbar({
           <span className="tb-date">{shortDate}</span>
         </div>
         <button className="taskbar-lock" onClick={onLock}>
-          🔒
+          <MdLock size={16} />
         </button>
       </div>
 
@@ -197,7 +182,7 @@ export default function Taskbar({
           <div className="notif-list">
             {notifications.map((n) => (
               <div key={n.id} className="notif-item">
-                <span className="notif-icon">{n.icon}</span>
+                <span className="notif-icon">{n.emoji}</span>
                 <div className="notif-content">
                   <div className="notif-app">{n.app}</div>
                   <div className="notif-text">{n.text}</div>

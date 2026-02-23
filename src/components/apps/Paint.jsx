@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
+import { MdBrush, MdDelete, MdSave, MdClear } from 'react-icons/md'
 
 export default function Paint() {
   const canvasRef = useRef(null)
@@ -69,13 +70,13 @@ export default function Paint() {
             className={tool === 'brush' ? 'active' : ''}
             onClick={() => setTool('brush')}
           >
-            🖌️ Brush
+            <MdBrush size={18} /> Brush
           </button>
           <button
             className={tool === 'eraser' ? 'active' : ''}
             onClick={() => setTool('eraser')}
           >
-            🧽 Eraser
+            <MdClear size={18} /> Eraser
           </button>
         </div>
         <div className="color-group">
@@ -94,8 +95,12 @@ export default function Paint() {
           <span>{brushSize}px</span>
         </div>
         <div className="action-group">
-          <button onClick={clearCanvas}>🗑️ Clear</button>
-          <button onClick={saveImage}>💾 Save</button>
+          <button onClick={clearCanvas}>
+            <MdDelete size={18} /> Clear
+          </button>
+          <button onClick={saveImage}>
+            <MdSave size={18} /> Save
+          </button>
         </div>
       </div>
       <canvas

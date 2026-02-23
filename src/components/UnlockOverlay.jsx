@@ -32,51 +32,56 @@ export default function UnlockOverlay({ onUnlock, onCancel }) {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Escape') onCancel()
+    if (e.key === 'Enter') handleSubmit()
   }
 
   return (
     <div className="unlock-overlay" onClick={(e) => e.stopPropagation()}>
       <div className={`unlock-panel ${shake ? 'shake' : ''} ${loading ? 'loading' : ''}`}>
+
+        {/* Avatar */}
         <div className="ul-avatar-large">
-          <svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor">
+          <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
           </svg>
         </div>
 
-        <div className="ul-username">Tenzin</div>
+        {/* Username */}
+        <div className="ul-username">[REDACTED]</div>
 
+        {/* PIN input with submit arrow */}
         <form className="ul-form" onSubmit={handleSubmit}>
-          <input
-            ref={inputRef}
-            type="password"
-            value={pin}
-            onChange={(e) => {
-              setPin(e.target.value)
-              setError('')
-            }}
-            onKeyDown={handleKeyDown}
-            placeholder="PIN"
-            className="ul-pin-input"
-            autoComplete="off"
-            disabled={loading}
-            maxLength="6"
-          />
+          <div className="ul-input-row">
+            <input
+              ref={inputRef}
+              type="password"
+              value={pin}
+              onChange={(e) => { setPin(e.target.value); setError('') }}
+              onKeyDown={handleKeyDown}
+              placeholder="PIN"
+              className="ul-pin-input"
+              autoComplete="off"
+              disabled={loading}
+              maxLength="6"
+            />
+          </div>
+          <button type="submit" className="ul-submit-btn" disabled={loading} aria-label="Sign in">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
         </form>
 
         {error && <div className="ul-error">{error}</div>}
-
-        <button className="ul-forgot-btn" onClick={onCancel}>
-          I forgot my PIN
-        </button>
-
-        <button className="ul-back" onClick={onCancel}>
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="white">
-            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-          </svg>
-          Back
-        </button>
       </div>
+
+      {/* Back arrow — bottom left */}
+      <button className="ul-back" onClick={onCancel} type="button">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+        Back
+      </button>
     </div>
   )
 }
-

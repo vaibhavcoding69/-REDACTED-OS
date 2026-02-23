@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { MdCalculate, MdNote, MdFolder, MdSettings, MdPublic, MdCheckCircle, MdSchedule, MdPalette } from 'react-icons/md'
 import Calculator from './apps/Calculator'
 import Notepad from './apps/Notepad'
 import FileExplorer from './apps/FileExplorer'
@@ -9,14 +10,14 @@ import Clock from './apps/Clock'
 import Paint from './apps/Paint'
 
 const APPS = [
-  { id: 'calculator', name: 'Calculator', icon: '🧮', component: Calculator },
-  { id: 'notepad', name: 'Notepad', icon: '📝', component: Notepad },
-  { id: 'explorer', name: 'File Explorer', icon: '📁', component: FileExplorer },
-  { id: 'settings', name: 'Settings', icon: '⚙️', component: Settings },
-  { id: 'browser', name: 'Web Browser', icon: '🌐', component: Browser },
-  { id: 'todo', name: 'Todo List', icon: '✅', component: Todo },
-  { id: 'clock', name: 'Clock', icon: '🕐', component: Clock },
-  { id: 'paint', name: 'Paint', icon: '🎨', component: Paint },
+  { id: 'calculator', name: 'Calculator', icon: MdCalculate, component: Calculator },
+  { id: 'notepad', name: 'Notepad', icon: MdNote, component: Notepad },
+  { id: 'explorer', name: 'File Explorer', icon: MdFolder, component: FileExplorer },
+  { id: 'settings', name: 'Settings', icon: MdSettings, component: Settings },
+  { id: 'browser', name: 'Web Browser', icon: MdPublic, component: Browser },
+  { id: 'todo', name: 'Todo List', icon: MdCheckCircle, component: Todo },
+  { id: 'clock', name: 'Clock', icon: MdSchedule, component: Clock },
+  { id: 'paint', name: 'Paint', icon: MdPalette, component: Paint },
 ]
 
 export default function StartMenu({ isOpen, onToggle, onAppClick, onLock }) {
@@ -42,16 +43,21 @@ export default function StartMenu({ isOpen, onToggle, onAppClick, onLock }) {
           />
         </div>
         <div className="start-apps">
-          {filteredApps.length > 0 ? filteredApps.map(app => (
-            <div
-              key={app.id}
-              className="start-app-item"
-              onClick={() => onAppClick(app)}
-            >
-              <span className="start-app-icon">{app.icon}</span>
-              <span className="start-app-name">{app.name}</span>
-            </div>
-          )) : (
+          {filteredApps.length > 0 ? filteredApps.map(app => {
+            const IconComponent = app.icon
+            return (
+              <div
+                key={app.id}
+                className="start-app-item"
+                onClick={() => onAppClick(app)}
+              >
+                <span className="start-app-icon">
+                  <IconComponent size={24} />
+                </span>
+                <span className="start-app-name">{app.name}</span>
+              </div>
+            )
+          }) : (
             <div className="start-no-results">No apps found</div>
           )}
         </div>

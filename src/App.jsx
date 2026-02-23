@@ -42,10 +42,13 @@ function App() {
 
   return (
     <div
-      className="app-root"
+      className={`app-root ${phase === 'desktop' ? 'phase-desktop' : ''}`}
       onClick={phase === 'locked' ? handleScreenClick : undefined}
     >
-      <LockScreen unlocking={phase === 'unlocking'} />
+      <LockScreen 
+        unlocking={phase === 'unlocking' ? true : (phase === 'desktop' ? 'desktop' : false)} 
+        onUnlock={() => setPhase('unlocking')}
+      />
       {phase === 'unlocking' && (
         <UnlockOverlay
           onUnlock={() => setPhase('desktop')}

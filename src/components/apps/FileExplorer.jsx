@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { MdFolder, MdNote, MdImage, MdAudioFile, MdArrowUpward } from 'react-icons/md'
 
 const MOCK_FILES = [
   { name: 'Documents', type: 'folder', size: '', modified: '2024-02-20' },
@@ -9,6 +10,14 @@ const MOCK_FILES = [
   { name: 'photo.jpg', type: 'file', size: '2.5 MB', modified: '2024-02-19' },
   { name: 'song.mp3', type: 'file', size: '5.1 MB', modified: '2024-02-18' },
 ]
+
+const getFileIcon = (file) => {
+  if (file.type === 'folder') return MdFolder
+  if (file.name.endsWith('.txt')) return MdNote
+  if (file.name.endsWith('.jpg') || file.name.endsWith('.png')) return MdImage
+  if (file.name.endsWith('.mp3')) return MdAudioFile
+  return MdNote
+}
 
 export default function FileExplorer() {
   const [currentPath, setCurrentPath] = useState('C:\\Users\\User')
@@ -33,7 +42,9 @@ export default function FileExplorer() {
   return (
     <div className="file-explorer">
       <div className="explorer-toolbar">
-        <button onClick={goUp} disabled={currentPath === 'C:'}>↑</button>
+        <button onClick={goUp} disabled={currentPath === 'C:'}>
+          <MdArrowUpward size={18} />
+        </button>
         <span className="current-path">{currentPath}</span>
         <div className="view-toggle">
           <button onClick={() => setView('list')} className={view === 'list' ? 'active' : ''}>List</button>
@@ -49,7 +60,10 @@ export default function FileExplorer() {
             onDoubleClick={() => handleDoubleClick(file)}
           >
             <div className="file-icon">
-              {file.type === 'folder' ? '📁' : file.name.endsWith('.txt') ? '📄' : file.name.endsWith('.jpg') ? '🖼️' : file.name.endsWith('.mp3') ? '🎵' : '📄'}
+              {(() => {
+                const IconComponent = getFileIcon(file)
+                return <IconComponent size={32} />
+              })()}
             </div>
             <div className="file-name">{file.name}</div>
             {view === 'list' && (
