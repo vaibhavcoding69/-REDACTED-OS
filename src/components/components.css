@@ -351,6 +351,15 @@
   justify-content: center;
   color: #6b7280;
   margin-bottom: 0.25rem;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.ul-avatar-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .ul-avatar-large svg {
@@ -464,26 +473,6 @@
   max-width: 280px;
 }
 
-/* "I forgot my PIN" button — red border, Win11 style */
-.ul-forgot-btn {
-  margin-top: 0.25rem;
-  background: transparent;
-  border: 1px solid #c50f1f;
-  color: #fff;
-  padding: 0.45rem 1.2rem;
-  border-radius: 3px;
-  font-size: 0.88rem;
-  font-weight: 400;
-  cursor: pointer;
-  transition: background 0.15s;
-  font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
-  letter-spacing: 0.01em;
-}
-
-.ul-forgot-btn:hover {
-  background: rgba(197,15,31,0.15);
-}
-
 /* Back button — bottom-left */
 .ul-back {
   position: fixed;
@@ -507,15 +496,11 @@
   background: rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.9);
 }
-
-/* ====================================
-   DESKTOP CONTAINER
-   ==================================== */
-
 .desktop {
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  background: url('pexels-zhanqun-cai-1507025-3998488.jpg') no-repeat center center;
+  background-size: cover;
   overflow: hidden;
 }
 
@@ -530,6 +515,7 @@
   width: 100%;
   height: calc(100% - 44px);
   pointer-events: none;
+  user-select: none;
 }
 
 .desktop-icon {
@@ -537,33 +523,68 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 8px;
+  gap: 4px;
+  padding: 8px 4px;
+  width: 90px;
+  height: 90px;
+  border-radius: 4px;
   cursor: pointer;
   pointer-events: auto;
   user-select: none;
-  transition: background 0.2s;
+  -webkit-user-drag: none;
+  transition: all 0.1s ease;
+  border: 1px solid transparent;
 }
 
 .desktop-icon:hover {
   background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .desktop-icon.selected {
-  background: rgba(0, 120, 212, 0.3);
+  background: rgba(77, 144, 254, 0.2);
+  border: 1px solid rgba(77, 144, 254, 0.3);
+}
+
+.desktop-icon.dragging {
+  opacity: 0.8;
+  transition: none;
+  z-index: 1000;
+  cursor: grabbing;
+}
+
+.desktop-icon.selected:hover {
+  background: rgba(77, 144, 254, 0.3);
 }
 
 .icon-image {
-  font-size: 3rem;
+  margin-top: 4px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .icon-label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #fff;
   text-align: center;
-  max-width: 80px;
-  word-wrap: break-word;
+  width: 100%;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.25;
 }
 
 /* ====================================
@@ -573,59 +594,135 @@
 .start-menu-overlay {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 5000;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 44px 0 0 0;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 0 60px 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.25s ease;
+}
+
+.start-menu-overlay.open {
+  pointer-events: auto;
 }
 
 .start-menu {
-  width: 320px;
-  height: calc(100vh - 44px);
-  background: rgba(30, 30, 40, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0 12px 12px 0;
+  width: 640px;
+  max-width: 95vw;
+  height: 720px;
+  max-height: 85vh;
+  background: rgba(40, 40, 45, 0.45);
+  backdrop-filter: blur(50px) saturate(180%);
+  -webkit-backdrop-filter: blur(50px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+  box-shadow: none;
+  transform: translateY(100vh) translateZ(0);
+  will-change: transform;
+  transition: transform 0.28s cubic-bezier(0.1, 0.9, 0.2, 1);
+  visibility: hidden;
+}
+
+.start-menu-overlay.open .start-menu {
+  transform: translateY(0) translateZ(0);
+  visibility: visible;
+}
+
+@keyframes startMenuSlide {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .start-menu-header {
-  padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 32px 32px 24px 32px;
+}
+
+.start-search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.start-search-icon {
+  position: absolute;
+  left: 14px;
+  color: #0078d4;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
 }
 
 .start-search {
   width: 100%;
-  padding: 0.5rem 0.75rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
+  padding: 10px 10px 10px 42px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid #0078d4;
+  border-radius: 4px;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   outline: none;
+  transition: all 0.2s;
 }
 
-.start-search::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+.start-search:focus {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.start-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px 16px 32px;
+}
+
+.start-section-title {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.start-section-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.start-section-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .start-apps {
   flex: 1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: min-content;
+  gap: 8px;
+  padding: 0 24px;
   overflow-y: auto;
-  padding: 0.5rem 0;
 }
 
 .start-app-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 1rem;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 4px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.1s;
 }
 
 .start-app-item:hover {
@@ -633,51 +730,127 @@
 }
 
 .start-app-icon {
-  font-size: 1.5rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-app-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .start-app-name {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   color: #fff;
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 4px;
+}
+
+.rec-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.rec-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.rec-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rec-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rec-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.rec-name {
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.rec-desc {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
 }
 
 .start-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px 48px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 0 0 12px 12px;
+  /* No transitions here to prevent flickering during slide */
 }
 
 .start-user {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.start-user:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .start-user-avatar {
   width: 32px;
   height: 32px;
-  background: #0078d4;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  color: #fff;
+  overflow: hidden;
 }
 
 .start-user span {
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
-.start-power {
+.start-power-icon {
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-power-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .start-power-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
@@ -707,21 +880,38 @@
 
 .window {
   position: absolute;
-  background: #fff;
+  /* acrylic background to match start menu */
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px) saturate(180%);
   border-radius: 8px;
   pointer-events: auto;
   overflow: visible;
-  transition: box-shadow 0.2s, border-color 0.2s;
+  /* animate on mount like start menu slide */
+  transform: translateY(20px);
+  opacity: 0;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.28s cubic-bezier(0.1, 0.9, 0.2, 1), opacity 0.28s;
 }
 
 .window.focused {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 120, 212, 0.4);
   border: 1px solid rgba(0, 120, 212, 0.5);
+  /* ensure opened windows become visible */
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .window.unfocused {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;
+  /* maintain transparency/animation when unfocused */
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* helper class added at mount for smooth entry */
+.window.open {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .window.maximized {
@@ -765,6 +955,14 @@
 
 .window-title-icon {
   font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.window-title-icon img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
 }
 
 .window.unfocused .window-title {
@@ -806,11 +1004,284 @@
   height: calc(100% - 34px);
   overflow: auto;
   border-radius: 0 0 8px 8px;
+  color: #fff;
+  background: #1e1e1e; /* Consistent dark background for apps */
 }
 
 .window.maximized .window-content {
   border-radius: 0;
 }
+
+/* Base App Layout */
+.app-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(30,30,30, 0.7);
+  backdrop-filter: blur(20px);
+}
+
+.app-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(45,45,45, 0.5);
+  border-bottom: 1px solid rgba(255,255,255, 0.05);
+}
+
+.app-toolbar button, .app-toolbar label {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.app-toolbar button:hover, .app-toolbar label:hover {
+  background: rgba(255,255,255, 0.1);
+  color: #fff;
+}
+
+/* ====================================
+   APP: CALCULATOR (REVAMPED V2)
+   ==================================== */
+
+.calc-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #1f1f1f;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  user-select: none;
+}
+
+.calc-nav {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 16px;
+}
+
+.calc-nav-icon {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 18px;
+}
+
+.calc-nav-icon:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.calc-mode {
+  font-size: 20px;
+  font-weight: 600;
+  flex: 1;
+}
+
+.calc-history-btn {
+  font-size: 18px;
+}
+
+.calc-display-section {
+  padding: 24px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 120px;
+}
+
+.calc-prev-eq {
+  font-size: 14px;
+  color: #aaa;
+  height: 20px;
+}
+
+.calc-main-num {
+  font-size: 48px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.calc-memory-row {
+  display: flex;
+  padding: 0 12px;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.calc-mem-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #ddd;
+  font-size: 12px;
+  padding: 8px 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.calc-mem-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.calc-mem-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.calc-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 2px;
+  flex: 1;
+  padding: 4px;
+}
+
+.calc-btn-modern {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calc-btn-modern:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.calc-btn-modern.num {
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: 600;
+}
+
+.calc-btn-modern.num:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.calc-btn-modern.equal {
+  background: #a0c4d7;
+  color: #1a1a1a;
+  font-size: 24px;
+}
+
+.calc-btn-modern.equal:hover {
+    background: #b8d4e3;
+}
+
+/* ====================================
+   APP: NOTEPAD (REVAMPED)
+   ==================================== */
+
+.notepad-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.notepad-editor {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  color: #eee;
+  padding: 20px;
+  font-family: 'Consolas', monospace;
+  line-height: 1.5;
+}
+
+.notepad-status {
+  padding: 5px 20px;
+  background: rgba(45,45,45, 0.5);
+  border-top: 1px solid rgba(255,255,255, 0.05);
+  font-size: 11px;
+  color: #888;
+  display: flex;
+  gap: 20px;
+}
+
+/* ====================================
+   APP: TODO (REVAMPED)
+   ==================================== */
+
+.todo-container {
+  height: 100%;
+  padding: 24px;
+  background: #1e1e1e;
+}
+
+.todo-input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.todo-input {
+  flex: 1;
+  background: rgba(30,30,30, 0.5);
+  border: 1px solid rgba(255,255,255, 0.1);
+  padding: 10px 16px;
+  border-radius: 6px;
+  color: #fff;
+  outline: none;
+}
+
+.todo-input:focus { border-color: #0078d4; }
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255, 0.03);
+  padding: 12px 16px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.todo-item:hover { background: rgba(255,255,255, 0.06); }
+
+.todo-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 14px;
+}
+
+.todo-text.done {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.todo-delete {
+  opacity: 0;
+  cursor: pointer;
+  color: #ff4d4d;
+  transition: opacity 0.2s;
+}
+
+.todo-item:hover .todo-delete { opacity: 1; }
 
 /* ====================================
    WINDOW RESIZE HANDLES
@@ -870,108 +1341,239 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 44px;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  height: 48px;
+  background: rgba(28, 32, 38, 0.75);
+  backdrop-filter: blur(25px) saturate(1.5);
+  -webkit-backdrop-filter: blur(25px) saturate(1.5);
   display: flex;
   align-items: center;
-  padding: 0 1rem;
-  gap: 1rem;
-  z-index: 200;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  justify-content: space-between;
+  padding: 0 4px 0 12px;
+  z-index: 6000;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  user-select: none;
 }
 
-.taskbar-start {
-  flex-shrink: 0;
+.taskbar-left-dummy {
+  width: 200px; /* Balance the clock area on the right */
+  flex-shrink: 1;
+}
+
+.taskbar-center-box {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .start-button {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
-  padding: 0.25rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.start-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.taskbar-apps {
-  flex: 1;
-  display: flex;
-  gap: 0.25rem;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.taskbar-apps::-webkit-scrollbar {
-  display: none;
-}
-
-.taskbar-app {
-  background: rgba(255, 255, 255, 0.08);
+  justify-content: center;
+  background: transparent;
   border: none;
-  border-bottom: 2px solid transparent;
-  color: #fff;
-  padding: 0.25rem 0.65rem;
-  border-radius: 4px 4px 0 0;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  white-space: nowrap;
-  max-width: 160px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.taskbar-app:hover {
-  background: rgba(255, 255, 255, 0.18);
-}
-
-.taskbar-app.active {
-  background: rgba(255, 255, 255, 0.15);
-  border-bottom-color: #0078d4;
-}
-
-.taskbar-app.minimized {
-  opacity: 0.5;
-}
-
-.taskbar-app-icon {
-  font-size: 0.75rem;
-  flex-shrink: 0;
-}
-
-.taskbar-tray {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-
-.taskbar-lock {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
-  padding: 0.25rem;
+  width: 40px;
+  height: 40px;
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.2s;
 }
 
-.taskbar-lock:hover {
-  background: rgba(255, 255, 255, 0.2);
+.start-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.win-logo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  width: 18px;
+  height: 18px;
+}
+
+.grid-blue {
+  background: #0078d4;
+  border-radius: 1px;
+}
+
+.taskbar-apps {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.taskbar-app {
+  background: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  position: relative;
+  transition: background 0.2s;
+  border-radius: 4px;
+}
+
+.taskbar-app:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.taskbar-app-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.taskbar-app-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.taskbar-indicator {
+  position: absolute;
+  bottom: 3px;
+  width: 6px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  transition: width 0.2s, background 0.2s;
+}
+
+.taskbar-app.active .taskbar-indicator {
+  width: 16px;
+  background: #0078d4;
+}
+
+.taskbar-tray {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 100%;
+}
+
+.tray-collapse-btn {
+  padding: 0 4px;
+  color: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tray-status-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 8px;
+  height: 40px;
+  border-radius: 4px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.tray-status-group:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.taskbar-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 8px;
+  height: 40px;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.taskbar-clock:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tb-time {
+  font-size: 0.72rem;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.tb-date {
+  font-size: 0.72rem;
+  color: #fff;
+  line-height: 1;
+}
+
+.tb-show-desktop {
+  width: 5px;
+  height: 100%;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  margin-left: 4px;
+}
+
+.tb-battery-modern {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 18px;
+  gap: 1px;
+}
+
+.battery-outline {
+  width: 20px;
+  height: 10px;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  border-radius: 2px;
+  padding: 1.5px;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+.battery-fill {
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.9);
+  transition: width 0.3s ease;
+}
+
+.battery-fill.low {
+  background: rgba(255, 100, 100, 0.9);
+}
+
+.battery-cap-modern {
+  width: 2px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 0 1px 1px 0;
+  align-self: center;
+}
+
+.battery-bolt-modern {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  line-height: 0;
+}
+
+.tb-icon {
+  color: #fff;
+  opacity: 0.9;
+}
+
+.tb-battery {
+  display: flex;
+  align-items: center;
+  transform: scale(0.9);
 }
 
 /* ====================================
@@ -1191,66 +1793,251 @@
 }
 
 /* ====================================
-   APP: CALCULATOR
+   QUICK SETTINGS PANEL (REVAMPED)
    ==================================== */
 
-.calculator {
-  padding: 1rem;
-  background: #f5f5f5;
-  height: 100%;
+.quick-settings-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.quick-settings-panel {
+  position: absolute;
+  bottom: 60px;
+  right: 12px;
+  width: 360px;
+  /* match start menu acrylic look */
+  background: rgba(40, 40, 45, 0.45);
+  backdrop-filter: blur(50px) saturate(180%);
+  -webkit-backdrop-filter: blur(50px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  user-select: none;
+  /* use same slide animation as start menu for consistency */
+  animation: startMenuSlide 0.28s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+@keyframes slideQuickSettings {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.qs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.qs-item {
   display: flex;
   flex-direction: column;
-}
-
-.calc-display {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 1rem;
-  font-size: 2rem;
-  text-align: right;
-  margin-bottom: 1rem;
-  min-height: 3rem;
-  font-family: monospace;
-}
-
-.calc-buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
-  flex: 1;
-}
-
-.calc-btn {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1.2rem;
+  align-items: center;
+  gap: 6px;
   cursor: pointer;
-  transition: background 0.2s;
 }
 
-.calc-btn:hover {
-  background: #f0f0f0;
+.qs-icon-wrapper {
+  width: 100%;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s;
 }
 
-.calc-btn.op {
-  background: #e0e0e0;
+.qs-item.active .qs-icon-wrapper {
+  background: #0067c0;
+  border-color: #0078d4;
 }
 
-.calc-btn.clear {
-  background: #ff6b6b;
+.qs-item:hover .qs-icon-wrapper {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.qs-item.active:hover .qs-icon-wrapper {
+  background: #1078cc;
+}
+
+.qs-split-icon {
+  position: absolute;
+  right: 6px;
+  opacity: 0.6;
+}
+
+.qs-label {
+  font-size: 12px;
+  color: #ccc;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+}
+
+.qs-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 4px;
+}
+
+.qs-slider-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qs-slider-icon {
+  color: #fff;
+  opacity: 0.8;
+}
+
+.qs-slider-container {
+  flex: 1;
+  position: relative;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.qs-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  outline: none;
+  position: relative;
+}
+
+.qs-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 4px solid #111;
+  box-shadow: 0 0 0 1px #fff;
+}
+
+.qs-slider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: var(--progress, 0%);
+  background: #0078d4;
+  border-radius: 2px;
+}
+
+/* ====================================
+   CALENDAR PANEL (REVAMPED)
+   ==================================== */
+
+.calendar-panel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.calendar-panel {
+  position: absolute;
+  bottom: 60px;
+  right: 12px;
+  width: 360px;
+  max-height: calc(100vh - 120px);
+  /* same acrylic as start menu */
+  background: rgba(40, 40, 45, 0.45);
+  backdrop-filter: blur(50px) saturate(180%);
+  -webkit-backdrop-filter: blur(50px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  overflow: hidden;
+  animation: startMenuSlide 0.28s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+.calendar-header-section {
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar-notifications {
+  padding: 0 12px 12px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.notif-item-modern {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.calendar-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px;
+}
+
+.calendar-grid-container {
+  margin-top: 12px;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.cal-day {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cal-day:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cal-day.today {
+  background: #0078d4;
   color: #fff;
 }
 
-.calc-btn.equals {
-  background: #4caf50;
-  color: #fff;
-  grid-column: span 2;
-}
-
-.calc-btn.zero {
-  grid-column: span 2;
+.cal-day.other-month {
+  color: rgba(255, 255, 255, 0.2);
 }
 
 /* ====================================
@@ -3706,6 +4493,7 @@
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
   pointer-events: none;
+  margin-bottom: 20px;
 }
 
 .w11-cards-row--in {
@@ -3716,23 +4504,23 @@
 
 /* ── Shared card base ─────────────────────────────────────────────────────────── */
 .w11-card {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(50px) saturate(1.8);
-  -webkit-backdrop-filter: blur(50px) saturate(1.8);
-  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(25px) saturate(1.8);
+  -webkit-backdrop-filter: blur(25px) saturate(1.8);
+  border: 1px solid rgba(255,255,255,0.18);
   border-radius: 12px;
   padding: 12px;
   color: #fff;
   width: 176px;
-  height: 120px;
+  height: 124px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, border-color 0.2s;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
 }
 
 .w11-card::after {
@@ -3747,11 +4535,10 @@
 }
 
 .w11-card:hover {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255,255,255,0.4);
-  transform: translateY(-30px) scale(1.3);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  z-index: 1000;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255,255,255,0.45);
+  transform: translateY(-10px) scale(1.08);
+  z-index: 100;
 }
 
 /* ── Card shared elements ─────────────────────────────────────────────────────── */
@@ -4115,9 +4902,8 @@
     flex-direction: column;
     align-items: center;
     bottom: 70px;
-    max-height: 55vh;
-    overflow-y: auto;
-    scrollbar-width: none;
+    max-height: 60vh;
+    overflow: visible;
   }
   .w11-cards-row::-webkit-scrollbar { display: none; }
   .w11-card { min-width: 280px; width: 88vw; }

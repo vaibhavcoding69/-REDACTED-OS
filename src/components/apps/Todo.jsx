@@ -1,15 +1,15 @@
-import { useState } from 'react'
+﻿import React, { useState } from 'react'
 
 export default function Todo() {
   const [todos, setTodos] = useState([
-    { id: 1, text: 'Welcome to ReactOS!', completed: false },
-    { id: 2, text: 'Build more apps', completed: false },
+    { id: 1, text: 'Plan next project', completed: false },
+    { id: 2, text: 'Fix text visibility', completed: true },
+    { id: 3, text: 'Revamp apps', completed: true },
   ])
   const [newTodo, setNewTodo] = useState('')
-  const [filter, setFilter] = useState('all') // all, active, completed
 
-  const addTodo = () => {
-    if (newTodo.trim()) {
+  const addTodo = (e) => {
+    if (e.key === 'Enter' && newTodo.trim()) {
       setTodos([...todos, {
         id: Date.now(),
         text: newTodo.trim(),
@@ -29,67 +29,45 @@ export default function Todo() {
     setTodos(todos.filter(todo => todo.id !== id))
   }
 
-  const clearCompleted = () => {
-    setTodos(todos.filter(todo => !todo.completed))
-  }
-
-  const filteredTodos = todos.filter(todo => {
-    if (filter === 'active') return !todo.completed
-    if (filter === 'completed') return todo.completed
-    return true
-  })
-
-  const activeCount = todos.filter(todo => !todo.completed).length
-
   return (
-    <div className="todo-app">
-      <h2>Todo List</h2>
-      <div className="todo-input">
+    <div className="todo-container">
+      <h2 style={{ marginBottom: '20px', fontWeight: 500, color: '#fff' }}>Tasks</h2>
+      
+      <div className="todo-input-row">
         <input
+          className="todo-input"
           type="text"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && addTodo()}
-          placeholder="What needs to be done?"
+          onKeyDown={addTodo}
+          placeholder="Add a task"
         />
-        <button onClick={addTodo}>Add</button>
       </div>
-      <div className="todo-filters">
-        <button
-          className={filter === 'all' ? 'active' : ''}
-          onClick={() => setFilter('all')}
-        >
-          All ({todos.length})
-        </button>
-        <button
-          className={filter === 'active' ? 'active' : ''}
-          onClick={() => setFilter('active')}
-        >
-          Active ({activeCount})
-        </button>
-        <button
-          className={filter === 'completed' ? 'active' : ''}
-          onClick={() => setFilter('completed')}
-        >
-          Completed ({todos.length - activeCount})
-        </button>
-        {todos.some(todo => todo.completed) && (
-          <button onClick={clearCompleted}>Clear Completed</button>
-        )}
-      </div>
-      <ul className="todo-list">
-        {filteredTodos.map(todo => (
-          <li key={todo.id} className={todo.completed ? 'completed' : ''}>
+
+      <div className="todo-list">
+        {todos.map(todo => (
+          <div key={todo.id} className="todo-item">
             <input
               type="checkbox"
+              className="todo-checkbox"
               checked={todo.completed}
               onChange={() => toggleTodo(todo.id)}
             />
-            <span>{todo.text}</span>
-            <button onClick={() => deleteTodo(todo.id)}>×</button>
-          </li>
+            <span className={	odo-text } style={{ color: todo.completed ? '#888' : '#fff' }}>
+              {todo.text}
+            </span>
+            <span className="todo-delete" onClick={() => deleteTodo(todo.id)}>
+              ✕
+            </span>
+          </div>
         ))}
-      </ul>
+      </div>
+
+      {todos.length === 0 && (
+        <div style={{ textAlign: 'center', marginTop: '40px', opacity: 0.5 }}>
+          <p>No more tasks!</p>
+        </div>
+      )}
     </div>
   )
 }

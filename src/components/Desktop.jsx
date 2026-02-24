@@ -4,6 +4,8 @@ import DesktopIcons from './DesktopIcons'
 import Taskbar from './Taskbar'
 import WindowManager from './WindowManager'
 import ContextMenu from './ContextMenu'
+import QuickSettings from './QuickSettings'
+import CalendarPanel from './CalendarPanel'
 
 /**
  * Desktop component - main container with windows, start menu, and taskbar
@@ -11,6 +13,8 @@ import ContextMenu from './ContextMenu'
  */
 export default function Desktop({ onLock }) {
   const [startMenuOpen, setStartMenuOpen] = useState(false)
+  const [quickSettingsOpen, setQuickSettingsOpen] = useState(false)
+  const [calendarOpen, setCalendarOpen] = useState(false)
   const [windows, setWindows] = useState([])
   const [nextId, setNextId] = useState(1)
   const [focusedId, setFocusedId] = useState(null)
@@ -94,7 +98,12 @@ export default function Desktop({ onLock }) {
     <div
       className="desktop"
       onContextMenu={handleContextMenu}
-      onClick={() => { closeContextMenu(); setStartMenuOpen(false) }}
+      onClick={() => { 
+        closeContextMenu(); 
+        setStartMenuOpen(false);
+        setQuickSettingsOpen(false);
+        setCalendarOpen(false);
+      }}
     >
       <DesktopIcons onDoubleClick={openApp} />
       <StartMenu
@@ -102,6 +111,14 @@ export default function Desktop({ onLock }) {
         onToggle={() => setStartMenuOpen(!startMenuOpen)}
         onAppClick={openApp}
         onLock={onLock}
+      />
+      <QuickSettings 
+        isOpen={quickSettingsOpen} 
+        onClose={() => setQuickSettingsOpen(false)} 
+      />
+      <CalendarPanel 
+        isOpen={calendarOpen} 
+        onClose={() => setCalendarOpen(false)} 
       />
       <WindowManager
         windows={windows}
@@ -123,6 +140,8 @@ export default function Desktop({ onLock }) {
       )}
       <Taskbar
         onStartClick={(e) => { e?.stopPropagation(); setStartMenuOpen(!startMenuOpen) }}
+        onQuickSettingsClick={(e) => { e?.stopPropagation(); setQuickSettingsOpen(!quickSettingsOpen) }}
+        onCalendarClick={(e) => { e?.stopPropagation(); setCalendarOpen(!calendarOpen) }}
         onLock={onLock}
         windows={windows}
         onWindowClick={(id) => {

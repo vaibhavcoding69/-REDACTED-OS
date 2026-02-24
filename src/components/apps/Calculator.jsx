@@ -1,89 +1,107 @@
-import { useState } from 'react'
+﻿import React, { useState } from 'react'
+import { MdMenu, MdHistory, MdFullscreenExit, MdBackspace } from 'react-icons/md'
 
 export default function Calculator() {
   const [display, setDisplay] = useState('0')
-  const [previous, setPrevious] = useState(null)
-  const [operation, setOperation] = useState(null)
+  const [equation, setEquation] = useState('')
+  const [shouldReset, setShouldReset] = useState(false)
 
-  const inputNumber = (num) => {
-    if (display === '0') {
-      setDisplay(num.toString())
+  const handleDigit = (digit) => {
+    if (display === '0' || shouldReset) {
+      setDisplay(digit)
+      setShouldReset(false)
     } else {
-      setDisplay(display + num)
+      setDisplay(display + digit)
     }
   }
 
-  const inputOperation = (op) => {
-    if (previous === null) {
-      setPrevious(parseFloat(display))
-      setDisplay('0')
-    } else if (operation) {
-      const current = parseFloat(display)
-      const result = calculate(previous, current, operation)
-      setDisplay(result.toString())
-      setPrevious(result)
-    }
-    setOperation(op)
+  const handleOperator = (op) => {
+    setEquation(display + ' ' + op + ' ')
+    setShouldReset(true)
   }
 
-  const calculate = (first, second, op) => {
-    switch (op) {
-      case '+': return first + second
-      case '-': return first - second
-      case '*': return first * second
-      case '/': return second !== 0 ? first / second : 'Error'
-      default: return second
+  const handleEqual = () => {
+    try {
+      if (!equation) return
+      const fullEq = equation + display
+      const mathEq = fullEq.replace('×', '*').replace('÷', '/').replace('−', '-')
+      const result = eval(mathEq)
+      setDisplay(String(result))
+      setEquation('')
+      setShouldReset(true)
+    } catch (e) {
+      setDisplay('Error')
     }
   }
 
-  const equals = () => {
-    const current = parseFloat(display)
-    if (previous !== null && operation) {
-      const result = calculate(previous, current, operation)
-      setDisplay(result.toString())
-      setPrevious(null)
-      setOperation(null)
-    }
-  }
-
-  const clear = () => {
+  const clearAll = () => {
     setDisplay('0')
-    setPrevious(null)
-    setOperation(null)
+    setEquation('')
   }
 
-  const backspace = () => {
-    setDisplay(display.length > 1 ? display.slice(0, -1) : '0')
-  }
-
-  const decimal = () => {
-    if (!display.includes('.')) {
-      setDisplay(display + '.')
-    }
-  }
+  const handleInverse = () => setDisplay(String(1 / parseFloat(display)))
+  const handleSquare = () => setDisplay(String(Math.pow(parseFloat(display), 2)))
+  const handleSqrt = () => setDisplay(String(Math.sqrt(parseFloat(display))))
+  const handleSign = () => setDisplay(String(parseFloat(display) * -1))
+  const handlePercent = () => setDisplay(String(parseFloat(display) / 100))
 
   return (
-    <div className="calculator">
-      <div className="calc-display">{display}</div>
-      <div className="calc-buttons">
-        <button onClick={clear} className="calc-btn clear">C</button>
-        <button onClick={backspace} className="calc-btn">⌫</button>
-        <button onClick={() => inputOperation('/')} className="calc-btn op">÷</button>
-        <button onClick={() => inputNumber(7)} className="calc-btn">7</button>
-        <button onClick={() => inputNumber(8)} className="calc-btn">8</button>
-        <button onClick={() => inputNumber(9)} className="calc-btn">9</button>
-        <button onClick={() => inputOperation('*')} className="calc-btn op">×</button>
-        <button onClick={() => inputNumber(4)} className="calc-btn">4</button>
-        <button onClick={() => inputNumber(5)} className="calc-btn">5</button>
-        <button onClick={() => inputNumber(6)} className="calc-btn">6</button>
-        <button onClick={() => inputOperation('-')} className="calc-btn op">−</button>
-        <button onClick={() => inputNumber(1)} className="calc-btn">1</button>
-        <button onClick={() => inputNumber(2)} className="calc-btn">2</button>
-        <button onClick={() => inputNumber(3)} className="calc-btn">3</button>
-        <button onClick={() => inputOperation('+')} className="calc-btn op">+</button>
-        <button onClick={() => inputNumber(0)} className="calc-btn zero">0</button>
-        <button onClick={decimal} className="calc-btn">.</button>
-        <button onClick={equals} className="calc-btn equals">=</button>
+    <div className="calc-container">
+      <div className="calc-nav">
+        <MdMenu className="calc-nav-icon" />
+        <span className="calc-mode">Standard</span>
+        <div style={{ display: 'flex', gap: '4px' }}>
+          <MdFullscreenExit className="calc-nav-icon" style={{ rotate: '45deg' }} />
+          <MdHistory className="calc-nav-icon" />
+        </div>
+      </div>
+
+      <div className="calc-display-section">
+        <div className="calc-prev-eq">{equation}</div>
+        <div className="calc-main-num">{display}</div>
+      </div>
+
+      <div className="calc-memory-row">
+        <button className="calc-mem-btn" disabled>MC</button>
+        <button className="calc-mem-btn" disabled>MR</button>
+        <button className="calc-mem-btn">M+</button>
+        <button className="calc-mem-btn">M-</button>
+        <button className="calc-mem-btn">MS</button>
+        <button className="calc-mem-btn" disabled>Mv</button>
+      </div>
+
+      <div className="calc-btn-grid">
+        <button className="calc-btn-modern" onClick={handlePercent}>%</button>
+        <button className="calc-btn-modern" onClick={() => setDisplay('0')}>CE</button>
+        <button className="calc-btn-modern" onClick={clearAll}>C</button>
+        <button className="calc-btn-modern" onClick={() => setDisplay(display.length > 1 ? display.slice(0, -1) : '0')}>
+           <MdBackspace />
+        </button>
+
+        <button className="calc-btn-modern" onClick={handleInverse}>1/x</button>
+        <button className="calc-btn-modern" onClick={handleSquare}>x²</button>
+        <button className="calc-btn-modern" onClick={handleSqrt}>²√x</button>
+        <button className="calc-btn-modern" onClick={() => handleOperator('÷')}>÷</button>
+
+        <button className="calc-btn-modern num" onClick={() => handleDigit('7')}>7</button>
+        <button className="calc-btn-modern num" onClick={() => handleDigit('8')}>8</button>
+        <button className="calc-btn-modern num" onClick={() => handleDigit('9')}>9</button>
+        <button className="calc-btn-modern" onClick={() => handleOperator('×')}>×</button>
+
+        <button className="calc-btn-modern num" onClick={() => handleDigit('4')}>4</button>
+        <button className="calc-btn-modern num" onClick={() => handleDigit('5')}>5</button>
+        <button className="calc-btn-modern num" onClick={() => handleDigit('6')}>6</button>
+        <button className="calc-btn-modern" onClick={() => handleOperator('−')}>−</button>
+
+        <button className="calc-btn-modern num" onClick={() => handleDigit('1')}>1</button>
+        <button className="calc-btn-modern num" onClick={() => handleDigit('2')}>2</button>
+        <button className="calc-btn-modern num" onClick={() => handleDigit('3')}>3</button>
+        <button className="calc-btn-modern" onClick={() => handleOperator('+')}>+</button>
+
+        <button className="calc-btn-modern" onClick={handleSign}>+/-</button>
+        <button className="calc-btn-modern num" onClick={() => handleDigit('0')}>0</button>
+        <button className="calc-btn-modern" onClick={() => display.includes('.') ? null : setDisplay(display + '.')}>.</button>
+        <button className="calc-btn-modern equal" onClick={handleEqual}>=</button>
       </div>
     </div>
   )

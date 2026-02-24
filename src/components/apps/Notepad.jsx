@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+﻿import React, { useState, useRef } from 'react'
 
 export default function Notepad() {
   const [content, setContent] = useState('')
@@ -33,32 +33,40 @@ export default function Notepad() {
   const charCount = content.length
 
   return (
-    <div className="notepad">
-      <div className="notepad-toolbar">
-        <button onClick={handleNew}>New</button>
+    <div className="notepad-container">
+      <div className="app-toolbar">
+        <button onClick={handleNew}>File</button>
         <label>
           Open
           <input type="file" accept=".txt" onChange={handleLoad} style={{ display: 'none' }} />
         </label>
         <button onClick={handleSave}>Save</button>
-        <select value={fontSize} onChange={(e) => setFontSize(Number(e.target.value))}>
+        <select 
+          value={fontSize} 
+          onChange={(e) => setFontSize(Number(e.target.value))}
+          style={{ background: 'transparent', border: 'none', color: '#ccc', fontSize: '13px' }}
+        >
           <option value={12}>12px</option>
           <option value={14}>14px</option>
           <option value={16}>16px</option>
           <option value={18}>18px</option>
           <option value={20}>20px</option>
         </select>
-        <div className="notepad-stats">
-          Words: {wordCount} | Chars: {charCount}
-        </div>
       </div>
       <textarea
         ref={textareaRef}
+        className="notepad-editor"
         value={content}
         onChange={(e) => setContent(e.target.value)}
         style={{ fontSize: `${fontSize}px` }}
         placeholder="Start typing..."
       />
+      <div className="notepad-status">
+        <span>Ln 1, Col 1</span>
+        <span>{charCount} characters</span>
+        <span>{wordCount} words</span>
+        <span>UTF-8</span>
+      </div>
     </div>
   )
 }

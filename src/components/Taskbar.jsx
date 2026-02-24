@@ -5,27 +5,25 @@ import { MdSignalCellularAlt, MdVolumeUp, MdNotifications, MdLock, MdMenu } from
  * BatteryIcon component - displays battery level with charging indicator
  */
 function BatteryIcon({ level, charging }) {
-  const filled = Math.round((level / 100) * 4)
-  const col = level > 20 ? '#ffffff' : '#ff6b6b'
-
   return (
     <div
-      className="tb-battery"
+      className="tb-battery-modern"
       title={`${level}%${charging ? ' · Charging' : ''}`}
     >
-      <div className="tb-battery-body" style={{ borderColor: col }}>
-        {[0, 1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="tb-battery-bar"
-            style={{
-              background: i < filled ? col : 'rgba(255,255,255,0.15)',
-            }}
-          />
-        ))}
+      <div className="battery-outline">
+        <div 
+          className={`battery-fill ${level <= 20 ? 'low' : ''}`}
+          style={{ width: `${level}%` }} 
+        />
+        {charging && (
+          <div className="battery-bolt-modern">
+            <svg viewBox="0 0 24 24" width="8" height="8" fill="white">
+              <path d="M11 21h-1l1-7H7.5c-.8 0-1.2-.5-.9-1.2.3-.7 1.2-1.8 2.7-3.3s2.9-3.2 2.9-3.2h1l-1 7h3.5c.8 0 1.2.5.9 1.2-.3.7-5.6 10.8-5.6 10.8z"/>
+            </svg>
+          </div>
+        )}
       </div>
-      <div className="tb-battery-cap" style={{ background: col }} />
-      {charging && <span className="tb-battery-bolt">⚡</span>}
+      <div className="battery-cap-modern" />
     </div>
   )
 }
@@ -35,11 +33,9 @@ function BatteryIcon({ level, charging }) {
  */
 function WifiIcon() {
   return (
-    <MdSignalCellularAlt
-      className="tb-icon"
-      size={17}
-      title="Wi-Fi"
-    />
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="white" opacity="0.9" title="Wi-Fi">
+      <path d="M1 9l2 2c2.9-2.9 6.9-4.7 11-4.7s8.1 1.8 11 4.7l2-2C23.9 5.7 18.3 3 12 3S.1 5.7 1 9zm4 4 2 2c1.6-1.6 3.8-2.6 6-2.6s4.4 1 6 2.6l2-2C19.1 11 15.7 9.4 12 9.4s-7.1 1.6-9 3.6zm4 4 3 3 3-3a4.237 4.237 0 0 0-3-1.2c-1.1 0-2.2.4-3 1.2z"/>
+    </svg>
   )
 }
 
@@ -48,11 +44,9 @@ function WifiIcon() {
  */
 function VolumeIcon() {
   return (
-    <MdVolumeUp
-      className="tb-icon"
-      size={17}
-      title="Volume"
-    />
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="white" opacity="0.9" title="Volume">
+      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+    </svg>
   )
 }
 
@@ -74,6 +68,8 @@ function NotifIcon() {
  */
 export default function Taskbar({
   onStartClick,
+  onQuickSettingsClick,
+  onCalendarClick,
   onLock,
   windows,
   onWindowClick,
@@ -83,7 +79,7 @@ export default function Taskbar({
   const [time, setTime] = useState(new Date())
   const [notifOpen, setNotifOpen] = useState(false)
   const [notifications] = useState([
-    { id: 1, app: 'System', text: 'Welcome to ReactOS!', time: 'Just now', icon: '💻' },
+    { id: 1, app: 'System', text: 'Welcome to [REDACTED]OS!', time: 'Just now', icon: '💻' },
     { id: 2, app: 'Security', text: 'Your device is protected.', time: '2m ago', icon: '🛡️' },
     { id: 3, app: 'Updates', text: 'System is up to date.', time: '15m ago', icon: '✅' },
   ])
@@ -128,48 +124,57 @@ export default function Taskbar({
 
   return (
     <div className="taskbar">
-      <div className="taskbar-start">
-        <button className="start-button" onClick={onStartClick}>
-          <MdMenu size={16} style={{ marginRight: '4px' }} />
-          Start
-        </button>
-      </div>
+      <div className="taskbar-left-dummy" />
 
-      <div className="taskbar-apps">
-        {windows.map((win) => (
-          <button
-            key={win.id}
-            className={`taskbar-app ${win.minimized ? 'minimized' : ''} ${focusedId === win.id ? 'active' : ''}`}
-            onClick={() => onWindowClick(win.id)}
-            title={win.title}
-          >
-            {win.icon && (
-              <span className="taskbar-app-icon">
-                {typeof win.icon === 'function' ? <win.icon size={16} /> : win.icon}
-              </span>
-            )}
-            {win.title}
-          </button>
-        ))}
+      <div className="taskbar-center-box">
+        <button className="start-button" onClick={onStartClick} title="Start">
+          <img src="https://img.icons8.com/fluency/48/windows-11.png" alt="Start" width={28} height={28} />
+        </button>
+
+        <div className="taskbar-apps">
+          {windows.map((win) => (
+            <button
+              key={win.id}
+              className={`taskbar-app ${win.minimized ? 'minimized' : ''} ${focusedId === win.id ? 'active' : ''}`}
+              onClick={() => onWindowClick(win.id)}
+              title={win.title}
+            >
+              <div className="taskbar-app-inner">
+                {win.icon && (
+                  <span className="taskbar-app-icon">
+                    {typeof win.icon === 'function' ? (
+                      <win.icon size={22} />
+                    ) : typeof win.icon === 'string' && win.icon.startsWith('http') ? (
+                      <img src={win.icon} alt={win.title} width={24} height={24} />
+                    ) : (
+                      <span style={{ fontSize: '20px' }}>{win.icon}</span>
+                    )}
+                  </span>
+                )}
+                <div className="taskbar-indicator" />
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="taskbar-tray">
-        <WifiIcon />
-        <VolumeIcon />
-        {battery && (
-          <BatteryIcon level={battery.level} charging={battery.charging} />
-        )}
-        <button className="tb-notif-btn" onClick={(e) => { e.stopPropagation(); setNotifOpen(!notifOpen) }}>
-          <NotifIcon />
-          {notifications.length > 0 && <span className="notif-badge">{notifications.length}</span>}
-        </button>
-        <div className="taskbar-clock">
+        <div className="tray-collapse-btn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="white" opacity="0.7">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+          </svg>
+        </div>
+        <div className="tray-status-group" onClick={onQuickSettingsClick}>
+          <WifiIcon />
+          <VolumeIcon />
+          {battery && (
+            <BatteryIcon level={battery.level} charging={battery.charging} />
+          )}
+        </div>
+        <div className="taskbar-clock" onClick={onCalendarClick}>
           <span className="tb-time">{shortTime}</span>
           <span className="tb-date">{shortDate}</span>
         </div>
-        <button className="taskbar-lock" onClick={onLock}>
-          <MdLock size={16} />
-        </button>
       </div>
 
       {/* Notification Center */}
