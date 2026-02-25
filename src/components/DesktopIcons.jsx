@@ -29,28 +29,36 @@ export default function DesktopIcons({ onDoubleClick }) {
   const [dragging, setDragging] = useState(null)
   const dragOffset = useRef({ x: 0, y: 0 })
 
+  const dragStartRef = useRef(null)
+
   const handleMouseDown = (e, app) => {
     if (e.button !== 0) return // Only left click
-    
+
     setSelected(app.id)
-    setDragging(app.id)
-    
-    dragOffset.current = {
-      x: e.clientX - app.x,
-      y: e.clientY - app.y
-    }
+
+    // record potential drag start but don't mark dragging yet
+    dragStartRef.current = { id: app.id, startX: e.clientX, startY: e.clientY }
+    dragOffset.current = { x: e.clientX - app.x, y: e.clientY - app.y }
   }
 
   useEffect(() => {
     const handleMouseMove = (e) => {
+      // If a drag was initiated by movement beyond threshold, setDragging
+      if (!dragging && dragStartRef.current) {
+        const dx = Math.abs(e.clientX - dragStartRef.current.startX)
+        const dy = Math.abs(e.clientY - dragStartRef.current.startY)
+        if (dx > 6 || dy > 6) {
+          setDragging(dragStartRef.current.id)
+        }
+      }
+
       if (!dragging) return
 
       setApps(prevApps => prevApps.map(app => {
         if (app.id === dragging) {
-          // Clamp to screen boundaries
           const newX = Math.max(0, Math.min(window.innerWidth - 90, e.clientX - dragOffset.current.x))
           const newY = Math.max(0, Math.min(window.innerHeight - 134, e.clientY - dragOffset.current.y))
-          
+
           return {
             ...app,
             x: newX,
@@ -62,6 +70,9 @@ export default function DesktopIcons({ onDoubleClick }) {
     }
 
     const handleMouseUp = () => {
+      // Clear potential drag start
+      dragStartRef.current = null
+
       if (!dragging) return
 
       // Snap to grid on release
@@ -77,7 +88,7 @@ export default function DesktopIcons({ onDoubleClick }) {
       setDragging(null)
     }
 
-    if (dragging) {
+    if (dragging || dragStartRef.current) {
       window.addEventListener('mousemove', handleMouseMove)
       window.addEventListener('mouseup', handleMouseUp)
     }
@@ -103,7 +114,8 @@ export default function DesktopIcons({ onDoubleClick }) {
           style={{
             left: app.x,
             top: app.y,
-            zIndex: dragging === app.id ? 100 : 1
+            zIndex: dragging === app.id ? 100 : 1,
+            cursor: dragging === app.id ? 'grabbing' : 'default'
           }}
           onMouseDown={(e) => handleMouseDown(e, app)}
           onClick={(e) => handleClick(app, e)}
