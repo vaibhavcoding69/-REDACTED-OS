@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useUser } from '../contexts/UserContext'
 import Calculator from './apps/Calculator'
 import Notepad from './apps/Notepad'
 import FileExplorer from './apps/FileExplorer'
@@ -7,7 +8,7 @@ import Browser from './apps/Browser'
 import Todo from './apps/Todo'
 import Clock from './apps/Clock'
 import Paint from './apps/Paint'
-
+import Terminal from './apps/Terminal'
 const APPS = [
   { id: 'calculator', name: 'Calculator', icon: 'https://img.icons8.com/fluency/48/calculator.png', component: Calculator },
   { id: 'notepad', name: 'Notepad', icon: 'https://img.icons8.com/fluency/48/notepad.png', component: Notepad },
@@ -17,12 +18,12 @@ const APPS = [
   { id: 'todo', name: 'Todo List', icon: 'https://img.icons8.com/fluency/48/checkmark.png', component: Todo },
   { id: 'clock', name: 'Clock', icon: 'https://img.icons8.com/fluency/48/alarm-clock.png', component: Clock },
   { id: 'paint', name: 'Paint', icon: 'https://img.icons8.com/fluency/48/microsoft-paint.png', component: Paint },
+  { id: 'terminal', name: 'Terminal', icon: 'https://img.icons8.com/fluency/48/console.png', component: Terminal },
 ]
-
 export default function StartMenu({ isOpen, onToggle, onAppClick, onLock }) {
+  const { user } = useUser()
   const [search, setSearch] = useState('')
   const searchRef = useRef(null)
-
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => {
@@ -32,11 +33,9 @@ export default function StartMenu({ isOpen, onToggle, onAppClick, onLock }) {
       setSearch('')
     }
   }, [isOpen])
-
   const filteredApps = APPS.filter(app =>
     app.name.toLowerCase().includes(search.toLowerCase())
   )
-
   return (
     <div className={`start-menu-overlay ${isOpen ? 'open' : ''}`} onClick={() => onToggle()}>
       <div className="start-menu" onClick={(e) => e.stopPropagation()}>
@@ -67,7 +66,6 @@ export default function StartMenu({ isOpen, onToggle, onAppClick, onLock }) {
             </svg>
           </button>
         </div>
-
         <div className="start-apps">
           {filteredApps.length > 0 ? filteredApps.map(app => {
             return (
@@ -89,20 +87,16 @@ export default function StartMenu({ isOpen, onToggle, onAppClick, onLock }) {
         <div className="start-footer">
           <div className="start-user">
             <div className="start-user-avatar">
-              <img src="https://avatars.githubusercontent.com/u/189115938?v=4&size=32" alt="U" width={32} height={32} />
+              <img src={user.avatar} alt={user.name} width={32} height={32} />
             </div>
-            <span>Vaibhav Sharma</span>
+            <span>{user.name}</span>
           </div>
           <div className="start-power-icon" title="Power" onClick={() => {
-            // Browsers only allow window.close() if opened via script
-            // We try it anyway, then fallback to a lock screen + message
             try {
               window.close();
             } catch (e) {
               console.warn("window.close() blocked by browser security");
             }
-            
-            // Fallback: Lockdown the UI or show a hint
             if (onLock) onLock();
             alert("To shut down, please close this browser tab manualy.");
           }}>

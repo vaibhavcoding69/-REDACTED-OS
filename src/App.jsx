@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import LockScreen from './components/LockScreen'
 import UnlockOverlay from './components/UnlockOverlay'
 import Desktop from './components/Desktop'
-import './App.css'
 import './components/components.css'
 
 /**
@@ -42,13 +41,10 @@ function App() {
 
   return (
     <div
-      className={`app-root ${phase === 'desktop' ? 'phase-desktop' : ''}`}
+      className="app-root"
       onClick={phase === 'locked' ? handleScreenClick : undefined}
     >
-      <LockScreen 
-        unlocking={phase === 'unlocking' ? true : (phase === 'desktop' ? 'desktop' : false)} 
-        onUnlock={() => setPhase('unlocking')}
-      />
+      <LockScreen unlocking={phase === 'unlocking'} />
       {phase === 'unlocking' && (
         <UnlockOverlay
           onUnlock={() => setPhase('desktop')}

@@ -10,37 +10,30 @@ import {
   MdSportsBasketball,
   MdOutlineInsights
 } from 'react-icons/md'
-
 const MARKETS_SEED = [
   { name: 'S&P 500', base: 5241.53, change: +0.32 },
   { name: 'NASDAQ',  base: 16401.84, change: +0.20 },
 ]
-
 function formatClock(d) {
   let h = d.getHours()
   const m = d.getMinutes().toString().padStart(2, '0')
   h = h % 12 || 12
   return `${h}:${m}`
 }
-
 function formatDate(d) {
   return d.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' })
 }
-
 function jitter(val, spread) {
   return parseFloat((val + (Math.random() - 0.5) * spread).toFixed(2))
 }
-
 function WeatherCard() {
   const [temp, setTemp] = useState(83)
   const [location, setLocation] = useState('New York')
   const [loading, setLoading] = useState(true)
-
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 800)
     return () => clearTimeout(timer)
   }, [])
-
   return (
     <div className="w11-card">
       <div className="w11-card-header">
@@ -60,10 +53,8 @@ function WeatherCard() {
     </div>
   )
 }
-
 function MarketsCard() {
   const [markets, setMarkets] = useState(MARKETS_SEED.map(m => ({ ...m })))
-
   useEffect(() => {
     const id = setInterval(() => {
       setMarkets(prev => prev.map(m => ({
@@ -74,7 +65,6 @@ function MarketsCard() {
     }, 5000)
     return () => clearInterval(id)
   }, [])
-
   return (
     <div className="w11-card">
       <div className="w11-card-header">
@@ -98,7 +88,6 @@ function MarketsCard() {
     </div>
   )
 }
-
 function TrendingCard() {
   return (
     <div className="w11-card">
@@ -122,33 +111,27 @@ function TrendingCard() {
     </div>
   )
 }
-
 export default function LockScreen({ onUnlock, unlocking }) {
   const [time, setTime] = useState(new Date())
   const [showCards, setShowCards] = useState(false)
   const [isFullyUnlocked, setIsFullyUnlocked] = useState(false)
-
   useEffect(() => {
     if (unlocking === 'desktop') {
       const timer = setTimeout(() => setIsFullyUnlocked(true), 650)
       return () => clearTimeout(timer)
     }
   }, [unlocking])
-
   useEffect(() => {
     const id = setInterval(() => setTime(new Date()), 1000)
     return () => clearInterval(id)
   }, [])
-
   useEffect(() => {
     const id = setTimeout(() => setShowCards(true), 600)
     return () => clearTimeout(id)
   }, [])
-
   const handleUnlock = useCallback(() => {
     if (onUnlock && !unlocking) onUnlock()
   }, [onUnlock, unlocking])
-
   useEffect(() => {
     const onKey = (e) => { 
       if (e.key !== 'Escape' && !unlocking) handleUnlock() 
@@ -156,9 +139,7 @@ export default function LockScreen({ onUnlock, unlocking }) {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [handleUnlock, unlocking])
-
   if (isFullyUnlocked) return null
-
   return (
     <div
       className={`w11-lock ${unlocking === true ? 'w11-blurred' : ''} ${unlocking === 'desktop' ? 'w11-lock--out' : ''}`}
@@ -169,21 +150,18 @@ export default function LockScreen({ onUnlock, unlocking }) {
     >
       <div 
         className="w11-lock-bg-container" 
-        style={{ backgroundImage: `url('pexels-zhanqun-cai-1507025-3998488.jpg')` }}
+        style={{ backgroundImage: `url('/pexels-zhanqun-cai-1507025-3998488.jpg')` }}
         aria-hidden="true" 
       />
-      
       <div className="w11-clock-area">
         <div className="w11-time">{formatClock(time)}</div>
         <div className="w11-date">{formatDate(time)}</div>
       </div>
-
       <div className={`w11-cards-row ${showCards ? 'w11-cards-row--in' : ''}`}>
         <WeatherCard />
         <MarketsCard />
         <TrendingCard />
       </div>
-
       <div className="w11-status-bar" onClick={e => e.stopPropagation()}>
         <button className="w11-status-btn" title="Network">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="white">
@@ -196,7 +174,6 @@ export default function LockScreen({ onUnlock, unlocking }) {
           </svg>
         </button>
       </div>
-
       {!unlocking && (
         <div className="w11-signin-hint">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="white" opacity="0.6">

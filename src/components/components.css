@@ -1,7 +1,3 @@
-/* ====================================
-   LOCK SCREEN STYLES
-   ==================================== */
-
 .lock-screen {
   position: fixed;
   inset: 0;
@@ -18,17 +14,13 @@
   opacity: 1;
   transition: opacity 0.8s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 .lock-screen.bg-ready {
   opacity: 1;
 }
-
 .lock-screen.slide-up {
   transform: translateY(-100%);
   pointer-events: none;
 }
-
-/* Overlay on lock screen background */
 .lock-overlay {
   position: absolute;
   inset: 0;
@@ -40,40 +32,30 @@
   );
   z-index: 0;
 }
-
-/* Spotlight effect on lock screen */
 .lock-spotlight {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
-
-/* Taskbar for lock screen */
 .lock-taskbar {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 44px;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(18px) saturate(1.6);
-  -webkit-backdrop-filter: blur(18px) saturate(1.6);
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 0 1rem;
   gap: 0.75rem;
   z-index: 10;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
-
 .lock-taskbar-icons {
   display: flex;
   align-items: center;
   gap: 0.55rem;
 }
-
-/* Lock screen content area */
 .lock-content {
   position: relative;
   z-index: 1;
@@ -83,7 +65,6 @@
   gap: 0.35rem;
   padding-bottom: 4rem;
 }
-
 .lock-time {
   font-size: clamp(5rem, 14vw, 9rem);
   font-weight: 200;
@@ -92,7 +73,6 @@
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
   margin-top: 0.25rem;
 }
-
 .lock-date {
   font-size: clamp(1.1rem, 2.5vw, 1.6rem);
   font-weight: 400;
@@ -100,11 +80,6 @@
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
   margin-bottom: 0.5rem;
 }
-
-/* ====================================
-   WEATHER WIDGET
-   ==================================== */
-
 .weather-widget {
   display: flex;
   align-items: center;
@@ -119,50 +94,38 @@
   min-width: 180px;
   justify-content: center;
 }
-
 .weather-widget.loading {
   opacity: 0.6;
   font-size: 0.85rem;
 }
-
 .weather-widget.error {
   opacity: 0.6;
   font-size: 0.85rem;
   color: #ffa07a;
 }
-
 .weather-icon {
   font-size: 2rem;
   line-height: 1;
 }
-
 .weather-details {
   display: flex;
   flex-direction: column;
   gap: 1px;
 }
-
 .weather-temp {
   font-size: 1.4rem;
   font-weight: 600;
   line-height: 1.1;
 }
-
 .weather-label {
   font-size: 0.8rem;
   opacity: 0.8;
 }
-
 .weather-sub {
   font-size: 0.72rem;
   opacity: 0.65;
   margin-top: 1px;
 }
-
-/* ====================================
-   UNLOCK HINT ANIMATION
-   ==================================== */
-
 .unlock-hint {
   display: flex;
   flex-direction: column;
@@ -171,17 +134,14 @@
   margin-top: 1.5rem;
   opacity: 0.7;
 }
-
 .chevron-up {
   animation: bobUp 2s ease-in-out infinite;
 }
-
 .unlock-hint p {
   font-size: 0.8rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
-
 @keyframes bobUp {
   0%,
   100% {
@@ -191,11 +151,6 @@
     transform: translateY(-6px);
   }
 }
-
-/* ====================================
-   TASKBAR (Lock Screen)
-   ==================================== */
-
 .taskbar {
   position: absolute;
   bottom: 10px;
@@ -216,12 +171,10 @@
   border: 1px solid rgba(255, 255, 255, 0.04);
   transition: all 0.3s ease;
 }
-
 .taskbar:active {
   transform: translateY(0px);
   box-shadow: 0 6px 15px rgba(6, 18, 36, 0.5);
 }
-
 .notification-date-section {
   display: flex;
   flex-direction: column;
@@ -233,14 +186,11 @@
   background: rgba(255, 255, 255, 0.02);
   margin-right: 8px;
 }
-
 .notification-date-section:hover,
 .notification-date-section:active {
-  /* no highlight or lift */
   background: rgba(255, 255, 255, 0.02);
   transform: none;
 }
-
 .tb-time {
   font-size: 0.86rem;
   color: #fff;
@@ -248,15 +198,12 @@
   line-height: 1.2;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
-
 .tb-date {
   font-size: 0.72rem;
   color: rgba(255, 255, 255, 0.75);
   line-height: 1;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
-
-/* System Icons Section */
 .system-icons-section {
   display: flex;
   align-items: center;
@@ -267,54 +214,39 @@
   transition: all 0.2s ease;
   background: rgba(255, 255, 255, 0.02);
 }
-
 .system-icons-section:hover,
 .system-icons-section:active {
-  /* no highlight or lift */
   background: rgba(255, 255, 255, 0.02);
   transform: none;
 }
-
 .system-icons-section svg {
   transition: all 0.2s ease;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
-
 .system-icons-section:hover svg {
   transform: scale(1.05);
   filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
 }
-
-/* Battery specific styling */
 .system-icons-section svg[title*="Battery"] {
   position: relative;
 }
-
 .system-icons-section svg[title*="Battery"] rect:last-child {
   transition: fill 0.3s ease;
 }
-
-/* WiFi signal strength animation */
 @keyframes wifi-pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.6; }
 }
-
 .system-icons-section svg[title="Wi-Fi"] {
   animation: wifi-pulse 3s infinite;
 }
-
-/* Speaker volume levels */
 @keyframes speaker-wave {
   0%, 100% { transform: scaleY(1); }
   50% { transform: scaleY(1.2); }
 }
-
 .system-icons-section svg[title="Volume"] path:last-child {
   animation: speaker-wave 2s infinite;
 }
-
-/* Start button enhanced styling */
 .start-button {
   width: 40px;
   height: 40px;
@@ -329,7 +261,6 @@
   position: relative;
   overflow: hidden;
 }
-
 .start-button::before {
   content: '';
   position: absolute;
@@ -343,8 +274,6 @@
   transition: all 0.15s ease;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
-
-/* Remove start-button hover highlights and motion */
 .start-button:hover::before {
   opacity: 0;
 }
@@ -357,19 +286,13 @@
   transform: none;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
-
-/* Taskbar animations and effects */
 @keyframes taskbar-glow {
   0%, 100% { box-shadow: 0 8px 20px rgba(6, 18, 36, 0.6); }
   50% { box-shadow: 0 8px 25px rgba(6, 18, 36, 0.8), 0 0 30px rgba(59, 130, 246, 0.1); }
 }
-
-/* taskbar-glow animation disabled to prevent continuous motion */
 .taskbar {
   animation: none;
 }
-
-/* Responsive design for taskbar */
 @media (max-width: 1024px) {
   .taskbar {
     left: 8px;
@@ -377,31 +300,25 @@
     height: 46px;
     padding: 0 8px;
   }
-
   .notification-date-section {
     padding: 3px 6px;
     margin-right: 4px;
   }
-
   .system-icons-section {
     gap: 8px;
     padding: 4px 8px;
   }
-
   .start-button {
     width: 38px;
     height: 38px;
   }
-
   .tb-time {
     font-size: 0.8rem;
   }
-
   .tb-date {
     font-size: 0.68rem;
   }
 }
-
 @media (max-width: 768px) {
   .taskbar {
     bottom: 8px;
@@ -409,150 +326,114 @@
     right: 6px;
     height: 44px;
   }
-
   .taskbar-left {
     min-width: 100px;
   }
-
   .taskbar-right {
     min-width: 140px;
     gap: 6px;
   }
-
   .notification-date-section {
-    display: none; /* Hide date on very small screens */
+    display: none; 
   }
-
   .system-icons-section {
     gap: 6px;
   }
-
   .start-button {
     width: 36px;
     height: 36px;
   }
 }
-
 @media (max-width: 480px) {
   .taskbar {
     height: 42px;
     padding: 0 6px;
   }
-
   .system-icons-section svg {
     width: 14px;
     height: 14px;
   }
-
   .start-button img {
     width: 20px;
     height: 20px;
   }
 }
-
-/* Dark mode variations */
 @media (prefers-color-scheme: dark) {
   .taskbar {
     background: rgba(10, 20, 40, 0.75);
     border-color: rgba(255, 255, 255, 0.06);
   }
-
   .notification-date-section {
     background: rgba(255, 255, 255, 0.03);
   }
-
   .system-icons-section {
     background: rgba(255, 255, 255, 0.03);
   }
 }
-
-/* High contrast mode */
 @media (prefers-contrast: high) {
   .taskbar {
     background: rgba(0, 0, 0, 0.9);
     border: 2px solid rgba(255, 255, 255, 0.3);
   }
-
   .tb-time {
     color: #fff;
     font-weight: 600;
   }
-
   .tb-date {
     color: rgba(255, 255, 255, 0.9);
   }
-
   .system-icons-section svg {
     fill: #fff;
   }
 }
-
-/* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .taskbar {
     animation: none;
   }
-
   .start-button,
   .notification-date-section,
   .system-icons-section {
     transition: none;
   }
-
   .start-button:hover img {
     transform: none;
   }
-
   .system-icons-section svg[title="Wi-Fi"] {
     animation: none;
   }
-
   .system-icons-section svg[title="Volume"] path:last-child {
     animation: none;
   }
 }
-
-/* Focus states for accessibility */
 .start-button:focus,
 .notification-date-section:focus,
 .system-icons-section:focus {
   outline: 2px solid rgba(59, 130, 246, 0.6);
   outline-offset: 2px;
 }
-
 .start-button:focus:not(:focus-visible),
 .notification-date-section:focus:not(:focus-visible),
 .system-icons-section:focus:not(:focus-visible) {
   outline: none;
 }
-
-/* Print styles */
 @media print {
   .taskbar {
     display: none;
   }
 }
-
-/* Taskbar in fullscreen mode */
 .taskbar.fullscreen {
   display: none;
 }
-
-/* Taskbar with expanded sections */
 .taskbar.expanded .notification-date-section {
   min-width: 120px;
 }
-
 .taskbar.expanded .system-icons-section {
   min-width: 100px;
 }
-
-/* Loading state for taskbar */
 .taskbar.loading {
   opacity: 0.7;
   pointer-events: none;
 }
-
 .taskbar.loading::after {
   content: '';
   position: absolute;
@@ -563,48 +444,35 @@
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
   animation: loading-shimmer 2s infinite;
 }
-
 @keyframes loading-shimmer {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
-
-/* Error state */
 .taskbar.error {
   border-color: rgba(239, 68, 68, 0.5);
   box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
 }
-
-/* Success state */
 .taskbar.success {
   border-color: rgba(34, 197, 94, 0.5);
   box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
 }
-
-/* Custom scrollbar for taskbar overflow (if needed) */
 .taskbar-center::-webkit-scrollbar {
   height: 4px;
 }
-
 .taskbar-center::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
 }
-
 .taskbar-center::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.3);
   border-radius: 2px;
 }
-
 .taskbar-center::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
 }
-
-/* Tooltip styles for taskbar elements */
 .taskbar [title] {
   position: relative;
 }
-
 .taskbar [title]:hover::after {
   content: attr(title);
   position: absolute;
@@ -621,7 +489,6 @@
   margin-bottom: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
 .taskbar [title]:hover::before {
   content: '';
   position: absolute;
@@ -632,95 +499,69 @@
   border-top-color: rgba(0, 0, 0, 0.9);
   z-index: 1000;
 }
-
-/* Advanced hover effects */
 .start-button:hover {
   background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
 }
-
 .notification-date-section:hover {
   background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
 }
-
 .system-icons-section:hover {
   background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
 }
-
-/* Pulse animation for active elements */
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 }
-
 .taskbar .active {
-  /* disable pulsing of active icons */
   animation: none;
 }
-
-/* Gradient backgrounds for special states */
 .taskbar.christmas {
   background: linear-gradient(135deg, rgba(16, 30, 60, 0.7), rgba(139, 69, 19, 0.7));
   border-color: rgba(255, 215, 0, 0.3);
 }
-
 .taskbar.halloween {
   background: linear-gradient(135deg, rgba(16, 30, 60, 0.7), rgba(255, 140, 0, 0.7));
   border-color: rgba(255, 165, 0, 0.3);
 }
-
 .taskbar.new-year {
   background: linear-gradient(135deg, rgba(16, 30, 60, 0.7), rgba(0, 191, 255, 0.7));
   border-color: rgba(255, 255, 255, 0.3);
 }
-
-/* Seasonal animations */
 .taskbar.christmas .start-button:hover img {
   animation: christmas-twinkle 1s infinite;
 }
-
 @keyframes christmas-twinkle {
   0%, 100% { filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)); }
   50% { filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.8)); }
 }
-
 .taskbar.halloween .system-icons-section:hover svg {
   animation: halloween-glow 1s infinite alternate;
 }
-
 @keyframes halloween-glow {
   0% { filter: drop-shadow(0 0 5px rgba(255, 140, 0, 0.5)); }
   100% { filter: drop-shadow(0 0 10px rgba(255, 140, 0, 1)); }
 }
-
 .taskbar.new-year .notification-date-section:hover {
   animation: new-year-sparkle 1s infinite;
 }
-
 @keyframes new-year-sparkle {
   0%, 100% { box-shadow: 0 0 5px rgba(0, 191, 255, 0.3); }
   50% { box-shadow: 0 0 15px rgba(0, 191, 255, 0.8), 0 0 25px rgba(0, 191, 255, 0.4); }
 }
-
-/* Performance optimizations */
 .taskbar {
   will-change: transform, box-shadow;
   contain: layout style paint;
 }
-
 .start-button,
 .notification-date-section,
 .system-icons-section {
   will-change: transform;
 }
-
-/* GPU acceleration for animations */
 .taskbar *,
 .taskbar *::before,
 .taskbar *::after {
   transform: translateZ(0);
 }
-
-/* Custom properties for theming */
 .taskbar {
   --taskbar-bg: rgba(16, 30, 60, 0.7);
   --taskbar-border: rgba(255, 255, 255, 0.04);
@@ -729,78 +570,62 @@
   background: var(--taskbar-bg);
   border-color: var(--taskbar-border);
 }
-
-/* Theme variants */
 .taskbar.theme-light {
   --taskbar-bg: rgba(255, 255, 255, 0.8);
   --taskbar-border: rgba(0, 0, 0, 0.1);
   --taskbar-hover: rgba(0, 0, 0, 0.05);
   --taskbar-shadow: rgba(0, 0, 0, 0.2);
 }
-
 .taskbar.theme-dark {
   --taskbar-bg: rgba(10, 10, 10, 0.8);
   --taskbar-border: rgba(255, 255, 255, 0.1);
   --taskbar-hover: rgba(255, 255, 255, 0.1);
   --taskbar-shadow: rgba(0, 0, 0, 0.8);
 }
-
 .taskbar.theme-blue {
   --taskbar-bg: rgba(59, 130, 246, 0.7);
   --taskbar-border: rgba(255, 255, 255, 0.2);
   --taskbar-hover: rgba(255, 255, 255, 0.1);
   --taskbar-shadow: rgba(59, 130, 246, 0.4);
 }
-
 .taskbar.theme-green {
   --taskbar-bg: rgba(34, 197, 94, 0.7);
   --taskbar-border: rgba(255, 255, 255, 0.2);
   --taskbar-hover: rgba(255, 255, 255, 0.1);
   --taskbar-shadow: rgba(34, 197, 94, 0.4);
 }
-
 .taskbar.theme-purple {
   --taskbar-bg: rgba(147, 51, 234, 0.7);
   --taskbar-border: rgba(255, 255, 255, 0.2);
   --taskbar-hover: rgba(255, 255, 255, 0.1);
   --taskbar-shadow: rgba(147, 51, 234, 0.4);
 }
-
-/* Size variants */
 .taskbar.size-small {
   height: 40px;
 }
-
 .taskbar.size-small .start-button {
   width: 32px;
   height: 32px;
 }
-
 .taskbar.size-small .system-icons-section svg {
   width: 12px;
   height: 12px;
 }
-
 .taskbar.size-large {
   height: 56px;
 }
-
 .taskbar.size-large .start-button {
   width: 48px;
   height: 48px;
 }
-
 .taskbar.size-large .system-icons-section svg {
   width: 18px;
   height: 18px;
 }
-
-/* Position variants */
 .taskbar.position-top {
   top: 10px;
   bottom: auto;
 }
-
 .taskbar.position-left {
   left: 10px;
   right: auto;
@@ -812,14 +637,12 @@
   justify-content: flex-start;
   padding: 12px 0;
 }
-
 .taskbar.position-left .taskbar-center {
   position: static;
   transform: none;
   order: 2;
   margin: 20px 0;
 }
-
 .taskbar.position-left .taskbar-left,
 .taskbar.position-left .taskbar-right {
   min-width: auto;
@@ -827,7 +650,6 @@
   flex-direction: column;
   gap: 12px;
 }
-
 .taskbar.position-right {
   right: 10px;
   left: auto;
@@ -839,14 +661,12 @@
   justify-content: flex-start;
   padding: 12px 0;
 }
-
 .taskbar.position-right .taskbar-center {
   position: static;
   transform: none;
   order: 2;
   margin: 20px 0;
 }
-
 .taskbar.position-right .taskbar-left,
 .taskbar.position-right .taskbar-right {
   min-width: auto;
@@ -854,45 +674,34 @@
   flex-direction: column;
   gap: 12px;
 }
-
-/* Animation variants */
 .taskbar.animation-fade {
   animation: fade-in 0.5s ease;
 }
-
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
 .taskbar.animation-slide-up {
   animation: slide-up 0.5s ease;
 }
-
 @keyframes slide-up {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-
 .taskbar.animation-slide-down {
   animation: slide-down 0.5s ease;
 }
-
 @keyframes slide-down {
   from { transform: translateY(-20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-
 .taskbar.animation-scale {
   animation: scale-in 0.3s ease;
 }
-
 @keyframes scale-in {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
-
-/* Interaction variants */
 .taskbar.interaction-ripple .start-button:active::after,
 .taskbar.interaction-ripple .notification-date-section:active::after,
 .taskbar.interaction-ripple .system-icons-section:active::after {
@@ -903,199 +712,149 @@
   background: rgba(255, 255, 255, 0.2);
   animation: ripple 0.4s ease-out;
 }
-
 @keyframes ripple {
   0% { transform: scale(0); opacity: 1; }
   100% { transform: scale(2); opacity: 0; }
 }
-
 .taskbar.interaction-glow:hover {
   box-shadow: 0 8px 20px rgba(6, 18, 36, 0.6), 0 0 30px rgba(59, 130, 246, 0.2);
 }
-
 .taskbar.interaction-lift:hover {
   transform: translateY(-2px);
 }
-
-/* State variants */
 .taskbar.state-minimized {
   opacity: 0.5;
   transform: translateY(5px);
 }
-
 .taskbar.state-maximized {
   box-shadow: 0 12px 30px rgba(6, 18, 36, 0.8);
 }
-
 .taskbar.state-focused {
   border-color: rgba(59, 130, 246, 0.3);
   box-shadow: 0 8px 20px rgba(6, 18, 36, 0.6), 0 0 20px rgba(59, 130, 246, 0.2);
 }
-
 .taskbar.state-blurred {
   backdrop-filter: blur(20px) saturate(1.6);
   -webkit-backdrop-filter: blur(20px) saturate(1.6);
 }
-
-/* Custom icon sets */
 .taskbar.icon-set-minimal .system-icons-section svg {
   stroke-width: 2;
   fill: none;
   stroke: #fff;
 }
-
 .taskbar.icon-set-filled .system-icons-section svg {
   fill: #fff;
   stroke: none;
 }
-
 .taskbar.icon-set-outline .system-icons-section svg {
   fill: none;
   stroke: #fff;
   stroke-width: 1.5;
 }
-
-/* Font variants */
 .taskbar.font-mono .tb-time,
 .taskbar.font-mono .tb-date {
   font-family: 'Courier New', monospace;
 }
-
 .taskbar.font-sans .tb-time,
 .taskbar.font-sans .tb-date {
   font-family: 'Segoe UI', sans-serif;
 }
-
 .taskbar.font-serif .tb-time,
 .taskbar.font-serif .tb-date {
   font-family: 'Times New Roman', serif;
 }
-
-/* Color variants */
 .taskbar.color-warm .tb-time {
   color: #ffeb3b;
 }
-
 .taskbar.color-cool .tb-time {
   color: #00bcd4;
 }
-
 .taskbar.color-neutral .tb-time {
   color: #fff;
 }
-
-/* Spacing variants */
 .taskbar.spacing-compact {
   padding: 0 8px;
   gap: 0.5rem;
 }
-
 .taskbar.spacing-compact .notification-date-section {
   margin-right: 4px;
 }
-
 .taskbar.spacing-compact .system-icons-section {
   gap: 8px;
   padding: 4px 8px;
 }
-
 .taskbar.spacing-relaxed {
   padding: 0 16px;
   gap: 1rem;
 }
-
 .taskbar.spacing-relaxed .notification-date-section {
   margin-right: 12px;
 }
-
 .taskbar.spacing-relaxed .system-icons-section {
   gap: 16px;
   padding: 8px 12px;
 }
-
-/* Border radius variants */
 .taskbar.radius-none {
   border-radius: 0;
 }
-
 .taskbar.radius-small {
   border-radius: 6px;
 }
-
 .taskbar.radius-large {
   border-radius: 12px;
 }
-
 .taskbar.radius-full {
   border-radius: 24px;
 }
-
-/* Shadow variants */
 .taskbar.shadow-none {
   box-shadow: none;
 }
-
 .taskbar.shadow-soft {
   box-shadow: 0 4px 12px rgba(6, 18, 36, 0.4);
 }
-
 .taskbar.shadow-strong {
   box-shadow: 0 8px 25px rgba(6, 18, 36, 0.7);
 }
-
 .taskbar.shadow-colored {
   box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
 }
-
-/* Opacity variants */
 .taskbar.opacity-low {
   opacity: 0.6;
 }
-
 .taskbar.opacity-medium {
   opacity: 0.8;
 }
-
 .taskbar.opacity-high {
   opacity: 1;
 }
-
-/* Blur variants */
 .taskbar.blur-none {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   background: rgba(16, 30, 60, 0.9);
 }
-
 .taskbar.blur-light {
   backdrop-filter: blur(8px) saturate(1.2);
   -webkit-backdrop-filter: blur(8px) saturate(1.2);
 }
-
 .taskbar.blur-heavy {
   backdrop-filter: blur(24px) saturate(1.8);
   -webkit-backdrop-filter: blur(24px) saturate(1.8);
 }
-
-/* Advanced responsive breakpoints */
 @media (max-width: 1200px) {
   .taskbar {
     left: 10px;
     right: 10px;
   }
 }
-
 @media (max-width: 900px) {
   .taskbar {
     height: 46px;
   }
-
   .start-button {
     width: 38px;
     height: 38px;
   }
 }
-
 @media (max-width: 600px) {
   .taskbar {
     bottom: 8px;
@@ -1104,66 +863,51 @@
     height: 44px;
     padding: 0 6px;
   }
-
   .notification-date-section {
     padding: 2px 4px;
   }
-
   .system-icons-section {
     gap: 6px;
     padding: 4px 6px;
   }
 }
-
 @media (max-width: 400px) {
   .taskbar {
     height: 40px;
   }
-
   .start-button {
     width: 32px;
     height: 32px;
   }
-
   .system-icons-section svg {
     width: 12px;
     height: 12px;
   }
-
   .tb-time {
     font-size: 0.75rem;
   }
-
   .tb-date {
     font-size: 0.65rem;
   }
 }
-
-/* Orientation variants for different screen orientations */
 @media (orientation: portrait) {
   .taskbar {
     bottom: 8px;
   }
 }
-
 @media (orientation: landscape) {
   .taskbar {
     bottom: 10px;
   }
 }
-
-/* High DPI displays */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .taskbar {
     border-width: 0.5px;
   }
-
   .system-icons-section svg {
     stroke-width: 1px;
   }
 }
-
-/* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
   .start-button,
   .notification-date-section,
@@ -1178,8 +922,6 @@
     transform: none;
   }
 }
-
-/* Accessibility enhancements */
 @media (prefers-reduced-motion: reduce) {
   .taskbar,
   .start-button,
@@ -1190,14 +932,12 @@
     transition: none;
   }
 }
-
 @media (prefers-color-scheme: dark) {
   .taskbar {
     --taskbar-bg: rgba(10, 20, 40, 0.75);
     --taskbar-border: rgba(255, 255, 255, 0.06);
   }
 }
-
 @media (prefers-color-scheme: light) {
   .taskbar {
     --taskbar-bg: rgba(255, 255, 255, 0.8);
@@ -1205,28 +945,21 @@
     --taskbar-hover: rgba(0, 0, 0, 0.05);
     --taskbar-shadow: rgba(0, 0, 0, 0.2);
   }
-
   .tb-time {
     color: #000;
   }
-
   .tb-date {
     color: rgba(0, 0, 0, 0.7);
   }
-
   .system-icons-section svg {
     fill: #000;
   }
 }
-
-/* Print media */
 @media print {
   .taskbar {
     display: none !important;
   }
 }
-
-/* Screen reader only content */
 .taskbar .sr-only {
   position: absolute;
   width: 1px;
@@ -1238,13 +971,9 @@
   white-space: nowrap;
   border: 0;
 }
-
-/* Focus management */
 .taskbar:focus-within {
   border-color: rgba(59, 130, 246, 0.3);
 }
-
-/* Custom focus indicators */
 .taskbar .focus-indicator {
   position: absolute;
   inset: -2px;
@@ -1254,24 +983,18 @@
   pointer-events: none;
   transition: opacity 0.2s ease;
 }
-
 .taskbar .focus-indicator.visible {
   opacity: 1;
 }
-
-/* Loading states */
 .taskbar .skeleton {
   background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s infinite;
 }
-
 @keyframes skeleton-loading {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
-
-/* Error states */
 .taskbar .error-indicator {
   position: absolute;
   top: -4px;
@@ -1282,8 +1005,6 @@
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
-
-/* Success states */
 .taskbar .success-indicator {
   position: absolute;
   top: -4px;
@@ -1294,8 +1015,6 @@
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
-
-/* Notification badges */
 .taskbar .notification-badge {
   position: absolute;
   top: -2px;
@@ -1314,12 +1033,9 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
 .taskbar .notification-badge.hidden {
   display: none;
 }
-
-/* Progress indicators */
 .taskbar .progress-bar {
   position: absolute;
   bottom: 0;
@@ -1330,66 +1046,51 @@
   border-radius: 0 0 10px 10px;
   overflow: hidden;
 }
-
 .taskbar .progress-bar .progress-fill {
   height: 100%;
   background: linear-gradient(90deg, #3b82f6, #06b6d4);
   transition: width 0.3s ease;
   border-radius: inherit;
 }
-
-/* Custom cursors */
 .taskbar {
   cursor: default;
 }
-
 .start-button {
   cursor: pointer;
 }
-
 .notification-date-section,
 .system-icons-section {
   cursor: pointer;
 }
-
-/* Advanced animations */
 .taskbar .bounce-in {
   animation: bounce-in 0.6s ease;
 }
-
 @keyframes bounce-in {
   0% { transform: scale(0.3); opacity: 0; }
   50% { transform: scale(1.05); }
   70% { transform: scale(0.9); }
   100% { transform: scale(1); opacity: 1; }
 }
-
 .taskbar .fade-slide-up {
   animation: fade-slide-up 0.4s ease;
 }
-
 @keyframes fade-slide-up {
   from { transform: translateY(10px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-
 .taskbar .rotate-in {
   animation: rotate-in 0.5s ease;
 }
-
 @keyframes rotate-in {
   from { transform: rotate(-10deg) scale(0.9); opacity: 0; }
   to { transform: rotate(0deg) scale(1); opacity: 1; }
 }
-
-/* Particle effects (for special occasions) */
 .taskbar .particles {
   position: absolute;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
 }
-
 .taskbar .particle {
   position: absolute;
   width: 4px;
@@ -1398,46 +1099,34 @@
   border-radius: 50%;
   animation: particle-float 3s infinite ease-in-out;
 }
-
 @keyframes particle-float {
   0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
   50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
 }
-
-/* Glass morphism effects */
 .taskbar.glass {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
-
 .taskbar.glass:hover {
   background: rgba(255, 255, 255, 0.15);
 }
-
-/* Neon effects */
 .taskbar.neon {
   box-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.3), 0 0 15px rgba(59, 130, 246, 0.2);
 }
-
 .taskbar.neon .start-button:hover {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
-
-/* Retro effects */
 .taskbar.retro {
   background: linear-gradient(135deg, #8b5cf6, #06b6d4);
   border: 2px solid #fff;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
 }
-
 .taskbar.retro .start-button {
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
-
-/* Minimalist effects */
 .taskbar.minimal {
   background: rgba(0, 0, 0, 0.8);
   border: none;
@@ -1445,20 +1134,16 @@
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
-
 .taskbar.minimal .start-button:hover,
 .taskbar.minimal .notification-date-section:hover,
 .taskbar.minimal .system-icons-section:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
-/* Futuristic effects */
 .taskbar.futuristic {
   background: linear-gradient(135deg, rgba(6, 182, 212, 0.8), rgba(139, 92, 246, 0.8));
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 32px rgba(6, 182, 212, 0.3);
 }
-
 .taskbar.futuristic::before {
   content: '';
   position: absolute;
@@ -1466,206 +1151,149 @@
   background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
   animation: futuristic-scan 3s infinite;
 }
-
 @keyframes futuristic-scan {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
-
-/* Nature-inspired effects */
 .taskbar.nature {
   background: linear-gradient(135deg, rgba(34, 197, 94, 0.7), rgba(16, 185, 129, 0.7));
   border-color: rgba(255, 255, 255, 0.2);
 }
-
 .taskbar.nature .start-button:hover {
   background: rgba(255, 255, 255, 0.15);
   transform: translateY(-1px) scale(1.02);
   box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
 }
-
-/* Ocean effects */
 .taskbar.ocean {
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.7), rgba(6, 182, 212, 0.7));
   border-color: rgba(255, 255, 255, 0.2);
 }
-
 .taskbar.ocean .system-icons-section svg {
   animation: ocean-wave 4s infinite ease-in-out;
 }
-
 @keyframes ocean-wave {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-2px); }
 }
-
-/* Fire effects */
 .taskbar.fire {
   background: linear-gradient(135deg, rgba(239, 68, 68, 0.7), rgba(245, 158, 11, 0.7));
   border-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
 }
-
 .taskbar.fire .start-button:hover {
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
 }
-
-/* Ice effects */
 .taskbar.ice {
   background: linear-gradient(135deg, rgba(6, 182, 212, 0.7), rgba(147, 197, 253, 0.7));
   border-color: rgba(255, 255, 255, 0.3);
 }
-
 .taskbar.ice .notification-date-section:hover {
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
 }
-
-/* Space effects */
 .taskbar.space {
   background: linear-gradient(135deg, rgba(17, 24, 39, 0.8), rgba(31, 41, 55, 0.8));
   border-color: rgba(156, 163, 175, 0.3);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
-
 .taskbar.space .system-icons-section svg {
   filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
 }
-
 .taskbar.space .start-button:hover {
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
-
-/* Custom gradients */
 .taskbar.gradient-sunset {
   background: linear-gradient(135deg, rgba(251, 146, 60, 0.7), rgba(239, 68, 68, 0.7), rgba(147, 51, 234, 0.7));
 }
-
 .taskbar.gradient-ocean {
   background: linear-gradient(135deg, rgba(6, 182, 212, 0.7), rgba(59, 130, 246, 0.7), rgba(16, 185, 129, 0.7));
 }
-
 .taskbar.gradient-forest {
   background: linear-gradient(135deg, rgba(34, 197, 94, 0.7), rgba(22, 163, 74, 0.7), rgba(21, 128, 61, 0.7));
 }
-
 .taskbar.gradient-purple {
   background: linear-gradient(135deg, rgba(147, 51, 234, 0.7), rgba(168, 85, 247, 0.7), rgba(196, 181, 253, 0.7));
 }
-
-/* Advanced shadow effects */
 .taskbar.shadow-glow {
   box-shadow: 0 8px 20px rgba(6, 18, 36, 0.6), 0 0 40px rgba(59, 130, 246, 0.1);
 }
-
 .taskbar.shadow-inset {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 20px rgba(6, 18, 36, 0.6);
 }
-
 .taskbar.shadow-layered {
   box-shadow: 0 2px 4px rgba(6, 18, 36, 0.3), 0 8px 16px rgba(6, 18, 36, 0.4), 0 16px 32px rgba(6, 18, 36, 0.5);
 }
-
-/* Typography enhancements */
 .taskbar .tb-time {
   font-variant-numeric: tabular-nums;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 .taskbar .tb-date {
   font-variant-numeric: tabular-nums;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-/* Icon enhancements */
 .taskbar .system-icons-section svg {
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
-
-/* Performance optimizations */
 .taskbar {
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
 }
-
 .taskbar *,
 .taskbar *::before,
 .taskbar *::after {
   box-sizing: border-box;
 }
-
-/* Final responsive adjustments */
 @media (max-width: 320px) {
   .taskbar {
     height: 36px;
     padding: 0 4px;
   }
-
   .start-button {
     width: 28px;
     height: 28px;
   }
-
   .system-icons-section {
     gap: 4px;
     padding: 2px 4px;
   }
-
   .system-icons-section svg {
     width: 10px;
     height: 10px;
   }
-
   .tb-time {
     font-size: 0.7rem;
   }
-
   .tb-date {
     font-size: 0.6rem;
   }
 }
-
-/* Safety overrides: remove any remaining hover highlights/transforms and opening animations */
-.taskbar .start-button:hover,
-.taskbar .start-button:active,
-.taskbar .start-button:focus,
-.taskbar .taskbar-btn:hover,
-.taskbar .taskbar-btn:active,
-.taskbar .notification-date-section:hover,
-.taskbar .notification-date-section:active,
-.taskbar .system-icons-section:hover,
-.taskbar .system-icons-section:active,
-.taskbar .taskbar-app.just-opened,
-.taskbar .taskbar-btn.icon-animating,
-.taskbar .taskbar .active {
-  transform: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  animation: none !important;
+.taskbar .start-button:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
-
-/* Ensure icon images don't animate or rotate */
-.taskbar img,
-.taskbar svg {
-  transition: none !important;
+.taskbar .taskbar-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
-
+.taskbar .system-tray-group:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.taskbar .taskbar-clock:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
 .taskbar-left {
   display: flex;
   align-items: center;
   gap: 0.6rem;
   min-width: 160px;
 }
-
 .taskbar-center {
   position: absolute;
   left: 50%;
@@ -1675,18 +1303,15 @@
   gap: 8px;
   pointer-events: auto;
 }
-
 .taskbar-icons {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
 .tb-icon {
   cursor: default;
   flex-shrink: 0;
 }
-
 .start-button {
   width: 40px;
   height: 40px;
@@ -1699,12 +1324,10 @@
   cursor: pointer;
   transition: background 0.15s ease, transform 0.12s ease;
 }
-
 .start-button:hover {
   background: rgba(255, 255, 255, 0.06);
   transform: translateY(-1px);
 }
-
 .taskbar-btn {
   width: 36px;
   height: 36px;
@@ -1718,30 +1341,40 @@
   cursor: pointer;
   position: relative;
 }
-
 .taskbar-btn:hover {
-  /* highlight removed */
   background: transparent;
 }
-
 .taskbar-app .taskbar-indicator {
   position: absolute;
-  bottom: 6px;
+  bottom: 3px;
   left: 50%;
   transform: translateX(-50%);
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+  width: 0;
+  height: 3px;
+  border-radius: 2px;
   background: transparent;
-  transition: background 0.15s ease, transform 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.taskbar-app.has-window .taskbar-indicator {
+  width: 6px;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .taskbar-app.active .taskbar-indicator {
-  background: #3b82f6;
-  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
-  transform: translateX(-50%) scale(1.05);
+  width: 16px;
+  background: #60cdff;
+  box-shadow: 0 0 6px rgba(96, 205, 255, 0.6);
+  height: 3px;
 }
 
+.taskbar-app.active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.taskbar-app:hover {
+  background: rgba(255, 255, 255, 0.08); 
+}
 .taskbar-right {
   display: flex;
   align-items: center;
@@ -1749,24 +1382,18 @@
   min-width: 180px;
   justify-content: flex-end;
 }
-
-/* Pinned icons styling */
 .taskbar-pinned img,
 .taskbar-app .taskbar-app-icon img {
   width: 20px;
   height: 20px;
   display: block;
 }
-
-/* Icon shifting animation: smooth flex reflow and popup for newly opened */
 .taskbar-center {
   transition: none;
 }
-
 .taskbar-btn {
   transition: none;
 }
-
 .taskbar-context {
   position: fixed;
   background: rgba(20,28,40,0.98);
@@ -1779,7 +1406,6 @@
   z-index: 2000;
   animation: none;
 }
-
 .taskbar-context .ctx-item {
   padding: 8px 12px;
   font-size: 0.9rem;
@@ -1787,56 +1413,44 @@
   transition: none;
   background: transparent;
 }
-
 .taskbar-context .ctx-item:hover {
   background: rgba(255,255,255,0.08);
   transition: none;
 }
-
 .taskbar-context .ctx-item:active {
   background: rgba(255,255,255,0.12);
 }
-
-/* ensure desktop icon grabbing only appears while actually dragging */
 .desktop-icon {
   cursor: default;
 }
-
 .desktop-icon.dragging {
   cursor: grabbing;
 }
-
 .taskbar-clock {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin-left: 0.5rem;
+  /* margin-left: 0.5rem; */
   padding-left: 0;
   border-left: none;
 }
-
 .tb-time {
   font-size: 0.86rem;
   color: #fff;
   font-weight: 500;
   line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
-
 .tb-date {
   font-size: 0.72rem;
   color: rgba(255, 255, 255, 0.75);
   line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
-
 @media (max-width: 720px) {
   .taskbar { left: 6px; right: 6px; height: 46px; }
   .taskbar-left { min-width: 110px; }
 }
-
-/* ====================================
-   BATTERY ICON
-   ==================================== */
-
 .tb-battery {
   display: flex;
   align-items: center;
@@ -1844,7 +1458,6 @@
   cursor: default;
   position: relative;
 }
-
 .tb-battery-body {
   display: flex;
   align-items: center;
@@ -1854,21 +1467,18 @@
   padding: 2px;
   height: 12px;
 }
-
 .tb-battery-bar {
   width: 3px;
   height: 100%;
   border-radius: 1px;
   transition: background 0.4s;
 }
-
 .tb-battery-cap {
   width: 2.5px;
   height: 5px;
   border-radius: 0 1px 1px 0;
   margin-left: 1px;
 }
-
 .tb-battery-bolt {
   position: absolute;
   font-size: 9px;
@@ -1876,12 +1486,6 @@
   left: 50%;
   transform: translateX(-60%);
 }
-
-/* ====================================
-   UNLOCK OVERLAY & PANEL
-   ==================================== */
-
-/* ── Unlock overlay — full-screen Win11 login ─────────────────────────────── */
 .unlock-overlay {
   position: fixed;
   inset: 0;
@@ -1892,7 +1496,6 @@
   font-family: "Segoe UI Variable", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
   background: transparent;
 }
-
 .unlock-panel {
   display: flex;
   flex-direction: column;
@@ -1904,29 +1507,23 @@
   position: relative;
   animation: ulSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-
 @keyframes ulSlideUp {
   from { opacity: 0; transform: translateY(60px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 .unlock-panel.shake {
   animation: shake 0.5s cubic-bezier(0.36,0.07,0.19,0.97);
 }
-
 .unlock-panel.loading {
   opacity: 0.7;
   pointer-events: none;
 }
-
 @keyframes shake {
   10%, 90% { transform: translateX(-3px); }
   20%, 80% { transform: translateX(5px); }
   30%, 50%, 70% { transform: translateX(-7px); }
   40%, 60% { transform: translateX(7px); }
 }
-
-/* Avatar circle — matches Win11 grey circle with person icon */
 .ul-avatar-large {
   width: 130px;
   height: 130px;
@@ -1941,20 +1538,16 @@
   background-position: center;
   overflow: hidden;
 }
-
 .ul-avatar-large img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .ul-avatar-large svg {
   width: 72px;
   height: 72px;
   fill: #6b7280;
 }
-
-/* Username */
 .ul-username {
   font-size: 1.6rem;
   font-weight: 400;
@@ -1962,8 +1555,6 @@
   letter-spacing: 0.01em;
   margin-bottom: 0.25rem;
 }
-
-/* PIN input row */
 .ul-form {
   width: 100%;
   display: flex;
@@ -1971,7 +1562,6 @@
   align-items: center;
   gap: 12px;
 }
-
 .ul-input-row {
   display: flex;
   align-items: center;
@@ -1985,13 +1575,11 @@
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-
 .ul-input-row:focus-within {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.45);
   box-shadow: 0 8px 32px rgba(0,0,0,0.2);
 }
-
 .ul-pin-input {
   flex: 1;
   background: transparent;
@@ -2003,22 +1591,18 @@
   letter-spacing: 0.35em;
   font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
 }
-
 .ul-pin-input::placeholder {
   color: rgba(255,255,255,0.4);
   letter-spacing: 0.02em;
   font-size: 0.9rem;
 }
-
 .ul-pin-input:focus {
   background: transparent;
 }
-
 .ul-pin-input:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-
 .ul-submit-btn {
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -2033,33 +1617,26 @@
   border-radius: 50%;
   flex-shrink: 0;
 }
-
 .ul-submit-btn:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.22);
   border-color: rgba(255, 255, 255, 0.35);
   transform: scale(1.08);
   box-shadow: 0 0 12px rgba(255,255,255,0.15);
 }
-
 .ul-submit-btn:active:not(:disabled) {
   transform: scale(0.92);
   background: rgba(255, 255, 255, 0.15);
 }
-
 .ul-submit-btn:disabled {
   opacity: 0.3;
   cursor: not-allowed;
 }
-
-/* Error message */
 .ul-error {
   color: #ff8fa3;
   font-size: 0.82rem;
   text-align: center;
   max-width: 280px;
 }
-
-/* Back button — bottom-left */
 .ul-back {
   position: fixed;
   bottom: 24px;
@@ -2077,7 +1654,6 @@
   transition: color 0.15s, background 0.15s;
   font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
 }
-
 .ul-back:hover {
   background: rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.9);
@@ -2085,15 +1661,8 @@
 .desktop {
   position: fixed;
   inset: 0;
-  background: url('pexels-zhanqun-cai-1507025-3998488.jpg') no-repeat center center;
-  background-size: cover;
   overflow: hidden;
 }
-
-/* ====================================
-   DESKTOP ICONS
-   ==================================== */
-
 .desktop-icons {
   position: absolute;
   top: 0;
@@ -2103,7 +1672,6 @@
   pointer-events: none;
   user-select: none;
 }
-
 .desktop-icon {
   position: absolute;
   display: flex;
@@ -2121,28 +1689,23 @@
   transition: all 0.1s ease;
   border: 1px solid transparent;
 }
-
 .desktop-icon:hover {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
-
 .desktop-icon.selected {
   background: rgba(77, 144, 254, 0.2);
   border: 1px solid rgba(77, 144, 254, 0.3);
 }
-
 .desktop-icon.dragging {
   opacity: 0.8;
   transition: none;
   z-index: 1000;
   cursor: grabbing;
 }
-
 .desktop-icon.selected:hover {
   background: rgba(77, 144, 254, 0.3);
 }
-
 .icon-image {
   margin-top: 4px;
   width: 48px;
@@ -2151,14 +1714,12 @@
   align-items: center;
   justify-content: center;
 }
-
 .icon-image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
-
 .icon-label {
   font-size: 0.75rem;
   color: #fff;
@@ -2172,11 +1733,6 @@
   overflow: hidden;
   line-height: 1.25;
 }
-
-/* ====================================
-   START MENU
-   ==================================== */
-
 .start-menu-overlay {
   position: fixed;
   inset: 0;
@@ -2189,11 +1745,9 @@
   background: rgba(0, 0, 0, 0);
   transition: background 0.25s ease;
 }
-
 .start-menu-overlay.open {
   pointer-events: auto;
 }
-
 .start-menu {
   width: 640px;
   max-width: 95vw;
@@ -2212,27 +1766,22 @@
   transition: transform 0.28s cubic-bezier(0.1, 0.9, 0.2, 1);
   visibility: hidden;
 }
-
 .start-menu-overlay.open .start-menu {
   transform: translateY(0) translateZ(0);
   visibility: visible;
 }
-
 @keyframes startMenuSlide {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-
 .start-menu-header {
   padding: 32px 32px 24px 32px;
 }
-
 .start-search-container {
   position: relative;
   display: flex;
   align-items: center;
 }
-
 .start-search-icon {
   position: absolute;
   left: 14px;
@@ -2241,7 +1790,6 @@
   display: flex;
   align-items: center;
 }
-
 .start-search {
   width: 100%;
   padding: 10px 10px 10px 42px;
@@ -2254,24 +1802,20 @@
   outline: none;
   transition: all 0.2s;
 }
-
 .start-search:focus {
   background: rgba(255, 255, 255, 0.15);
 }
-
 .start-section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 32px 16px 32px;
 }
-
 .start-section-title {
   color: #fff;
   font-weight: 600;
   font-size: 0.9rem;
 }
-
 .start-section-btn {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -2284,11 +1828,9 @@
   align-items: center;
   gap: 4px;
 }
-
 .start-section-btn:hover {
   background: rgba(255, 255, 255, 0.15);
 }
-
 .start-apps {
   flex: 1;
   display: grid;
@@ -2298,7 +1840,6 @@
   padding: 0 24px;
   overflow-y: auto;
 }
-
 .start-app-item {
   display: flex;
   flex-direction: column;
@@ -2310,11 +1851,9 @@
   cursor: pointer;
   transition: all 0.1s;
 }
-
 .start-app-item:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
 .start-app-icon {
   width: 32px;
   height: 32px;
@@ -2322,13 +1861,11 @@
   align-items: center;
   justify-content: center;
 }
-
 .start-app-icon img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-
 .start-app-name {
   font-size: 0.75rem;
   color: #fff;
@@ -2339,7 +1876,6 @@
   text-overflow: ellipsis;
   padding: 0 4px;
 }
-
 .rec-item {
   display: flex;
   align-items: center;
@@ -2348,40 +1884,33 @@
   border-radius: 6px;
   cursor: pointer;
 }
-
 .rec-item:hover {
   background: rgba(255, 255, 255, 0.08);
 }
-
 .rec-icon {
   width: 32px;
   height: 32px;
   border-radius: 4px;
   overflow: hidden;
 }
-
 .rec-icon img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .rec-info {
   display: flex;
   flex-direction: column;
 }
-
 .rec-name {
   color: #fff;
   font-size: 0.8rem;
   font-weight: 500;
 }
-
 .rec-desc {
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.75rem;
 }
-
 .start-footer {
   background: rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(10px);
@@ -2391,9 +1920,7 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 0 0 12px 12px;
-  /* No transitions here to prevent flickering during slide */
 }
-
 .start-user {
   display: flex;
   align-items: center;
@@ -2402,23 +1929,19 @@
   border-radius: 6px;
   cursor: pointer;
 }
-
 .start-user:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
 .start-user-avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   overflow: hidden;
 }
-
 .start-user span {
   color: #fff;
   font-size: 0.85rem;
 }
-
 .start-power-icon {
   padding: 8px;
   border-radius: 6px;
@@ -2428,11 +1951,9 @@
   align-items: center;
   justify-content: center;
 }
-
 .start-power-icon:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
 .start-power-btn {
   display: flex;
   align-items: center;
@@ -2446,15 +1967,9 @@
   cursor: pointer;
   transition: background 0.2s;
 }
-
 .start-power-btn:hover {
   background: rgba(255, 255, 255, 0.2);
 }
-
-/* ====================================
-   WINDOW MANAGER
-   ==================================== */
-
 .window-manager {
   position: absolute;
   top: 0;
@@ -2463,45 +1978,196 @@
   height: calc(100% - 44px);
   pointer-events: none;
 }
+.window-container {
+  position: absolute;
+  pointer-events: auto;
+  will-change: transform, width, height;
+  transition: transform 0.16s ease, width 0.14s ease, height 0.14s ease;
+}
+
+.window-container.interacting {
+  transition: none;
+}
 
 .window {
-  position: absolute;
-  /* acrylic background to match start menu */
+  width: 100%;
+  height: 100%;
+  position: relative; 
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(20px) saturate(180%);
   border-radius: 8px;
-  pointer-events: auto;
   overflow: visible;
-  /* animate on mount like start menu slide */
-  transform: translateY(20px);
   opacity: 0;
-  transition: box-shadow 0.2s, border-color 0.2s, transform 0.28s cubic-bezier(0.1, 0.9, 0.2, 1), opacity 0.28s;
+  transform: scale(0.95) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.window-container.open .window {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.window-container.closing .window {
+  opacity: 0;
+  transform: scale(0.94) translateY(14px);
+  transition: transform 0.22s ease-in, opacity 0.2s ease-in;
+}
+
+.window-container.minimized .window {
+  opacity: 0;
+  transform: scale(0.7) translateY(200px);
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease-in;
+}
+
+.window-container.minimized {
+  pointer-events: none;
+  /* Don't hide display:none here, let child animate */
 }
 
 .window.focused {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 120, 212, 0.4);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 120, 212, 0.4);
   border: 1px solid rgba(0, 120, 212, 0.5);
-  /* ensure opened windows become visible */
-  transform: translateY(0);
-  opacity: 1;
+  z-index: 100;
 }
-
 .window.unfocused {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;
-  /* maintain transparency/animation when unfocused */
-  transform: translateY(0);
   opacity: 1;
 }
-
-/* helper class added at mount for smooth entry */
-.window.open {
-  transform: translateY(0);
-  opacity: 1;
-}
-
 .window.maximized {
   border-radius: 0;
+}
+
+.snap-layout-hud {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(32, 32, 32, 0.95);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  z-index: 20000;
+  animation: snapHudSlideDown 0.25s cubic-bezier(0.1, 0.9, 0.2, 1);
+  pointer-events: auto;
+}
+
+.snap-group {
+  display: flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 4px;
+  border-radius: 6px;
+  height: 80px;
+  width: 120px; /* Base width, adjust per group */
+  transition: transform 0.1s;
+}
+
+.snap-group:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.snap-zone {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.snap-zone.active {
+  background: #0078d4;
+  border-color: #4cc2ff;
+  box-shadow: 0 0 10px rgba(0, 120, 212, 0.4);
+}
+
+/* Layout Specifics */
+/* 50-50 */
+.group-50-50 .snap-zone { 
+  flex: 1; 
+  height: 100%; 
+}
+
+/* 60-40 */
+.group-60-40 .left { 
+  flex: 1.6; /* 60% approx */
+  height: 100%; 
+}
+.group-60-40 .right { 
+  flex: 1; /* 40% approx */
+  height: 100%; 
+}
+
+/* 3 Cols */
+.group-3-col .snap-zone { 
+  flex: 1; 
+  height: 100%; 
+}
+
+/* Left Focus (Left half, Right split) */
+.group-left-focus { 
+  flex-wrap: nowrap; /* Prevent wrapping of main columns */
+}
+.group-left-focus .left { 
+  width: calc(50% - 2px); 
+  height: 100%; 
+}
+.group-left-focus .right-col { 
+  width: calc(50% - 2px); 
+  height: 100%; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 4px; 
+}
+.group-left-focus .right-top,
+.group-left-focus .right-btm {
+  flex: 1;
+  width: 100%;
+}
+
+/* Grid (2x2) */
+.group-grid { 
+  flex-wrap: wrap; 
+  align-content: stretch; 
+}
+.group-grid .snap-zone { 
+  width: calc(50% - 2px); 
+  height: calc(50% - 2px); 
+}
+
+/* Right Focus */
+.group-right-focus { 
+  flex-wrap: nowrap; 
+}
+.group-right-focus .left-col { 
+  width: calc(50% - 2px); 
+  height: 100%; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 4px; 
+}
+.group-right-focus .left-top,
+.group-right-focus .left-btm {
+  flex: 1;
+  width: 100%;
+}
+.group-right-focus .right { 
+  width: calc(50% - 2px); 
+  height: 100%; 
+}
+
+
+@keyframes snapHudSlideDown {
+  from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+  to { transform: translateX(-50%) translateY(0); opacity: 1; }
 }
 
 .window-titlebar {
@@ -2514,19 +2180,15 @@
   user-select: none;
   border-radius: 8px 8px 0 0;
 }
-
 .window.focused .window-titlebar {
   background: linear-gradient(90deg, #f5f5f5 0%, #e8e8e8 100%);
 }
-
 .window.unfocused .window-titlebar {
   background: #f0f0f0;
 }
-
 .window.maximized .window-titlebar {
   border-radius: 0;
 }
-
 .window-title {
   font-size: 0.85rem;
   font-weight: 600;
@@ -2538,28 +2200,23 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 .window-title-icon {
   font-size: 0.9rem;
   display: flex;
   align-items: center;
 }
-
 .window-title-icon img {
   width: 16px;
   height: 16px;
   object-fit: contain;
 }
-
 .window.unfocused .window-title {
   color: #888;
 }
-
 .window-controls {
   display: flex;
   gap: 0;
 }
-
 .window-controls button.win-ctrl {
   width: 40px;
   height: 28px;
@@ -2572,33 +2229,39 @@
   align-items: center;
   justify-content: center;
 }
-
 .window-controls button.win-ctrl.minimize:hover {
   background: rgba(0, 0, 0, 0.08);
 }
-
-.window-controls button.win-ctrl.maximize:hover {
+.window-controls button.win-ctrl.Maximize:hover {
   background: rgba(0, 0, 0, 0.08);
 }
-
 .window-controls button.win-ctrl.close:hover {
   background: #e81123;
   color: white;
 }
-
 .window-content {
   height: calc(100% - 34px);
   overflow: auto;
   border-radius: 0 0 8px 8px;
   color: #fff;
-  background: #1e1e1e; /* Consistent dark background for apps */
+  background: #1e1e1e; 
 }
-
 .window.maximized .window-content {
   border-radius: 0;
 }
-
-/* Base App Layout */
+.window-drag-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 999;
+  background: transparent;
+  cursor: inherit;
+}
+.window.interacting {
+  user-select: none;
+}
+.window.interacting .window-content {
+  pointer-events: none;
+}
 .app-container {
   height: 100%;
   display: flex;
@@ -2606,7 +2269,6 @@
   background: rgba(30,30,30, 0.7);
   backdrop-filter: blur(20px);
 }
-
 .app-toolbar {
   display: flex;
   align-items: center;
@@ -2615,7 +2277,6 @@
   background: rgba(45,45,45, 0.5);
   border-bottom: 1px solid rgba(255,255,255, 0.05);
 }
-
 .app-toolbar button, .app-toolbar label {
   background: transparent;
   border: none;
@@ -2625,16 +2286,10 @@
   font-size: 13px;
   cursor: pointer;
 }
-
 .app-toolbar button:hover, .app-toolbar label:hover {
   background: rgba(255,255,255, 0.1);
   color: #fff;
 }
-
-/* ====================================
-   APP: CALCULATOR (REVAMPED V2)
-   ==================================== */
-
 .calc-container {
   height: 100%;
   display: flex;
@@ -2644,35 +2299,29 @@
   font-family: 'Segoe UI', sans-serif;
   user-select: none;
 }
-
 .calc-nav {
   display: flex;
   align-items: center;
   padding: 8px 12px;
   gap: 16px;
 }
-
 .calc-nav-icon {
   cursor: pointer;
   padding: 8px;
   border-radius: 4px;
   font-size: 18px;
 }
-
 .calc-nav-icon:hover {
   background: rgba(255, 255, 255, 0.05);
 }
-
 .calc-mode {
   font-size: 20px;
   font-weight: 600;
   flex: 1;
 }
-
 .calc-history-btn {
   font-size: 18px;
 }
-
 .calc-display-section {
   padding: 24px;
   text-align: right;
@@ -2681,26 +2330,22 @@
   justify-content: flex-end;
   min-height: 120px;
 }
-
 .calc-prev-eq {
   font-size: 14px;
   color: #aaa;
   height: 20px;
 }
-
 .calc-main-num {
   font-size: 48px;
   font-weight: 600;
   margin-top: 4px;
 }
-
 .calc-memory-row {
   display: flex;
   padding: 0 12px;
   gap: 4px;
   margin-bottom: 8px;
 }
-
 .calc-mem-btn {
   flex: 1;
   background: transparent;
@@ -2711,16 +2356,13 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
 .calc-mem-btn:hover {
   background: rgba(255, 255, 255, 0.05);
 }
-
 .calc-mem-btn:disabled {
   opacity: 0.3;
   cursor: default;
 }
-
 .calc-btn-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -2729,7 +2371,6 @@
   flex: 1;
   padding: 4px;
 }
-
 .calc-btn-modern {
   background: rgba(255, 255, 255, 0.06);
   border: none;
@@ -2742,40 +2383,29 @@
   align-items: center;
   justify-content: center;
 }
-
 .calc-btn-modern:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
 .calc-btn-modern.num {
   background: rgba(255, 255, 255, 0.08);
   font-weight: 600;
 }
-
 .calc-btn-modern.num:hover {
   background: rgba(255, 255, 255, 0.12);
 }
-
 .calc-btn-modern.equal {
   background: #a0c4d7;
   color: #1a1a1a;
   font-size: 24px;
 }
-
 .calc-btn-modern.equal:hover {
     background: #b8d4e3;
 }
-
-/* ====================================
-   APP: NOTEPAD (REVAMPED)
-   ==================================== */
-
 .notepad-container {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
-
 .notepad-editor {
   flex: 1;
   background: transparent;
@@ -2787,7 +2417,6 @@
   font-family: 'Consolas', monospace;
   line-height: 1.5;
 }
-
 .notepad-status {
   padding: 5px 20px;
   background: rgba(45,45,45, 0.5);
@@ -2797,23 +2426,92 @@
   display: flex;
   gap: 20px;
 }
-
-/* ====================================
-   APP: TODO (REVAMPED)
-   ==================================== */
-
+.browser-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #1e1e1e;
+  color: #fff;
+  user-select: none;
+}
+.browser-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(40,40,40,0.9);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.browser-nav {
+  display: flex;
+  gap: 4px;
+}
+.browser-nav button {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.browser-nav button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+.browser-url-form {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 4px 16px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.browser-url-form svg {
+  color: rgba(255,255,255,0.6);
+  margin-right: 8px;
+}
+.browser-url-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: #fff;
+  background: transparent;
+  padding: 2px 0;
+}
+.browser-url-input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+.browser-content {
+  flex: 1;
+  background: #1e1e1e;
+  position: relative;
+}
+.browser-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.browser-spacer {
+  width: 100px;
+  flex-shrink: 0;
+}
 .todo-container {
   height: 100%;
   padding: 24px;
   background: #1e1e1e;
 }
-
 .todo-input-row {
   display: flex;
   gap: 10px;
   margin-bottom: 24px;
 }
-
 .todo-input {
   flex: 1;
   background: rgba(30,30,30, 0.5);
@@ -2823,15 +2521,12 @@
   color: #fff;
   outline: none;
 }
-
 .todo-input:focus { border-color: #0078d4; }
-
 .todo-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-
 .todo-item {
   display: flex;
   align-items: center;
@@ -2841,96 +2536,69 @@
   border-radius: 6px;
   transition: background 0.2s;
 }
-
 .todo-item:hover { background: rgba(255,255,255, 0.06); }
-
 .todo-checkbox {
   width: 18px;
   height: 18px;
   cursor: pointer;
 }
-
 .todo-text {
   flex: 1;
   font-size: 14px;
 }
-
 .todo-text.done {
   text-decoration: line-through;
   opacity: 0.5;
 }
-
 .todo-delete {
   opacity: 0;
   cursor: pointer;
   color: #ff4d4d;
   transition: opacity 0.2s;
 }
-
 .todo-item:hover .todo-delete { opacity: 1; }
-
-/* ====================================
-   WINDOW RESIZE HANDLES
-   ==================================== */
-
 .resize-handle {
   position: absolute;
   z-index: 10;
 }
-
 .resize-n {
   top: -4px; left: 8px; right: 8px; height: 8px;
   cursor: n-resize;
 }
-
 .resize-s {
   bottom: -4px; left: 8px; right: 8px; height: 8px;
   cursor: s-resize;
 }
-
 .resize-e {
   right: -4px; top: 8px; bottom: 8px; width: 8px;
   cursor: e-resize;
 }
-
 .resize-w {
   left: -4px; top: 8px; bottom: 8px; width: 8px;
   cursor: w-resize;
 }
-
 .resize-ne {
   top: -4px; right: -4px; width: 14px; height: 14px;
   cursor: ne-resize;
 }
-
 .resize-nw {
   top: -4px; left: -4px; width: 14px; height: 14px;
   cursor: nw-resize;
 }
-
 .resize-se {
   bottom: -4px; right: -4px; width: 14px; height: 14px;
   cursor: se-resize;
 }
-
 .resize-sw {
   bottom: -4px; left: -4px; width: 14px; height: 14px;
   cursor: sw-resize;
 }
-
-/* ====================================
-   WINDOWS 11 DESKTOP TASKBAR
-   ==================================== */
-
 .taskbar {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 48px;
-  background: rgba(20, 22, 28, 0.88);
-  backdrop-filter: blur(30px) saturate(1.6);
-  -webkit-backdrop-filter: blur(30px) saturate(1.6);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2940,14 +2608,11 @@
   user-select: none;
   font-family: 'Segoe UI', -apple-system, sans-serif;
 }
-
-/* Left - Weather widget */
 .taskbar-left {
   display: flex;
   align-items: center;
   flex-shrink: 0;
 }
-
 .tb-weather {
   display: flex;
   align-items: center;
@@ -2957,44 +2622,36 @@
   cursor: pointer;
   transition: background 0.2s;
 }
-
 .tb-weather:hover {
   background: rgba(255, 255, 255, 0.08);
 }
-
 .tb-weather-icon {
   font-size: 18px;
   line-height: 1;
 }
-
 .tb-weather-info {
   display: flex;
   flex-direction: column;
 }
-
 .tb-weather-temp {
   font-size: 0.72rem;
   color: #fff;
   font-weight: 500;
   line-height: 1.2;
 }
-
 .tb-weather-desc {
   font-size: 0.65rem;
   color: rgba(255, 255, 255, 0.6);
   line-height: 1.1;
 }
-
-/* Center - Start, Search, and app icons */
 .taskbar-center {
   display: flex;
   align-items: center;
-  gap: 6px; /* extra spacing between elements */
+  gap: 6px; 
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
-
 .start-button {
   display: flex;
   align-items: center;
@@ -3007,11 +2664,9 @@
   cursor: pointer;
   transition: background 0.2s;
 }
-
 .start-button:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
 .taskbar-btn {
   display: flex;
   align-items: center;
@@ -3026,25 +2681,20 @@
   transition: background 0.2s;
   color: white;
 }
-
 .taskbar-btn:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
 .taskbar-btn.active {
   background: rgba(255, 255, 255, 0.08);
 }
-
 .taskbar-btn.minimized {
   opacity: 0.7;
 }
-
 .taskbar-app-icon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .taskbar-indicator {
   position: absolute;
   bottom: 2px;
@@ -3056,46 +2706,21 @@
   border-radius: 2px;
   transition: width 0.2s, background 0.2s;
 }
-
 .taskbar-btn.active .taskbar-indicator {
   width: 16px;
   background: #60cdff;
 }
-
-/* Right - System tray */
 .taskbar-right {
   display: flex;
   align-items: center;
   gap: 2px;
   flex-shrink: 0;
 }
-
-.tb-lang {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 6px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.tb-lang:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.tb-lang span {
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 500;
-}
-
 .tb-hidden-icons {
   position: relative;
   display: flex;
   align-items: center;
 }
-
 .tb-tray-btn {
   display: flex;
   align-items: center;
@@ -3109,17 +2734,14 @@
   border: none;
   color: white;
 }
-
 .tb-tray-btn:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
 .hidden-icons-backdrop {
   position: fixed;
   inset: 0;
   z-index: 5999;
 }
-
 .hidden-icons-popup {
   position: absolute;
   bottom: calc(100% + 8px);
@@ -3138,12 +2760,10 @@
   z-index: 6001;
   animation: popupSlide 0.15s ease-out;
 }
-
 @keyframes popupSlide {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 .hidden-icon-item {
   display: flex;
   align-items: center;
@@ -3153,16 +2773,13 @@
   cursor: pointer;
   transition: background 0.15s;
 }
-
 .hidden-icon-item:hover {
   background: rgba(255, 255, 255, 0.08);
 }
-
 .hidden-icon-label {
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.9);
 }
-
 .tb-tray-group {
   display: flex;
   align-items: center;
@@ -3172,13 +2789,11 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.2s;
+  color: rgba(255, 255, 255, 0.9);
 }
-
 .tb-tray-group:hover {
   background: rgba(255, 255, 255, 0.08);
 }
-
-/* Clock */
 .taskbar-clock {
   display: flex;
   flex-direction: column;
@@ -3190,24 +2805,20 @@
   transition: background 0.2s;
   cursor: pointer;
 }
-
 .taskbar-clock:hover {
   background: rgba(255, 255, 255, 0.08);
 }
-
 .tb-time {
   font-size: 0.72rem;
   color: #fff;
   line-height: 1.2;
   font-weight: 400;
 }
-
 .tb-date {
   font-size: 0.68rem;
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.1;
 }
-
 .tb-show-desktop {
   width: 5px;
   height: 100%;
@@ -3216,32 +2827,86 @@
   cursor: pointer;
   transition: background 0.2s;
 }
-
 .tb-show-desktop:hover {
   background: rgba(255, 255, 255, 0.15);
 }
-
-/* Calendar panel overlay */
+.system-tray-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  height: 36px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: rgba(255, 255, 255, 0.9);
+}
+.system-tray-group:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.tb-battery-mini {
+  display: flex;
+  align-items: center;
+}
+.battery-outline-mini {
+  width: 20px;
+  height: 10px;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.battery-outline-mini::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 2px;
+  width: 2px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 0 1px 1px 0;
+}
+.battery-fill-mini {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 1px;
+  transition: width 0.3s;
+}
+.battery-fill-mini.low {
+  background: #ff4d4d;
+}
+.taskbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.taskbar-app img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+.tb-search-btn {
+  color: rgba(255, 255, 255, 0.85);
+}
 .calendar-panel-overlay {
   position: fixed;
   inset: 0;
   z-index: 6500;
   background: transparent;
 }
-
 .calendar-panel {
   position: fixed;
   bottom: 56px;
   right: 8px;
   width: 380px;
   max-height: calc(100vh - 80px);
-  background: rgba(40, 40, 48, 0.75);
-  backdrop-filter: blur(40px) saturate(1.8);
-  -webkit-backdrop-filter: blur(40px) saturate(1.8);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(40, 40, 45, 0.45);
+  backdrop-filter: blur(50px) saturate(180%);
+  -webkit-backdrop-filter: blur(50px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -3251,7 +2916,6 @@
   font-family: 'Segoe UI', -apple-system, sans-serif;
   animation: calendarSlideUp 0.25s cubic-bezier(0.1, 0.9, 0.2, 1);
 }
-
 @keyframes calendarSlideUp {
   from {
     opacity: 0;
@@ -3262,7 +2926,6 @@
     transform: translateY(0);
   }
 }
-
 .calendar-header-section {
   display: flex;
   justify-content: space-between;
@@ -3270,45 +2933,43 @@
   padding-bottom: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
-
 .calendar-title {
   font-size: 14px;
   font-weight: 600;
   color: #fff;
 }
-
 .calendar-notif-btns {
   display: flex;
   gap: 8px;
 }
-
 .notif-btn {
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  transition: color 0.2s;
-  padding: 4px;
-}
-
-.notif-btn:hover {
-  color: #fff;
-}
-
-.notif-btn.clear-all {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.notif-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.notif-btn.clear-all {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
   font-size: 12px;
   padding: 4px 12px;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: background 0.2s;
 }
-
 .notif-btn.clear-all:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.16);
 }
-
 .calendar-notifications {
   display: flex;
   flex-direction: column;
@@ -3316,20 +2977,27 @@
   max-height: 150px;
   overflow-y: auto;
 }
-
 .notif-item-modern {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  padding: 10px;
+  padding: 10px 12px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
-
 .notif-item-modern:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
 }
-
+.notif-empty {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
 .notif-header {
   display: flex;
   align-items: center;
@@ -3338,59 +3006,49 @@
   color: rgba(255, 255, 255, 0.6);
   margin-bottom: 8px;
 }
-
 .notif-body {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-
 .notif-text-main {
   font-size: 13px;
   font-weight: 500;
   color: #fff;
 }
-
 .notif-text-sub {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.6);
 }
-
 .calendar-section {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-
 .calendar-month-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
 }
-
 .month-display {
   font-size: 14px;
   font-weight: 600;
   color: #fff;
 }
-
 .month-controls {
   opacity: 0.6;
   cursor: pointer;
   transition: opacity 0.2s;
 }
-
 .month-controls:hover {
   opacity: 1;
 }
-
 .calendar-grid-container {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-
 .calendar-month-label {
   display: flex;
   justify-content: space-between;
@@ -3399,18 +3057,15 @@
   margin-bottom: 8px;
   padding: 0 8px;
 }
-
 .month-arrows {
   display: flex;
   gap: 8px;
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
 }
-
 .month-arrows svg:hover {
   color: rgba(255, 255, 255, 0.9);
 }
-
 .calendar-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -3418,7 +3073,6 @@
   margin-bottom: 8px;
   text-align: center;
 }
-
 .calendar-weekdays > div {
   font-size: 12px;
   font-weight: 600;
@@ -3427,13 +3081,11 @@
   background: rgba(96, 205, 255, 0.15);
   border-radius: 4px;
 }
-
 .calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 4px;
 }
-
 .cal-day {
   display: flex;
   align-items: center;
@@ -3447,23 +3099,19 @@
   transition: background 0.2s;
   background: rgba(255, 255, 255, 0.05);
 }
-
 .cal-day:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
 .cal-day.other-month {
   color: rgba(255, 255, 255, 0.3);
   background: transparent;
 }
-
 .cal-day.today {
   background: rgba(96, 205, 255, 0.4);
   color: #fff;
   font-weight: 600;
   border: 1px solid rgba(96, 205, 255, 0.6);
 }
-
 .tb-battery-modern {
   display: flex;
   align-items: center;
@@ -3471,7 +3119,6 @@
   height: 18px;
   gap: 1px;
 }
-
 .battery-outline {
   width: 20px;
   height: 10px;
@@ -3483,17 +3130,14 @@
   align-items: stretch;
   box-sizing: border-box;
 }
-
 .battery-fill {
   border-radius: 1px;
   background: rgba(255, 255, 255, 0.9);
   transition: width 0.3s ease;
 }
-
 .battery-fill.low {
   background: rgba(255, 100, 100, 0.9);
 }
-
 .battery-cap-modern {
   width: 2px;
   height: 5px;
@@ -3501,7 +3145,6 @@
   border-radius: 0 1px 1px 0;
   align-self: center;
 }
-
 .battery-bolt-modern {
   position: absolute;
   top: 50%;
@@ -3510,32 +3153,15 @@
   z-index: 2;
   line-height: 0;
 }
-
 .tb-icon {
   color: #fff;
   opacity: 0.9;
 }
-
 .tb-battery {
   display: flex;
   align-items: center;
   transform: scale(0.9);
 }
-
-/* ====================================
-   NOTIFICATION BUTTON & CENTER
-   ==================================== */
-
-.tb-notif-btn {
-  position: relative;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 2px;
-  display: flex;
-  align-items: center;
-}
-
 .notif-badge {
   position: absolute;
   top: -2px;
@@ -3552,7 +3178,6 @@
   justify-content: center;
   line-height: 1;
 }
-
 .notif-center {
   position: absolute;
   bottom: 48px;
@@ -3571,12 +3196,10 @@
   z-index: 300;
   overflow: hidden;
 }
-
 @keyframes slideUpFade {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 .notif-header {
   display: flex;
   align-items: center;
@@ -3584,14 +3207,12 @@
   padding: 0.85rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .notif-header h3 {
   color: #fff;
   font-size: 0.9rem;
   font-weight: 600;
   margin: 0;
 }
-
 .notif-clear {
   background: transparent;
   border: none;
@@ -3602,18 +3223,15 @@
   border-radius: 4px;
   transition: background 0.15s;
 }
-
 .notif-clear:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
 }
-
 .notif-list {
   flex: 1;
   overflow-y: auto;
   padding: 0.25rem 0;
 }
-
 .notif-item {
   display: flex;
   align-items: flex-start;
@@ -3622,24 +3240,20 @@
   transition: background 0.15s;
   cursor: default;
 }
-
 .notif-item:hover {
   background: rgba(255, 255, 255, 0.06);
 }
-
 .notif-icon {
   font-size: 1.3rem;
   flex-shrink: 0;
   margin-top: 2px;
 }
-
 .notif-content {
   display: flex;
   flex-direction: column;
   gap: 2px;
   min-width: 0;
 }
-
 .notif-app {
   font-size: 0.72rem;
   color: rgba(255, 255, 255, 0.5);
@@ -3647,18 +3261,15 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-
 .notif-text {
   font-size: 0.82rem;
   color: #fff;
   line-height: 1.3;
 }
-
 .notif-time {
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.35);
 }
-
 .notif-footer {
   padding: 0.6rem 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -3666,11 +3277,6 @@
   color: rgba(255, 255, 255, 0.5);
   text-align: center;
 }
-
-/* ====================================
-   CONTEXT MENU
-   ==================================== */
-
 .context-menu {
   position: fixed;
   min-width: 220px;
@@ -3684,12 +3290,10 @@
   z-index: 500;
   animation: ctxFade 0.12s ease;
 }
-
 @keyframes ctxFade {
   from { opacity: 0; transform: scale(0.96); }
   to { opacity: 1; transform: scale(1); }
 }
-
 .ctx-item {
   display: flex;
   align-items: center;
@@ -3700,60 +3304,43 @@
   color: #fff;
   font-size: 0.82rem;
 }
-
 .ctx-item:hover {
   background: rgba(0, 120, 212, 0.35);
 }
-
 .ctx-icon {
   font-size: 0.9rem;
   width: 20px;
   text-align: center;
   flex-shrink: 0;
 }
-
 .ctx-label {
   flex: 1;
 }
-
 .ctx-arrow {
   opacity: 0.5;
   font-size: 1rem;
 }
-
 .ctx-divider {
   height: 1px;
   background: rgba(255, 255, 255, 0.1);
   margin: 3px 0.5rem;
 }
-
-/* ====================================
-   START MENU IMPROVEMENTS
-   ==================================== */
-
 .start-no-results {
   padding: 2rem 1rem;
   text-align: center;
   color: rgba(255, 255, 255, 0.4);
   font-size: 0.85rem;
 }
-
-/* ====================================
-   QUICK SETTINGS PANEL (REVAMPED)
-   ==================================== */
-
 .quick-settings-overlay {
   position: fixed;
   inset: 0;
-  z-index: 999;
+  z-index: 6500;
 }
-
 .quick-settings-panel {
   position: absolute;
   bottom: 60px;
   right: 12px;
   width: 360px;
-  /* match start menu acrylic look */
   background: rgba(40, 40, 45, 0.45);
   backdrop-filter: blur(50px) saturate(180%);
   -webkit-backdrop-filter: blur(50px) saturate(180%);
@@ -3763,22 +3350,18 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   color: #fff;
   user-select: none;
-  /* use same slide animation as start menu for consistency */
   animation: startMenuSlide 0.28s cubic-bezier(0.1, 0.9, 0.2, 1);
 }
-
 @keyframes slideQuickSettings {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-
 .qs-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin-bottom: 24px;
 }
-
 .qs-item {
   display: flex;
   flex-direction: column;
@@ -3786,7 +3369,6 @@
   gap: 6px;
   cursor: pointer;
 }
-
 .qs-icon-wrapper {
   width: 100%;
   height: 48px;
@@ -3799,26 +3381,21 @@
   position: relative;
   transition: all 0.2s;
 }
-
 .qs-item.active .qs-icon-wrapper {
   background: #0067c0;
   border-color: #0078d4;
 }
-
 .qs-item:hover .qs-icon-wrapper {
   background: rgba(255, 255, 255, 0.1);
 }
-
 .qs-item.active:hover .qs-icon-wrapper {
   background: #1078cc;
 }
-
 .qs-split-icon {
   position: absolute;
   right: 6px;
   opacity: 0.6;
 }
-
 .qs-label {
   font-size: 12px;
   color: #ccc;
@@ -3828,25 +3405,21 @@
   text-overflow: ellipsis;
   max-width: 90px;
 }
-
 .qs-sliders {
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 8px 4px;
 }
-
 .qs-slider-group {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
 .qs-slider-icon {
   color: #fff;
   opacity: 0.8;
 }
-
 .qs-slider-container {
   flex: 1;
   position: relative;
@@ -3854,7 +3427,6 @@
   display: flex;
   align-items: center;
 }
-
 .qs-slider {
   -webkit-appearance: none;
   appearance: none;
@@ -3865,7 +3437,6 @@
   outline: none;
   position: relative;
 }
-
 .qs-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 18px;
@@ -3876,7 +3447,6 @@
   border: 4px solid #111;
   box-shadow: 0 0 0 1px #fff;
 }
-
 .qs-slider::before {
   content: '';
   position: absolute;
@@ -3887,24 +3457,12 @@
   background: #0078d4;
   border-radius: 2px;
 }
-
-/* ====================================
-   CALENDAR PANEL (REVAMPED)
-   ==================================== */
-
-/* (styles defined above in redesigned taskbar section) */
-
-/* ====================================
-   APP: NOTEPAD
-   ==================================== */
-
 .notepad {
   height: 100%;
   display: flex;
   flex-direction: column;
   background: #fff;
 }
-
 .notepad-toolbar {
   display: flex;
   align-items: center;
@@ -3913,7 +3471,6 @@
   border-bottom: 1px solid #ccc;
   background: #f5f5f5;
 }
-
 .notepad-toolbar button,
 .notepad-toolbar select {
   padding: 0.25rem 0.5rem;
@@ -3921,13 +3478,11 @@
   background: #fff;
   cursor: pointer;
 }
-
 .notepad-stats {
   margin-left: auto;
   font-size: 0.8rem;
   color: #666;
 }
-
 .notepad textarea {
   flex: 1;
   border: none;
@@ -3937,18 +3492,12 @@
   font-family: 'Consolas', monospace;
   line-height: 1.4;
 }
-
-/* ====================================
-   APP: FILE EXPLORER
-   ==================================== */
-
 .file-explorer {
   height: 100%;
   display: flex;
   flex-direction: column;
   background: #fff;
 }
-
 .explorer-toolbar {
   display: flex;
   align-items: center;
@@ -3957,14 +3506,12 @@
   border-bottom: 1px solid #ccc;
   background: #f5f5f5;
 }
-
 .explorer-toolbar button {
   padding: 0.25rem 0.5rem;
   border: 1px solid #ccc;
   background: #fff;
   cursor: pointer;
 }
-
 .current-path {
   flex: 1;
   padding: 0.25rem;
@@ -3972,34 +3519,28 @@
   border: 1px solid #ccc;
   font-family: monospace;
 }
-
 .view-toggle {
   display: flex;
   gap: 0.25rem;
 }
-
 .view-toggle button.active {
   background: #0078d4;
   color: #fff;
 }
-
 .explorer-content {
   flex: 1;
   overflow-y: auto;
   padding: 0.5rem;
 }
-
 .explorer-content.list {
   display: flex;
   flex-direction: column;
 }
-
 .explorer-content.icons {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   gap: 1rem;
 }
-
 .file-item {
   display: flex;
   align-items: center;
@@ -4009,91 +3550,68 @@
   cursor: pointer;
   transition: background 0.2s;
 }
-
 .file-item:hover {
   background: #f0f0f0;
 }
-
 .file-item.selected {
   background: #cce7ff;
 }
-
 .explorer-content.list .file-item {
   border-bottom: 1px solid #eee;
 }
-
 .file-icon {
   font-size: 1.5rem;
 }
-
 .file-name {
   flex: 1;
 }
-
 .file-size,
 .file-modified {
   font-size: 0.8rem;
   color: #666;
 }
-
-/* ====================================
-   APP: SETTINGS
-   ==================================== */
-
 .settings {
   padding: 1rem;
   background: #fff;
   height: 100%;
   overflow-y: auto;
 }
-
 .settings h2 {
   margin-bottom: 1rem;
   color: #333;
 }
-
 .settings-section {
   margin-bottom: 2rem;
   border-bottom: 1px solid #eee;
   padding-bottom: 1rem;
 }
-
 .settings-section h3 {
   margin-bottom: 1rem;
   color: #555;
 }
-
 .setting-item {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 0.5rem;
 }
-
 .setting-item label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
 }
-
 .setting-item select {
   padding: 0.25rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
-/* ====================================
-   APP: BROWSER
-   ==================================== */
-
 .browser {
   height: 100%;
   display: flex;
   flex-direction: column;
   background: #fff;
 }
-
 .browser-toolbar {
   display: flex;
   align-items: center;
@@ -4102,34 +3620,25 @@
   border-bottom: 1px solid #ccc;
   background: #f5f5f5;
 }
-
 .browser-toolbar button {
   padding: 0.25rem 0.5rem;
   border: 1px solid #ccc;
   background: #fff;
   cursor: pointer;
 }
-
 .browser-address {
   flex: 1;
 }
-
 .browser-address input {
   width: 100%;
   padding: 0.25rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
 .browser-content {
   flex: 1;
   border: none;
 }
-
-/* ====================================
-   APP: TODO
-   ==================================== */
-
 .todo-app {
   padding: 1rem;
   background: #fff;
@@ -4137,25 +3646,21 @@
   display: flex;
   flex-direction: column;
 }
-
 .todo-app h2 {
   margin-bottom: 1rem;
   color: #333;
 }
-
 .todo-input {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
-
 .todo-input input {
   flex: 1;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
 .todo-input button {
   padding: 0.5rem 1rem;
   background: #0078d4;
@@ -4164,14 +3669,12 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
 .todo-filters {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
   flex-wrap: wrap;
 }
-
 .todo-filters button {
   padding: 0.25rem 0.5rem;
   border: 1px solid #ccc;
@@ -4179,19 +3682,16 @@
   cursor: pointer;
   border-radius: 4px;
 }
-
 .todo-filters button.active {
   background: #0078d4;
   color: #fff;
 }
-
 .todo-list {
   list-style: none;
   padding: 0;
   flex: 1;
   overflow-y: auto;
 }
-
 .todo-list li {
   display: flex;
   align-items: center;
@@ -4199,12 +3699,10 @@
   padding: 0.5rem;
   border-bottom: 1px solid #eee;
 }
-
 .todo-list li.completed span {
   text-decoration: line-through;
   opacity: 0.6;
 }
-
 .todo-list li button {
   background: none;
   border: none;
@@ -4212,11 +3710,6 @@
   cursor: pointer;
   font-size: 1.2rem;
 }
-
-/* ====================================
-   APP: CLOCK
-   ==================================== */
-
 .clock-app {
   padding: 1rem;
   background: #fff;
@@ -4225,11 +3718,9 @@
   flex-direction: column;
   align-items: center;
 }
-
 .analog-clock {
   margin-bottom: 2rem;
 }
-
 .clock-face {
   position: relative;
   width: 200px;
@@ -4238,7 +3729,6 @@
   border-radius: 50%;
   background: #fff;
 }
-
 .hour-mark,
 .minute-mark {
   position: absolute;
@@ -4249,17 +3739,14 @@
   margin-left: -1px;
   transform-origin: 50% 90px;
 }
-
 .hour-mark {
   height: 20px;
 }
-
 .minute-mark {
   height: 10px;
   width: 1px;
   margin-left: 0;
 }
-
 .hand {
   position: absolute;
   bottom: 50%;
@@ -4267,28 +3754,24 @@
   transform-origin: 50% 100px;
   border-radius: 50% 50% 0 0;
 }
-
 .hour-hand {
   width: 6px;
   height: 60px;
   background: #333;
   margin-left: -3px;
 }
-
 .minute-hand {
   width: 4px;
   height: 80px;
   background: #333;
   margin-left: -2px;
 }
-
 .second-hand {
   width: 2px;
   height: 90px;
   background: #ff0000;
   margin-left: -1px;
 }
-
 .center-dot {
   position: absolute;
   top: 50%;
@@ -4299,59 +3782,45 @@
   border-radius: 50%;
   margin: -6px 0 0 -6px;
 }
-
 .digital-clock {
   text-align: center;
   margin-bottom: 2rem;
 }
-
 .digital-time {
   font-size: 2rem;
   font-weight: bold;
   color: #333;
 }
-
 .digital-date {
   font-size: 1rem;
   color: #666;
 }
-
 .time-zones {
   width: 100%;
   max-width: 300px;
 }
-
 .time-zones h3 {
   margin-bottom: 1rem;
   color: #333;
 }
-
 .tz-item {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0;
   border-bottom: 1px solid #eee;
 }
-
 .tz-item span:first-child {
   font-weight: bold;
 }
-
 .tz-item span:last-child {
   color: #666;
 }
-
-/* ====================================
-   APP: PAINT
-   ==================================== */
-
 .paint-app {
   height: 100%;
   display: flex;
   flex-direction: column;
   background: #f5f5f5;
 }
-
 .paint-toolbar {
   display: flex;
   gap: 1rem;
@@ -4360,7 +3829,6 @@
   border-bottom: 1px solid #ccc;
   align-items: center;
 }
-
 .tool-group,
 .color-group,
 .action-group {
@@ -4368,7 +3836,6 @@
   align-items: center;
   gap: 0.5rem;
 }
-
 .tool-group button,
 .action-group button {
   padding: 0.25rem 0.5rem;
@@ -4377,34 +3844,24 @@
   cursor: pointer;
   border-radius: 4px;
 }
-
 .tool-group button.active {
   background: #0078d4;
   color: #fff;
 }
-
 .color-group input[type='color'] {
   width: 40px;
   height: 30px;
   border: 1px solid #ccc;
   cursor: pointer;
 }
-
 .color-group input[type='range'] {
   width: 100px;
 }
-
 .paint-canvas {
   border: 1px solid #ccc;
   cursor: crosshair;
   background: #fff;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — PARTICLES CANVAS
-   Full-screen canvas for animated floating particles + connection lines
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-particles-canvas {
   position: absolute;
   inset: 0;
@@ -4413,12 +3870,6 @@
   opacity: 0.6;
   mix-blend-mode: screen;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — AURORA / GRADIENT BLOBS
-   Large soft radial blobs that drift around creating aurora effect
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-aurora-layer {
   position: absolute;
   inset: 0;
@@ -4426,7 +3877,6 @@
   pointer-events: none;
   overflow: hidden;
 }
-
 .ls-aurora-blob {
   position: absolute;
   border-radius: 50%;
@@ -4435,20 +3885,13 @@
   animation: auroraFloat linear infinite both;
   will-change: transform, opacity;
 }
-
 @keyframes auroraFloat {
-  0%   { transform: translate(-50%, -50%) scale(1) rotate(0deg);   opacity: 0.35; }
+  0%   { transform: translate(0, 0)    scale(1) rotate(0deg);   opacity: 0.35; }
   25%  { transform: translate(-48%, -52%) scale(1.08) rotate(5deg); opacity: 0.45; }
   50%  { transform: translate(-52%, -48%) scale(0.95) rotate(-3deg); opacity: 0.3; }
   75%  { transform: translate(-50%, -54%) scale(1.05) rotate(4deg); opacity: 0.4; }
   100% { transform: translate(-50%, -50%) scale(1) rotate(0deg);   opacity: 0.35; }
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — AMBIENT ORBS
-   Decorative color-bleed orbs behind content, time-of-day tinted
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-ambient-orbs {
   position: absolute;
   inset: 0;
@@ -4456,7 +3899,6 @@
   pointer-events: none;
   overflow: hidden;
 }
-
 .ls-orb {
   position: absolute;
   border-radius: 50%;
@@ -4465,7 +3907,6 @@
   animation: orbDrift ease-in-out infinite alternate;
   will-change: transform;
 }
-
 .ls-orb-1 {
   width: 60vw;
   height: 60vw;
@@ -4474,7 +3915,6 @@
   animation-duration: 20s;
   animation-delay: 0s;
 }
-
 .ls-orb-2 {
   width: 45vw;
   height: 45vw;
@@ -4483,7 +3923,6 @@
   animation-duration: 25s;
   animation-delay: -7s;
 }
-
 .ls-orb-3 {
   width: 50vw;
   height: 50vw;
@@ -4492,19 +3931,12 @@
   animation-duration: 22s;
   animation-delay: -13s;
 }
-
 @keyframes orbDrift {
   0%   { transform: translate(0, 0)    scale(1); }
   33%  { transform: translate(4%, 6%)  scale(1.06); }
   66%  { transform: translate(-3%, 4%) scale(0.94); }
   100% { transform: translate(5%, -4%) scale(1.04); }
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — BACKGROUND CROSSFADE LAYER
-   The previous background slides out as the new one loads
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .lock-bg-prev {
   position: absolute;
   inset: 0;
@@ -4514,17 +3946,10 @@
   animation: bgFadeOut 0.9s ease forwards;
   pointer-events: none;
 }
-
 @keyframes bgFadeOut {
   from { opacity: 1; }
   to   { opacity: 0; }
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — REVISED MAIN LAYOUT ELEMENTS
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* Ambient mode dims the overlay for a screensaver feel */
 .lock-screen.ambient-mode .lock-overlay {
   background: linear-gradient(
     to bottom,
@@ -4532,14 +3957,11 @@
     rgba(0,0,0,0.15) 100%
   );
 }
-
 .lock-screen.ambient-mode .lock-content {
   opacity: 0.7;
   transform: scale(0.95);
   transition: opacity 1s, transform 1s;
 }
-
-/* Greeting line above avatar */
 .ls-greeting {
   font-size: clamp(0.85rem, 1.6vw, 1.1rem);
   font-weight: 400;
@@ -4550,13 +3972,10 @@
   text-shadow: 0 1px 6px rgba(0,0,0,0.4);
   animation: fadeSlideDown 0.8s ease both;
 }
-
 @keyframes fadeSlideDown {
   from { opacity: 0; transform: translateY(-12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
-/* Year badge under the date */
 .ls-year-badge {
   font-size: 0.72rem;
   color: rgba(255,255,255,0.38);
@@ -4565,12 +3984,6 @@
   margin-top: -0.15rem;
   margin-bottom: 0.3rem;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — SECONDS RING (SVG clock)
-   SVG arc that wraps around the large time display
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-clock-wrap {
   position: relative;
   display: flex;
@@ -4580,14 +3993,12 @@
   height: 260px;
   margin: 0 auto 0;
 }
-
 .ls-seconds-ring {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
 }
-
 .ls-clock-wrap .lock-time {
   position: relative;
   z-index: 1;
@@ -4595,12 +4006,6 @@
   margin: 0;
   line-height: 1;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — SIDEBAR (Calendar + Quotes)
-   Slides in from the left edge
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-sidebar {
   position: absolute;
   left: 0;
@@ -4612,11 +4017,9 @@
   align-items: stretch;
   transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 .ls-sidebar.open {
   width: 320px;
 }
-
 .ls-sidebar-toggle {
   position: absolute;
   right: -14px;
@@ -4636,11 +4039,9 @@
   justify-content: center;
   transition: background 0.2s;
 }
-
 .ls-sidebar-toggle:hover {
   background: rgba(0,120,212,0.7);
 }
-
 .ls-sidebar-content {
   width: 320px;
   background: rgba(15,15,25,0.72);
@@ -4655,15 +4056,8 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.15) transparent;
 }
-
 .ls-sidebar-content::-webkit-scrollbar { width: 4px; }
 .ls-sidebar-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — RIGHT PANEL ICON STRIP
-   Vertical buttons on the right edge to toggle floating panels
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-right-panel {
   position: absolute;
   right: 12px;
@@ -4674,7 +4068,6 @@
   flex-direction: column;
   gap: 0.5rem;
 }
-
 .ls-panel-btn {
   width: 38px;
   height: 38px;
@@ -4691,52 +4084,35 @@
   justify-content: center;
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
-
 .ls-panel-btn:hover {
   background: rgba(0,120,212,0.5);
   border-color: rgba(0,120,212,0.6);
   transform: scale(1.08);
 }
-
 .ls-panel-btn.active {
   background: rgba(0,120,212,0.6);
   border-color: rgba(0,120,212,0.8);
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — FLOATING PANELS (Events, Status)
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-floating-panel {
   position: absolute;
   z-index: 14;
   animation: panelFadeIn 0.22s ease both;
 }
-
 @keyframes panelFadeIn {
   from { opacity: 0; transform: translateX(16px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-
 .ls-floating-panel--right {
   right: 60px;
   top: 50%;
   transform: translateY(-50%);
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — REVISED TASKBAR
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .lock-taskbar {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 44px;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(20px) saturate(1.6);
-  -webkit-backdrop-filter: blur(20px) saturate(1.6);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -4745,25 +4121,21 @@
   z-index: 10;
   border-top: 1px solid rgba(255,255,255,0.08);
 }
-
 .lock-taskbar-left {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
 .ls-taskbar-greeting {
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.5);
   letter-spacing: 0.03em;
 }
-
 .lock-taskbar-icons {
   display: flex;
   align-items: center;
   gap: 0.6rem;
 }
-
 .lock-taskbar-clock {
   display: flex;
   flex-direction: column;
@@ -4775,43 +4147,32 @@
   color: #fff;
   line-height: 1.3;
 }
-
 .lock-taskbar-date {
   font-size: 0.68rem;
   color: rgba(255,255,255,0.6);
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — MINI CALENDAR
-   Full month grid displayed inside the left sidebar
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-mini-calendar {
   width: 100%;
   color: #fff;
   user-select: none;
 }
-
 .ls-cal-header {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 0.75rem;
 }
-
 .ls-cal-month {
   font-size: 0.9rem;
   font-weight: 600;
   color: rgba(255,255,255,0.9);
   letter-spacing: 0.03em;
 }
-
 .ls-cal-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 2px;
 }
-
 .ls-cal-dayname {
   text-align: center;
   font-size: 0.65rem;
@@ -4821,7 +4182,6 @@
   padding: 0.2rem 0;
   letter-spacing: 0.04em;
 }
-
 .ls-cal-cell {
   text-align: center;
   font-size: 0.78rem;
@@ -4832,27 +4192,18 @@
   transition: background 0.15s;
   line-height: 1.4;
 }
-
 .ls-cal-cell:hover {
   background: rgba(255,255,255,0.1);
 }
-
 .ls-cal-other {
   color: rgba(255,255,255,0.25);
 }
-
 .ls-cal-today {
   background: #0078d4 !important;
   color: #fff !important;
   font-weight: 700;
   box-shadow: 0 2px 10px rgba(0,120,212,0.45);
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — QUOTE ROTATOR
-   Fading motivational quote card with pagination dots
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-quote-panel {
   width: 100%;
   background: rgba(255,255,255,0.06);
@@ -4860,21 +4211,17 @@
   border-radius: 14px;
   padding: 1rem 1rem 0.8rem;
 }
-
 .ls-quote-inner {
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
 .ls-quote-visible {
   opacity: 1;
   transform: translateY(0);
 }
-
 .ls-quote-hidden {
   opacity: 0;
   transform: translateY(6px);
 }
-
 .ls-quote-text {
   font-size: 0.82rem;
   color: rgba(255,255,255,0.88);
@@ -4883,21 +4230,18 @@
   font-style: italic;
   text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
-
 .ls-quote-author {
   font-size: 0.72rem;
   color: rgba(255,255,255,0.5);
   font-weight: 500;
   letter-spacing: 0.03em;
 }
-
 .ls-quote-dots {
   display: flex;
   justify-content: center;
   gap: 4px;
   margin-top: 0.75rem;
 }
-
 .ls-quote-dot {
   width: 5px;
   height: 5px;
@@ -4906,17 +4250,10 @@
   display: inline-block;
   transition: background 0.3s, transform 0.3s;
 }
-
 .ls-quote-dot.active {
   background: rgba(255,255,255,0.8);
   transform: scale(1.3);
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — PHOTO ATTRIBUTION
-   Bottom-left credit line for Unsplash wallpaper
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-photo-credit {
   position: absolute;
   bottom: 56px;
@@ -4937,17 +4274,10 @@
   pointer-events: none;
   user-select: none;
 }
-
 .ls-photo-credit strong {
   color: rgba(255,255,255,0.65);
   font-weight: 600;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — NEWS TICKER
-   Scrolling marquee strip sits just above the taskbar
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-ticker-strip {
   position: absolute;
   bottom: 44px;
@@ -4963,7 +4293,6 @@
   border-top: 1px solid rgba(255,255,255,0.06);
   overflow: hidden;
 }
-
 .ls-ticker-label {
   flex-shrink: 0;
   background: #0078d4;
@@ -4977,14 +4306,12 @@
   align-items: center;
   text-transform: uppercase;
 }
-
 .ls-ticker-track-wrap {
   flex: 1;
   overflow: hidden;
   display: flex;
   align-items: center;
 }
-
 .ls-ticker-track {
   display: flex;
   gap: 2.5rem;
@@ -4992,28 +4319,19 @@
   animation: tickerScroll 60s linear infinite;
   will-change: transform;
 }
-
 .ls-ticker-track.paused {
   animation-play-state: paused;
 }
-
 @keyframes tickerScroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
 .ls-ticker-item {
   color: rgba(255,255,255,0.72);
   font-size: 0.72rem;
   letter-spacing: 0.02em;
   flex-shrink: 0;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — UPCOMING EVENTS PANEL
-   Glass card showing today's + tomorrow's schedule
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-events-panel {
   background: rgba(15,15,25,0.75);
   backdrop-filter: blur(24px) saturate(1.6);
@@ -5025,20 +4343,17 @@
   max-width: 270px;
   color: #fff;
 }
-
 .ls-events-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.75rem;
 }
-
 .ls-events-title {
   font-size: 0.82rem;
   font-weight: 600;
   color: rgba(255,255,255,0.9);
 }
-
 .ls-events-next {
   font-size: 0.68rem;
   color: #0078d4;
@@ -5047,7 +4362,6 @@
   border-radius: 20px;
   padding: 1px 8px;
 }
-
 .ls-events-section-label {
   font-size: 0.65rem;
   font-weight: 700;
@@ -5056,7 +4370,6 @@
   letter-spacing: 0.08em;
   margin: 0.6rem 0 0.35rem;
 }
-
 .ls-event-item {
   display: flex;
   align-items: center;
@@ -5066,15 +4379,12 @@
   transition: background 0.15s;
   margin-bottom: 2px;
 }
-
 .ls-event-item:hover {
   background: rgba(255,255,255,0.06);
 }
-
 .ls-event-item.past {
   opacity: 0.38;
 }
-
 .ls-event-dot {
   width: 8px;
   height: 8px;
@@ -5083,14 +4393,12 @@
   flex-shrink: 0;
   box-shadow: 0 0 6px var(--ev-color, #0078d4);
 }
-
 .ls-event-time {
   font-size: 0.72rem;
   color: rgba(255,255,255,0.5);
   min-width: 36px;
   font-variant-numeric: tabular-nums;
 }
-
 .ls-event-title {
   font-size: 0.8rem;
   color: rgba(255,255,255,0.85);
@@ -5098,12 +4406,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — SYSTEM STATUS PANEL
-   Live CPU / RAM / Disk / Network utilisation bars
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-sys-panel {
   background: rgba(15,15,25,0.75);
   backdrop-filter: blur(24px) saturate(1.6);
@@ -5114,7 +4416,6 @@
   min-width: 200px;
   color: #fff;
 }
-
 .ls-sys-title {
   font-size: 0.78rem;
   font-weight: 600;
@@ -5123,21 +4424,18 @@
   text-transform: uppercase;
   margin-bottom: 0.75rem;
 }
-
 .ls-sys-row {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.55rem;
 }
-
 .ls-sys-icon {
   font-size: 0.85rem;
   width: 18px;
   text-align: center;
   flex-shrink: 0;
 }
-
 .ls-sys-label {
   font-size: 0.72rem;
   color: rgba(255,255,255,0.55);
@@ -5145,7 +4443,6 @@
   flex-shrink: 0;
   letter-spacing: 0.02em;
 }
-
 .ls-sys-bar-bg {
   flex: 1;
   height: 5px;
@@ -5153,7 +4450,6 @@
   border-radius: 10px;
   overflow: hidden;
 }
-
 .ls-sys-bar-fill {
   height: 100%;
   border-radius: 10px;
@@ -5161,7 +4457,6 @@
   transition: width 0.6s ease;
   box-shadow: 0 0 6px var(--bar-a, #0078d4);
 }
-
 .ls-sys-value {
   font-size: 0.7rem;
   color: rgba(255,255,255,0.6);
@@ -5170,12 +4465,6 @@
   font-variant-numeric: tabular-nums;
   flex-shrink: 0;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — QUICK CONTROLS PANEL
-   Brightness + Volume sliders, Night Mode + High Contrast toggles
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-quick-controls {
   position: absolute;
   right: 14px;
@@ -5186,7 +4475,6 @@
   align-items: flex-end;
   gap: 0.4rem;
 }
-
 .ls-qc-toggle-btn-icon {
   width: 38px;
   height: 38px;
@@ -5203,11 +4491,9 @@
   justify-content: center;
   transition: background 0.2s, transform 0.15s;
 }
-
 .ls-qc-toggle-btn-icon:hover {
   background: rgba(255,255,255,0.22);
 }
-
 .ls-qc-panel {
   background: rgba(15,15,25,0.82);
   backdrop-filter: blur(28px) saturate(1.8);
@@ -5218,7 +4504,6 @@
   width: 220px;
   animation: panelFadeIn 0.2s ease;
 }
-
 .ls-qc-title {
   font-size: 0.78rem;
   font-weight: 600;
@@ -5227,14 +4512,12 @@
   letter-spacing: 0.06em;
   margin-bottom: 0.9rem;
 }
-
 .ls-qc-row {
   display: flex;
   align-items: center;
   gap: 0.55rem;
   margin-bottom: 0.7rem;
 }
-
 .ls-qc-icon {
   font-size: 0.9rem;
   width: 20px;
@@ -5242,14 +4525,12 @@
   flex-shrink: 0;
   color: rgba(255,255,255,0.7);
 }
-
 .ls-qc-label {
   font-size: 0.73rem;
   color: rgba(255,255,255,0.6);
   width: 56px;
   flex-shrink: 0;
 }
-
 .ls-qc-slider {
   flex: 1;
   appearance: none;
@@ -5260,7 +4541,6 @@
   outline: none;
   cursor: pointer;
 }
-
 .ls-qc-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 14px;
@@ -5270,7 +4550,6 @@
   box-shadow: 0 0 6px rgba(0,120,212,0.6);
   cursor: pointer;
 }
-
 .ls-qc-val {
   font-size: 0.7rem;
   color: rgba(255,255,255,0.5);
@@ -5279,14 +4558,12 @@
   font-variant-numeric: tabular-nums;
   flex-shrink: 0;
 }
-
 .ls-qc-toggles {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
   margin-top: 0.25rem;
 }
-
 .ls-qc-btn {
   flex: 1;
   min-width: 80px;
@@ -5303,22 +4580,14 @@
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
-
 .ls-qc-btn.active {
   background: rgba(0,120,212,0.25);
   border-color: rgba(0,120,212,0.5);
   color: #60c8ff;
 }
-
 .ls-qc-btn:hover {
   background: rgba(255,255,255,0.14);
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — KEYBOARD HINTS PANEL
-   HUD shown briefly on any keypress listing useful shortcuts
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-kb-panel {
   position: absolute;
   top: 50%;
@@ -5335,7 +4604,6 @@
   animation: panelFadeIn 0.25s ease;
   pointer-events: none;
 }
-
 .ls-kb-title {
   font-size: 0.85rem;
   font-weight: 600;
@@ -5345,7 +4613,6 @@
   margin-bottom: 1rem;
   text-align: center;
 }
-
 .ls-kb-row {
   display: flex;
   align-items: center;
@@ -5353,17 +4620,9 @@
   padding: 0.45rem 0;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-
 .ls-kb-row:last-child {
   border-bottom: none;
 }
-
-.ls-kb-keys {
-  display: flex;
-  gap: 0.25rem;
-  align-items: center;
-}
-
 .ls-kbd {
   display: inline-block;
   padding: 0.18rem 0.5rem;
@@ -5376,22 +4635,14 @@
   letter-spacing: 0.03em;
   box-shadow: 0 2px 0 rgba(0,0,0,0.3);
 }
-
 .ls-kb-plus {
   font-size: 0.72rem;
   color: rgba(255,255,255,0.35);
 }
-
 .ls-kb-action {
   font-size: 0.78rem;
   color: rgba(255,255,255,0.62);
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — ENHANCED CLOCK AREA
-   Large time display, greeting, year badge, seconds ring SVG
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-clock-wrap {
   position: relative;
   display: flex;
@@ -5399,7 +4650,6 @@
   align-items: center;
   gap: 0.1rem;
 }
-
 .ls-seconds-ring {
   position: absolute;
   top: 50%;
@@ -5407,13 +4657,11 @@
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
-
 .ls-ring-track {
   stroke: rgba(255,255,255,0.08);
   fill: none;
   stroke-width: 2;
 }
-
 .ls-ring-progress {
   fill: none;
   stroke: rgba(255,255,255,0.55);
@@ -5422,7 +4670,6 @@
   transition: stroke-dashoffset 0.9s linear;
   filter: drop-shadow(0 0 5px rgba(255,255,255,0.4));
 }
-
 .lock-time {
   font-size: clamp(3.8rem, 8vw, 6.5rem);
   font-weight: 200;
@@ -5435,7 +4682,6 @@
   font-variant-numeric: tabular-nums;
   z-index: 1;
 }
-
 .lock-date {
   font-size: clamp(0.85rem, 1.5vw, 1.1rem);
   color: rgba(255,255,255,0.7);
@@ -5445,7 +4691,6 @@
   text-shadow: 0 1px 8px rgba(0,0,0,0.35);
   z-index: 1;
 }
-
 .ls-greeting {
   font-size: 0.85rem;
   color: rgba(255,255,255,0.55);
@@ -5454,7 +4699,6 @@
   font-weight: 500;
   margin-bottom: 0.3rem;
 }
-
 .ls-year-badge {
   display: inline-block;
   background: rgba(255,255,255,0.1);
@@ -5467,12 +4711,6 @@
   margin-top: 0.35rem;
   backdrop-filter: blur(6px);
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — WEATHER WIDGET OVERRIDES WITHIN LOCK SCREEN
-   Keep weather readable against any background
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .lock-screen .weather-widget {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(16px) saturate(1.5);
@@ -5483,16 +4721,9 @@
   color: #fff;
   box-shadow: 0 4px 24px rgba(0,0,0,0.25);
 }
-
 .lock-screen .weather-widget * {
   color: inherit;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — GENERAL POLISH
-   Lock screen container, background image, central card layout
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .lock-screen {
   position: fixed;
   inset: 0;
@@ -5504,15 +4735,12 @@
   background: #0a0a0f;
   transition: filter 0.4s ease;
 }
-
 .lock-screen.ambient-mode {
   filter: brightness(0.45) saturate(0.7);
 }
-
 .lock-screen.ambient-mode:hover {
   filter: brightness(1) saturate(1);
 }
-
 .lock-bg {
   position: absolute;
   inset: 0;
@@ -5524,7 +4752,6 @@
   transform: scale(1.04);
   will-change: transform;
 }
-
 .lock-bg::after {
   content: '';
   position: absolute;
@@ -5536,7 +4763,6 @@
     rgba(0,0,0,0.55) 100%
   );
 }
-
 .lock-bg-prev {
   position: absolute;
   inset: 0;
@@ -5547,7 +4773,6 @@
   pointer-events: none;
   transform: scale(1.04);
 }
-
 .lock-center {
   position: relative;
   z-index: 10;
@@ -5558,7 +4783,6 @@
   text-align: center;
   padding: 0 1rem;
 }
-
 .lock-unlock-area {
   display: flex;
   flex-direction: column;
@@ -5567,7 +4791,6 @@
   margin-top: 0.4rem;
   cursor: pointer;
 }
-
 .lock-unlock-hint {
   font-size: 0.82rem;
   color: rgba(255,255,255,0.52);
@@ -5576,38 +4799,26 @@
   font-weight: 500;
   animation: hintPulse 3s ease-in-out infinite;
 }
-
 @keyframes hintPulse {
   0%, 100% { opacity: 0.52; transform: translateY(0); }
   50%       { opacity: 0.85; transform: translateY(-3px); }
 }
-
 .lock-arrow {
   color: rgba(255,255,255,0.45);
   font-size: 1.1rem;
   animation: arrowBounce 2s ease-in-out infinite;
 }
-
 @keyframes arrowBounce {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(5px); }
 }
-
-/* Entry fade for lock screen */
 @keyframes lockFadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-
 .lock-screen {
   animation: lockFadeIn 0.6s ease both;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — RIGHT PANEL (floating panels host)
-   Side-column holding events + system status stacked
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-right-panel {
   position: absolute;
   right: 14px;
@@ -5621,11 +4832,9 @@
   overflow-y: auto;
   scrollbar-width: none;
 }
-
 .ls-right-panel::-webkit-scrollbar {
   display: none;
 }
-
 .ls-panel-btn {
   position: absolute;
   right: 14px;
@@ -5636,7 +4845,6 @@
   flex-direction: column;
   gap: 0.5rem;
 }
-
 .ls-panel-btn button {
   width: 36px;
   height: 36px;
@@ -5652,17 +4860,10 @@
   justify-content: center;
   transition: background 0.2s;
 }
-
 .ls-panel-btn button:hover, .ls-panel-btn button.active {
   background: rgba(0,120,212,0.35);
   border-color: rgba(0,120,212,0.5);
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — SIDEBAR POLISH
-   Refined left-side drawer with scrollable content sections
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-sidebar {
   position: absolute;
   left: 0;
@@ -5673,7 +4874,6 @@
   display: flex;
   flex-direction: column;
 }
-
 .ls-sidebar-toggle {
   position: absolute;
   left: 14px;
@@ -5694,15 +4894,12 @@
   justify-content: center;
   transition: background 0.2s, left 0.3s;
 }
-
 .ls-sidebar-toggle:hover {
   background: rgba(255,255,255,0.2);
 }
-
 .ls-sidebar-toggle.open {
   left: 238px;
 }
-
 .ls-sidebar-content {
   width: 260px;
   height: 100%;
@@ -5720,20 +4917,16 @@
   transform: translateX(-100%);
   transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
 }
-
 .ls-sidebar-content.open {
   transform: translateX(0);
 }
-
 .ls-sidebar-content::-webkit-scrollbar {
   width: 4px;
 }
-
 .ls-sidebar-content::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.15);
   border-radius: 4px;
 }
-
 .ls-sidebar-section-title {
   font-size: 0.65rem;
   font-weight: 700;
@@ -5744,12 +4937,6 @@
   padding-bottom: 0.3rem;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — AMBIENT ORBS (reworked with smoother animation)
-   Three large, heavily blurred orbs that slowly drift
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-ambient-orbs {
   position: absolute;
   inset: 0;
@@ -5757,7 +4944,6 @@
   overflow: hidden;
   pointer-events: none;
 }
-
 .ls-orb-1,
 .ls-orb-2,
 .ls-orb-3 {
@@ -5767,25 +4953,21 @@
   opacity: 0.22;
   mix-blend-mode: screen;
 }
-
 .ls-orb-1 {
   width: 45vw;
   height: 45vw;
   animation: orbDrift1 22s ease-in-out infinite alternate;
 }
-
 .ls-orb-2 {
   width: 38vw;
   height: 38vw;
   animation: orbDrift2 28s ease-in-out infinite alternate;
 }
-
 .ls-orb-3 {
   width: 30vw;
   height: 30vw;
   animation: orbDrift3 18s ease-in-out infinite alternate;
 }
-
 @keyframes orbDrift1 {
   0%   { transform: translate(0%,   0%);   }
   25%  { transform: translate(8%,   -5%);  }
@@ -5793,26 +4975,18 @@
   75%  { transform: translate(5%,   20%);  }
   100% { transform: translate(-10%, 8%);   }
 }
-
 @keyframes orbDrift2 {
   0%   { transform: translate(0%,   0%);   }
   33%  { transform: translate(-12%, 8%);   }
   66%  { transform: translate(10%,  -12%); }
   100% { transform: translate(5%,   15%);  }
 }
-
 @keyframes orbDrift3 {
   0%   { transform: translate(0%,   0%);   }
   40%  { transform: translate(-8%,  -10%); }
   80%  { transform: translate(14%,  4%);   }
   100% { transform: translate(0%,   -15%); }
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — AURORA LAYER (refined)
-   Glassy blobs behind clock for colorful aurora effect
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-aurora-layer {
   position: absolute;
   inset: 0;
@@ -5820,7 +4994,6 @@
   pointer-events: none;
   overflow: hidden;
 }
-
 .ls-aurora-blob {
   position: absolute;
   border-radius: 50%;
@@ -5829,31 +5002,18 @@
   mix-blend-mode: screen;
   animation: auroraFloat var(--dur, 20s) ease-in-out infinite alternate;
 }
-
 @keyframes auroraFloat {
   0%   { transform: translate(0,0) scale(1);     opacity: 0.16; }
   30%  { transform: translate(6%, -8%) scale(1.08); opacity: 0.22; }
   60%  { transform: translate(-5%, 10%) scale(0.95); opacity: 0.14; }
   100% { transform: translate(8%, 5%) scale(1.05);  opacity: 0.20; }
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — NIGHT MODE OVERRIDE
-   Applied via .night-mode class on .lock-screen
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .lock-screen.night-mode {
   filter: sepia(0.3) brightness(0.65) saturate(0.6);
 }
-
 .lock-screen.night-mode.ambient-mode {
   filter: sepia(0.4) brightness(0.32) saturate(0.5);
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — HIGH CONTRAST OVERRIDE
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .lock-screen.high-contrast .ls-sidebar-content,
 .lock-screen.high-contrast .ls-events-panel,
 .lock-screen.high-contrast .ls-sys-panel,
@@ -5862,74 +5022,46 @@
   background: rgba(0,0,0,0.92) !important;
   border-color: rgba(255,255,255,0.4) !important;
 }
-
 .lock-screen.high-contrast .lock-time,
 .lock-screen.high-contrast .lock-date,
 .lock-screen.high-contrast .ls-quote-text {
   text-shadow: none;
   color: #fff;
 }
-
 .lock-screen.high-contrast .ls-aurora-layer,
 .lock-screen.high-contrast .ls-ambient-orbs,
 .lock-screen.high-contrast .ls-particles-canvas {
   opacity: 0 !important;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — FLOATING PANELS (general)
-   Shared styles for all glass panels that pop up on the lock screen
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-floating-panel {
   animation: panelFadeIn 0.22s ease both;
 }
-
 @keyframes panelFadeIn {
   from { opacity: 0; transform: translateY(10px) scale(0.97); }
   to   { opacity: 1; transform: translateY(0)   scale(1);    }
 }
-
-/* Panel slide-out */
 @keyframes panelFadeOut {
   from { opacity: 1; transform: translateY(0)    scale(1);    }
   to   { opacity: 0; transform: translateY(-8px) scale(0.97); }
 }
-
 .ls-floating-panel.closing {
   animation: panelFadeOut 0.18s ease both;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — BACKGROUND CROSSFADE
-   Previous background fades out while new one is already visible below
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 @keyframes bgFadeOut {
   from { opacity: 1; }
   to   { opacity: 0; }
 }
-
 .lock-bg-prev.fading {
   animation: bgFadeOut 1.4s ease forwards;
 }
-
-/* Ken-Burns subtle pan on current bg */
 @keyframes kenBurns {
   0%   { transform: scale(1.04) translate(0%, 0%);    }
   50%  { transform: scale(1.07) translate(-0.6%, 0.4%); }
   100% { transform: scale(1.04) translate(0%, 0%);    }
 }
-
 .lock-bg {
   animation: kenBurns 30s ease-in-out infinite;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — PARTICLES CANVAS
-   Canvas used by the ParticlesCanvas component (react ref)
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .ls-particles-canvas {
   position: absolute;
   inset: 0;
@@ -5938,12 +5070,6 @@
   mix-blend-mode: screen;
   opacity: 0.55;
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — TASKBAR (inside lock screen)
-   Thin bottom bar showing time, weather summary, quick icons
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 .lock-taskbar {
   position: absolute;
   bottom: 0;
@@ -5961,36 +5087,30 @@
   z-index: 20;
   user-select: none;
 }
-
 .lock-taskbar-left {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
 .ls-taskbar-greeting {
   font-size: 0.78rem;
   color: rgba(255,255,255,0.5);
   letter-spacing: 0.04em;
 }
-
 .lock-taskbar-icons {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
-
 .lock-taskbar-icons span {
   font-size: 1rem;
   color: rgba(255,255,255,0.55);
   cursor: default;
   transition: color 0.2s;
 }
-
 .lock-taskbar-icons span:hover {
   color: rgba(255,255,255,0.9);
 }
-
 .lock-taskbar-clock {
   font-size: 0.88rem;
   font-weight: 600;
@@ -5998,18 +5118,10 @@
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.03em;
 }
-
 .lock-taskbar-date {
   font-size: 0.68rem;
   color: rgba(255,255,255,0.6);
 }
-
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — RESPONSIVE BREAKPOINTS
-   Adjustments for smaller screens (tablets, small laptops)
-   ══════════════════════════════════════════════════════════════════════════════ */
-
 @media (max-width: 1024px) {
   .ls-sidebar {
     width: 240px;
@@ -6031,7 +5143,6 @@
     bottom: 72px;
   }
 }
-
 @media (max-width: 768px) {
   .lock-time {
     font-size: clamp(3rem, 14vw, 4.5rem);
@@ -6064,7 +5175,6 @@
     display: none;
   }
 }
-
 @media (max-width: 480px) {
   .lock-time {
     font-size: clamp(2.6rem, 16vw, 3.5rem);
@@ -6088,21 +5198,12 @@
     display: none;
   }
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LOCK SCREEN — MISCELLANEOUS HELPERS
-   Small utility rules for the lock screen sub-components
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* Divider line used inside sidebar sections */
 .ls-divider {
   width: 100%;
   height: 1px;
   background: rgba(255,255,255,0.07);
   margin: 0.5rem 0;
 }
-
-/* Generic icon button inside lock screen panels */
 .ls-icon-btn {
   width: 32px;
   height: 32px;
@@ -6118,13 +5219,10 @@
   transition: background 0.18s, color 0.18s;
   flex-shrink: 0;
 }
-
 .ls-icon-btn:hover {
   background: rgba(255,255,255,0.15);
   color: #fff;
 }
-
-/* Glowing blue accent dot used for active states */
 .ls-accent-dot {
   width: 6px;
   height: 6px;
@@ -6133,8 +5231,6 @@
   box-shadow: 0 0 8px rgba(0,120,212,0.7);
   display: inline-block;
 }
-
-/* Generic label+value row */
 .ls-info-row {
   display: flex;
   justify-content: space-between;
@@ -6143,12 +5239,9 @@
   padding: 0.28rem 0;
   color: rgba(255,255,255,0.65);
 }
-
 .ls-info-row strong {
   color: rgba(255,255,255,0.88);
 }
-
-/* Thin progress bar used in misc status displays */
 .ls-thin-bar-bg {
   width: 100%;
   height: 3px;
@@ -6157,20 +5250,16 @@
   overflow: hidden;
   margin-top: 0.2rem;
 }
-
 .ls-thin-bar-fill {
   height: 100%;
   border-radius: 6px;
   background: #0078d4;
   transition: width 0.5s ease;
 }
-
-/* Pulsing dot for "live" indicators */
 @keyframes livePulse {
   0%, 100% { opacity: 1;   transform: scale(1);   }
   50%       { opacity: 0.4; transform: scale(0.75); }
 }
-
 .ls-live-dot {
   width: 6px;
   height: 6px;
@@ -6180,13 +5269,10 @@
   display: inline-block;
   animation: livePulse 2s ease-in-out infinite;
 }
-
-/* Shimmer loading placeholder */
 @keyframes shimmer {
   0%   { background-position: -400px 0; }
   100% { background-position:  400px 0; }
 }
-
 .ls-shimmer {
   background: linear-gradient(90deg,
     rgba(255,255,255,0.04) 25%,
@@ -6197,8 +5283,6 @@
   animation: shimmer 1.5s infinite linear;
   border-radius: 6px;
 }
-
-/* Tooltip-like label appearing above icon buttons */
 .ls-tooltip {
   position: absolute;
   bottom: calc(100% + 6px);
@@ -6215,27 +5299,16 @@
   transition: opacity 0.15s;
   z-index: 50;
 }
-
 .ls-icon-btn:hover .ls-tooltip {
   opacity: 1;
 }
-
-/* UserAvatar on lock screen */
 .lock-screen .user-avatar-wrap {
   filter: drop-shadow(0 4px 16px rgba(0,0,0,0.5));
   transition: transform 0.2s;
 }
-
 .lock-screen .user-avatar-wrap:hover {
   transform: scale(1.05);
 }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   WINDOWS 11 LOCK SCREEN  —  .w11-lock
-   Replaces the old complex lock screen with a clean Win11-style layout.
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Root container ─────────────────────────────────────────────────────────── */
 .w11-lock {
   position: fixed;
   inset: 0;
@@ -6253,13 +5326,10 @@
   background: #000;
   z-index: 9999;
 }
-
 @keyframes w11FadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-
-/* Background image handling - stays fixed to avoid black bars */
 .w11-lock-bg-container {
   position: absolute;
   inset: 0;
@@ -6269,21 +5339,17 @@
   background-repeat: no-repeat;
   transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .w11-lock.w11-blurred .w11-lock-bg-container {
   filter: blur(5px) brightness(0.95);
 }
-
 .w11-lock--out {
   animation: w11SlideUp 0.65s cubic-bezier(0.4, 0, 0.2, 1) both;
   pointer-events: none;
 }
-
 @keyframes w11SlideUp {
   from { transform: translateY(0); opacity: 1; }
   to   { transform: translateY(-100%); opacity: 0; }
 }
-
 .w11-lock.w11-blurred .w11-clock-area,
 .w11-lock.w11-blurred .w11-cards-row,
 .w11-lock.w11-blurred .w11-signin-hint,
@@ -6293,12 +5359,9 @@
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
-
-/* Fix for clock area since it's not absolutely centered with translateX */
 .w11-lock.w11-blurred .w11-clock-area {
-  transform: translateY(-80px); /* Clock is normal flow, no translateX needed */
+  transform: translateY(-80px); 
 }
-
 @keyframes w11BgShift {
   0%   { filter: brightness(1) saturate(1); }
   50%  { filter: brightness(1.05) saturate(1.05); }
@@ -6314,7 +5377,6 @@
   gap: 0.25rem;
   text-align: center;
 }
-
 .w11-time {
   font-size: clamp(5rem, 12vw, 8rem);
   font-weight: 200;
@@ -6324,7 +5386,6 @@
   text-shadow: 0 2px 30px rgba(0,0,0,0.3);
   font-variant-numeric: tabular-nums;
 }
-
 .w11-date {
   font-size: clamp(0.95rem, 1.6vw, 1.25rem);
   font-weight: 400;
@@ -6333,8 +5394,6 @@
   text-shadow: 0 1px 8px rgba(0,0,0,0.2);
   margin-top: 2px;
 }
-
-/* ── Cards row (Weather + Markets + Trending) ───────────────────────────────── */
 .w11-cards-row {
   position: absolute;
   bottom: 56px;
@@ -6349,14 +5408,11 @@
   pointer-events: none;
   margin-bottom: 20px;
 }
-
 .w11-cards-row--in {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
   pointer-events: all;
 }
-
-/* ── Shared card base ─────────────────────────────────────────────────────────── */
 .w11-card {
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(25px) saturate(1.8);
@@ -6376,7 +5432,6 @@
   overflow: hidden;
   transform: translateZ(0);
 }
-
 .w11-card::after {
   content: "";
   position: absolute;
@@ -6387,15 +5442,12 @@
   background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);
   pointer-events: none;
 }
-
 .w11-card:hover {
   background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255,255,255,0.45);
   transform: translateY(-10px) scale(1.08);
   z-index: 100;
 }
-
-/* ── Card shared elements ─────────────────────────────────────────────────────── */
 .w11-card-header {
   display: flex;
   align-items: center;
@@ -6405,92 +5457,72 @@
   color: rgba(255,255,255,0.6);
   letter-spacing: 0.02em;
 }
-
 .w11-card-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
 .w11-card-footer {
   font-size: 0.68rem;
   color: rgba(255,255,255,0.4);
   font-weight: 400;
 }
-
-/* Weather Specific */
 .w11-weather-simplified {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
 .w11-weather-simplified .w11-icon {
   font-size: 2.2rem;
 }
-
 .w11-weather-info {
   display: flex;
   flex-direction: column;
 }
-
 .w11-weather-degree {
   font-size: 1.4rem;
   font-weight: 300;
   line-height: 1.1;
 }
-
 .w11-weather-label {
   font-size: 0.7rem;
   opacity: 0.7;
 }
-
-/* Markets Specific */
 .w11-markets-mini {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-
 .w11-market-item {
   display: flex;
   justify-content: space-between;
   font-size: 0.75rem;
   font-weight: 400;
 }
-
 .w11-m-change {
   font-weight: 500;
   font-size: 0.7rem;
 }
-
 .w11-up { color: #69e1a8; }
 .w11-down { color: #ff7b7b; }
-
-/* Trending Specific */
 .w11-trending-mini {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-
 .w11-game-mini {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 0.7rem;
 }
-
 .w11-mini-logo {
   font-size: 0.9rem;
 }
-
-/* ── Weather card ─────────────────────────────────────────────────────────────── */
 .w11-weather-card {
   min-width: 210px;
 }
-
 .w11-card-location {
   display: flex;
   align-items: center;
@@ -6500,19 +5532,16 @@
   color: rgba(255,255,255,0.75);
   margin-bottom: 2px;
 }
-
 .w11-weather-main {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
 .w11-weather-icon {
   font-size: 2.2rem;
   line-height: 1;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
 }
-
 .w11-weather-temp {
   font-size: 2.5rem;
   font-weight: 200;
@@ -6520,24 +5549,20 @@
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
-
 .w11-weather-unit {
   font-size: 1rem;
   font-weight: 400;
   color: rgba(255,255,255,0.7);
   vertical-align: super;
 }
-
 .w11-weather-cond {
   font-size: 0.78rem;
   color: rgba(255,255,255,0.65);
 }
-
 .w11-weather-range {
   font-size: 0.72rem;
   color: rgba(255,255,255,0.45);
 }
-
 .w11-forecast-row {
   display: flex;
   gap: 6px;
@@ -6545,7 +5570,6 @@
   border-top: 1px solid rgba(255,255,255,0.06);
   padding-top: 8px;
 }
-
 .w11-fc-day {
   flex: 1;
   display: flex;
@@ -6553,23 +5577,19 @@
   align-items: center;
   gap: 3px;
 }
-
 .w11-fc-label {
   font-size: 0.62rem;
   color: rgba(255,255,255,0.42);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-
 .w11-fc-icon {
   font-size: 1rem;
 }
-
 .w11-fc-temp {
   font-size: 0.72rem;
   color: rgba(255,255,255,0.7);
 }
-
 .w11-unit-toggle {
   display: inline-block;
   background: none;
@@ -6584,36 +5604,29 @@
   transition: border-color 0.15s, color 0.15s;
   pointer-events: all;
 }
-
 .w11-unit-toggle:hover {
   border-color: rgba(255,255,255,0.4);
   color: rgba(255,255,255,0.85);
 }
-
-/* ── Markets card ─────────────────────────────────────────────────────────────── */
 .w11-markets-card {
   min-width: 220px;
 }
-
 .w11-markets-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-
 .w11-market-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 6px;
 }
-
 .w11-market-name {
   font-size: 0.78rem;
   color: rgba(255,255,255,0.72);
   flex: 1;
 }
-
 .w11-market-change {
   font-size: 0.76rem;
   font-weight: 600;
@@ -6621,10 +5634,8 @@
   text-align: right;
   transition: color 0.4s;
 }
-
 .w11-market-change.w11-up   { color: #4ade80; }
 .w11-market-change.w11-down { color: #f87171; }
-
 .w11-market-val {
   font-size: 0.74rem;
   color: rgba(255,255,255,0.5);
@@ -6632,24 +5643,19 @@
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-
-/* ── Trending / Sports card ────────────────────────────────────────────────────── */
 .w11-trending-card {
   min-width: 210px;
 }
-
 .w11-games-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
 .w11-game-block {
   display: flex;
   gap: 10px;
   align-items: flex-start;
 }
-
 .w11-game-time {
   font-size: 0.65rem;
   color: rgba(255,255,255,0.38);
@@ -6657,33 +5663,28 @@
   padding-top: 2px;
   flex-shrink: 0;
 }
-
 .w11-game-teams {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-
 .w11-team {
   display: flex;
   align-items: center;
   gap: 6px;
 }
-
 .w11-team-logo {
   font-size: 0.9rem;
   width: 18px;
   text-align: center;
   flex-shrink: 0;
 }
-
 .w11-team-name {
   font-size: 0.78rem;
   color: rgba(255,255,255,0.72);
   flex: 1;
   min-width: 65px;
 }
-
 .w11-team-score {
   font-size: 0.78rem;
   color: rgba(255,255,255,0.55);
@@ -6691,8 +5692,6 @@
   min-width: 14px;
   text-align: right;
 }
-
-/* ── Bottom-right status bar ──────────────────────────────────────────────────── */
 .w11-status-bar {
   position: absolute;
   bottom: 18px;
@@ -6702,7 +5701,6 @@
   align-items: center;
   gap: 6px;
 }
-
 .w11-status-btn {
   width: 36px;
   height: 36px;
@@ -6717,13 +5715,10 @@
   transition: background 0.15s, opacity 0.15s;
   opacity: 0.6;
 }
-
 .w11-status-btn:hover {
   background: rgba(255,255,255,0.08);
   opacity: 1;
 }
-
-/* ── Sign-in hint ─────────────────────────────────────────────────────────────── */
 .w11-signin-hint {
   position: absolute;
   bottom: 20px;
@@ -6737,20 +5732,16 @@
   pointer-events: none;
   animation: w11HintPulse 3.5s ease-in-out infinite;
 }
-
 .w11-signin-hint span {
   font-size: 0.72rem;
   color: rgba(255,255,255,0.4);
   letter-spacing: 0.04em;
   font-weight: 400;
 }
-
 @keyframes w11HintPulse {
   0%, 100% { opacity: 0.5; transform: translateX(-50%) translateY(0);   }
   50%       { opacity: 0.85; transform: translateX(-50%) translateY(-3px); }
 }
-
-/* ── Responsive ───────────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .w11-cards-row {
     flex-direction: column;
@@ -6763,11 +5754,283 @@
   .w11-card { min-width: 280px; width: 88vw; }
   .w11-time { font-size: clamp(4rem, 18vw, 6rem); }
 }
-
 @media (max-width: 480px) {
   .w11-cards-row { bottom: 60px; }
   .w11-time  { font-size: 4rem; }
   .w11-date  { font-size: 0.9rem; }
   .w11-card  { min-width: unset; width: 92vw; }
+}
+:root {
+  --w11-taskbar-bg: rgba(243, 243, 243, 0.65);
+  --w11-taskbar-bg-dark: rgba(32, 32, 32, 0.75);
+  --w11-hover-bg: rgba(255, 255, 255, 0.4);
+  --w11-hover-bg-dark: rgba(255, 255, 255, 0.08);
+  --w11-active-bg: rgba(255, 255, 255, 0.25);
+  --w11-accent: #0078d4;
+}
+.desktop {
+  background: url('/pexels-zhanqun-cai-1507025-3998488.jpg') no-repeat center center fixed !important;
+  background-size: cover !important;
+}
+.taskbar {
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 48px !important;
+  background: var(--w11-taskbar-bg-dark) !important;
+  backdrop-filter: blur(25px) saturate(1.25) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(1.25) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+.taskbar-left {
+  display: none !important;
+}
+.taskbar-center {
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  gap: 6px !important;
+  padding: 0 4px !important;
+  background: transparent !important;
+}
+.taskbar-btn, .start-button {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+  margin: 0 !important;
+  transition: background 0.15s ease, transform 0.1s ease !important;
+  position: relative !important;
+}
+.taskbar-btn:hover, .start-button:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+}
+.taskbar-btn:active, .start-button:active {
+  background: rgba(255, 255, 255, 0.06) !important;
+  transform: scale(0.92) !important;
+}
+.taskbar-btn.active {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+.taskbar-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  height: 3px;
+  background: #3b82f6; 
+  border-radius: 2px;
+  animation: slideUp 0.2s ease forwards;
+}
+.taskbar-btn.has-window::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 14px;
+  right: 14px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+}
+.taskbar-btn.active.has-window::after {
+  background: #3b82f6;
+  left: 10px;
+  right: 10px;
+}
+
+/* Use dedicated .taskbar-indicator element for app buttons to avoid duplicated bars */
+.taskbar-app::after,
+.taskbar-app.active::after,
+.taskbar-app.has-window::after,
+.taskbar-app.active.has-window::after {
+  content: none !important;
+}
+.taskbar-btn img, .start-button img {
+  width: 24px !important;
+  height: 24px !important;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+.taskbar-right {
+  position: absolute !important;
+  right: 0 !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  padding-right: 0 !important;
+  gap: 4px !important;
+}
+.tb-hidden-icons {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 100%;
+  cursor: default;
+}
+.tb-hidden-icons button {
+  background: transparent;
+  border: none;
+  color: white;
+  opacity: 0.8;
+}
+.system-tray-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 6px 10px !important;
+  border-radius: 4px !important;
+  cursor: default !important;
+  height: 34px !important;
+  transition: background 0.15s ease !important;
+}
+.system-tray-group:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+.taskbar-clock {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  padding: 0 5px !important;
+  height: 34px !important;
+  border-radius: 4px !important;
+  cursor: default !important;
+  transition: background 0.15s ease !important;
+}
+.taskbar-clock:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+.tb-time {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+}
+.tb-date {
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  display: block !important;
+}
+.tb-show-desktop {
+  width: 12px !important;
+  height: 100% !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+  margin-left: 8px !important;
+  cursor: pointer !important;
+  transition: background 0.2s;
+}
+.tb-show-desktop:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+@keyframes slideUp {
+  from { width: 0; opacity: 0; }
+  to { width: 20px; opacity: 1; }
+}
+.app-root {
+  position: fixed;
+  inset: 0;
+  cursor: default;
+}
+.desktop {
+  position: fixed;
+  inset: 0;
+  background: url('/pexels-zhanqun-cai-1507025-3998488.jpg') no-repeat center center;
+  background-size: cover;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #fff;
+  overflow: hidden;
+}
+@keyframes desktopFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.desktop {
+  animation: desktopFadeIn 0.5s ease;
+}
+
+/* Calendar Fixes */
+.cal-arrow-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.cal-arrow-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.notif-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notif-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.notif-btn.clear-all {
+  font-size: 12px;
+  color: #ccc;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.05);
+}
+.notif-btn.clear-all:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.month-display {
+  font-size: 14px;
+  font-weight: 600;
+}
+.month-controls {
+  opacity: 0.6;
+}
+.month-arrows {
+  display: flex;
+  gap: 4px;
+}
+
+@media (max-width: 1000px) {
+  .taskbar-center {
+    left: 0 !important;
+    transform: none !important;
+    justify-content: flex-start !important;
+    padding-left: 10px !important;
+  }
+  
+  .start-menu-overlay {
+    justify-content: flex-start !important;
+    padding-left: 10px !important;
+  }
 }
 

@@ -1,5 +1,4 @@
 ﻿import React, { useState } from 'react'
-
 export default function Todo() {
   const [todos, setTodos] = useState([
     { id: 1, text: 'Plan next project', completed: false },
@@ -7,7 +6,6 @@ export default function Todo() {
     { id: 3, text: 'Revamp apps', completed: true },
   ])
   const [newTodo, setNewTodo] = useState('')
-
   const addTodo = (e) => {
     if (e.key === 'Enter' && newTodo.trim()) {
       setTodos([...todos, {
@@ -18,21 +16,17 @@ export default function Todo() {
       setNewTodo('')
     }
   }
-
   const toggleTodo = (id) => {
     setTodos(todos.map(todo =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     ))
   }
-
   const deleteTodo = (id) => {
     setTodos(todos.filter(todo => todo.id !== id))
   }
-
   return (
     <div className="todo-container">
       <h2 style={{ marginBottom: '20px', fontWeight: 500, color: '#fff' }}>Tasks</h2>
-      
       <div className="todo-input-row">
         <input
           className="todo-input"
@@ -43,7 +37,6 @@ export default function Todo() {
           placeholder="Add a task"
         />
       </div>
-
       <div className="todo-list">
         {todos.map(todo => (
           <div key={todo.id} className="todo-item">
@@ -53,7 +46,7 @@ export default function Todo() {
               checked={todo.completed}
               onChange={() => toggleTodo(todo.id)}
             />
-            <span className={	odo-text } style={{ color: todo.completed ? '#888' : '#fff' }}>
+            <span className={`todo-text ${todo.completed ? 'done' : ''}`} style={{ color: todo.completed ? '#888' : '#fff' }}>
               {todo.text}
             </span>
             <span className="todo-delete" onClick={() => deleteTodo(todo.id)}>
@@ -62,7 +55,6 @@ export default function Todo() {
           </div>
         ))}
       </div>
-
       {todos.length === 0 && (
         <div style={{ textAlign: 'center', marginTop: '40px', opacity: 0.5 }}>
           <p>No more tasks!</p>

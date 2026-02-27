@@ -1,15 +1,12 @@
 ﻿import React, { useState, useRef } from 'react'
-
 export default function Notepad() {
   const [content, setContent] = useState('')
   const [fontSize, setFontSize] = useState(14)
   const textareaRef = useRef(null)
-
   const handleNew = () => {
     if (content && !confirm('Discard changes?')) return
     setContent('')
   }
-
   const handleSave = () => {
     const blob = new Blob([content], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
@@ -19,7 +16,6 @@ export default function Notepad() {
     a.click()
     URL.revokeObjectURL(url)
   }
-
   const handleLoad = (e) => {
     const file = e.target.files[0]
     if (file) {
@@ -28,10 +24,8 @@ export default function Notepad() {
       reader.readAsText(file)
     }
   }
-
   const wordCount = content.trim() ? content.trim().split(/\s+/).length : 0
   const charCount = content.length
-
   return (
     <div className="notepad-container">
       <div className="app-toolbar">
