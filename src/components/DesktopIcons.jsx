@@ -11,7 +11,7 @@ const INITIAL_APPS = [
   { id: 'calculator', name: 'Calculator', icon: 'https://img.icons8.com/fluency/48/calculator.png', component: Calculator },
   { id: 'notepad', name: 'Notepad', icon: 'https://img.icons8.com/fluency/48/notepad.png', component: Notepad },
   { id: 'explorer', name: 'File Explorer', icon: 'https://img.icons8.com/fluency/48/folder-invoices.png', component: FileExplorer },
-  { id: 'browser', name: 'Web Browser', icon: 'https://img.icons8.com/fluency/48/chrome.png', component: Browser },
+  { id: 'browser', name: 'Chrome', icon: 'https://img.icons8.com/fluency/48/chrome.png', component: Browser },
   { id: 'todo', name: 'Todo List', icon: 'https://img.icons8.com/fluency/48/checkmark.png', component: Todo },
   { id: 'clock', name: 'Clock', icon: 'https://img.icons8.com/fluency/48/alarm-clock.png', component: Clock },
   { id: 'paint', name: 'Paint', icon: 'https://img.icons8.com/fluency/48/microsoft-paint.png', component: Paint },

@@ -3,6 +3,7 @@ import LockScreen from './components/LockScreen'
 import UnlockOverlay from './components/UnlockOverlay'
 import Desktop from './components/Desktop'
 import './components/components.css'
+import { useUser } from './contexts/UserContext'
 
 /**
  * App state machine:
@@ -12,6 +13,17 @@ import './components/components.css'
  */
 function App() {
   const [phase, setPhase] = useState('locked')
+  const { currentColors } = useUser()
+
+  // Apply theme
+  useEffect(() => {
+    const root = document.documentElement;
+    if (currentColors) {
+      Object.entries(currentColors).forEach(([key, value]) => {
+        root.style.setProperty(key, value);
+      });
+    }
+  }, [currentColors]);
 
   // Global keyboard listener
   useEffect(() => {

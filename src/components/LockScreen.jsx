@@ -150,7 +150,7 @@ export default function LockScreen({ onUnlock, unlocking }) {
     >
       <div 
         className="w11-lock-bg-container" 
-        style={{ backgroundImage: `url('/pexels-zhanqun-cai-1507025-3998488.jpg')` }}
+        style={{ backgroundImage: 'var(--desktop-bg)' }}
         aria-hidden="true" 
       />
       <div className="w11-clock-area">

@@ -1,3 +1,26 @@
+# Browser proxy mode (Cloudflare Browser Rendering)
+
+The in-app browser supports a server-side proxy mode via `api/proxy.js`.
+
+## Optional: Use Cloudflare Browser Rendering (recommended)
+
+If you configure these environment variables, the proxy will use Cloudflare's `/browser-rendering/content` endpoint first, and fallback to basic fetch if unavailable.
+
+- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_API_TOKEN` (must include **Browser Rendering Write** permission)
+
+### Vercel env setup
+
+Add both variables in your Vercel project settings, then redeploy.
+
+### Local `.env` example
+
+Create `.env` (or `.env.local`) with:
+
+`CLOUDFLARE_ACCOUNT_ID=your_account_id`
+
+`CLOUDFLARE_API_TOKEN=your_token`
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

@@ -19,7 +19,7 @@ const DESKTOP_STATE_KEY = 'win11.desktop.state.v1'
 
 const APP_CATALOG = [
   { id: 'explorer', name: 'File Explorer', icon: 'https://img.icons8.com/fluency/48/folder-invoices.png', component: FileExplorer },
-  { id: 'browser', name: 'Web Browser', icon: 'https://img.icons8.com/fluency/48/ms-edge-new.png', component: Browser },
+  { id: 'browser', name: 'Chrome', icon: 'https://img.icons8.com/fluency/48/chrome.png', component: Browser },
   { id: 'settings', name: 'Settings', icon: 'https://img.icons8.com/fluency/48/settings.png', component: Settings },
   { id: 'notepad', name: 'Notepad', icon: 'https://img.icons8.com/fluency/48/notepad.png', component: Notepad },
   { id: 'calculator', name: 'Calculator', icon: 'https://img.icons8.com/fluency/48/calculator.png', component: Calculator },

@@ -1,11 +1,65 @@
-﻿import React, { useState } from 'react'
-import { MdPalette, MdMonitor, MdNotifications, MdVolumeUp, MdInfo, MdKeyboardArrowRight, MdArrowBack } from 'react-icons/md'
+﻿import React, { useMemo, useState } from 'react'
+import {
+  MdPalette,
+  MdMonitor,
+  MdNotifications,
+  MdVolumeUp,
+  MdInfo,
+  MdKeyboardArrowRight,
+  MdArrowBack,
+  MdWallpaper,
+  MdColorLens,
+  MdAutoFixHigh,
+  MdRestartAlt,
+} from 'react-icons/md'
 import { useUser } from '../../contexts/UserContext'
 
 export default function Settings() {
-  const { user } = useUser()
+  const {
+    user,
+    theme,
+    setThemePreset,
+    availableThemes,
+    currentColors,
+    updateCustomTheme,
+    setWallpaper,
+    resetCustomTheme,
+  } = useUser()
   const [activeTab, setActiveTab] = useState('system')
   const [subPage, setSubPage] = useState(null)
+  const [customBgUrl, setCustomBgUrl] = useState('')
+
+  const bgPreview = currentColors['--desktop-bg'] || "url('/primary-bg.jpg')"
+
+  const [brightness, setBrightness] = useState(100)
+  const [nightLight, setNightLight] = useState(false)
+  const [volume, setVolume] = useState(50)
+  const [outputDevice, setOutputDevice] = useState('Speakers (Realtek(R) Audio)')
+  
+  // Notification states
+  const [globalNotifications, setGlobalNotifications] = useState(true)
+  const [dndMode, setDndMode] = useState(false)
+  const [appNotifications, setAppNotifications] = useState({
+    snippingTool: true,
+    browser: true,
+    explorer: false,
+    system: true
+  })
+
+  // Apply brightness and night light to the document body
+  React.useEffect(() => {
+    const filter = []
+    if (brightness < 100) {
+      filter.push(`brightness(${brightness}%)`)
+    }
+    if (nightLight) {
+      filter.push('sepia(40%) hue-rotate(10deg) saturate(150%)')
+    }
+    document.body.style.filter = filter.join(' ')
+    return () => {
+      document.body.style.filter = 'none'
+    }
+  }, [brightness, nightLight])
 
   const handleTabChange = (id) => {
     setActiveTab(id)
@@ -18,31 +72,308 @@ export default function Settings() {
     { id: 'notifications', label: 'Notifications', icon: <MdNotifications size={18} /> },
     { id: 'about', label: 'About', icon: <MdInfo size={18} /> },
   ]
+
+  const handleColorChange = (key, value) => {
+    updateCustomTheme({ [key]: value });
+  };
+
+  const parseRgbaToHex = (value, fallback = '#202020') => {
+    if (!value) return fallback
+    if (value.startsWith('#')) return value
+    const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i)
+    if (!match) return fallback
+    const [r, g, b] = [match[1], match[2], match[3]].map((v) => Number(v).toString(16).padStart(2, '0'))
+    return `#${r}${g}${b}`
+  }
+
+  const wallpaperOptions = useMemo(
+    () => [
+      '/primary-bg.jpg',
+      'https://images.unsplash.com/photo-1477346611705-65d1883cee1e?auto=format&fit=crop&w=3840&q=100',
+      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=3840&q=100',
+      'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=3840&q=100',
+      'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=3840&q=100',
+      'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=3840&q=100',
+    ],
+    []
+  )
+
+  const quickAccents = ['#0078d4', '#4ca8ff', '#00c2a8', '#ff5ca8', '#c86cff', '#f59e0b']
+
   return (
-    <div className="settings-container" style={{ display: 'flex', height: '100%', background: '#1e1e1e', color: '#fff' }}>
-      <div className="settings-sidebar" style={{ width: '240px', background: 'rgba(255,255,255,0.02)', padding: '12px', borderRight: '1px solid rgba(255,255,255,0.05)' }}>
-        <div className="user-profile" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', marginBottom: '16px' }}>
+    <div className="settings-shell">
+      <style>{`
+        .settings-shell {
+          display: flex;
+          height: 100%;
+          background: var(--theme-bg-color);
+          color: var(--theme-text-color);
+          backdrop-filter: blur(30px);
+          font-family: 'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif;
+        }
+        .settings-sidebar-glass {
+          width: 280px;
+          background: rgba(var(--theme-window-color-rgb), 0.4);
+          border-right: 1px solid var(--theme-border-color);
+          display: flex;
+          flex-direction: column;
+          padding: 16px;
+          gap: 12px;
+        }
+        .settings-user-card {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 14px;
+          background: rgba(255,255,255,0.03);
+          border: 1px solid var(--theme-border-color);
+          border-radius: 14px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .settings-user-card img {
+          width: 48px !important;
+          height: 48px !important;
+          border-radius: 50% !important;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .settings-nav-item {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 12px 14px;
+          border-radius: 12px;
+          cursor: pointer;
+          margin-bottom: 4px;
+          border: 1px solid transparent;
+          transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+          font-size: 14px;
+          font-weight: 500;
+        }
+        .settings-nav-item:hover {
+          background: rgba(255,255,255,0.06);
+          border-color: rgba(255,255,255,0.05);
+          transform: translateX(2px);
+        }
+        .settings-nav-item.active {
+          background: rgba(var(--theme-accent-rgb), 0.15);
+          border-color: rgba(var(--theme-accent-rgb), 0.3);
+          color: var(--theme-accent-color);
+        }
+        .settings-main {
+          flex: 1;
+          padding: 40px 48px;
+          overflow-y: auto;
+          background: rgba(var(--theme-window-color-rgb), 0.2);
+        }
+        .settings-page-title {
+          font-size: 36px;
+          font-weight: 600;
+          letter-spacing: -0.02em;
+          margin-bottom: 28px;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .settings-panel {
+          background: var(--theme-card-bg);
+          border: 1px solid var(--theme-border-color);
+          border-radius: 16px;
+          padding: 22px;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+          backdrop-filter: blur(10px);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .settings-panel:hover {
+          box-shadow: 0 12px 40px rgba(0,0,0,0.16);
+        }
+        .settings-section-title {
+          font-size: 16px;
+          font-weight: 600;
+          margin-bottom: 14px;
+          color: var(--theme-text-color);
+        }
+        .settings-muted {
+          opacity: 0.75;
+          font-size: 13px;
+          line-height: 1.4;
+        }
+        .settings-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          margin-bottom: 16px;
+        }
+        .settings-input,
+        .settings-select {
+          width: 100%;
+          padding: 10px 14px;
+          border-radius: 12px;
+          border: 1px solid var(--theme-input-border);
+          background: var(--theme-input-bg);
+          color: var(--theme-text-color);
+          outline: none;
+          font-size: 14px;
+          transition: all 0.2s ease;
+        }
+        .settings-input:focus,
+        .settings-select:focus {
+          border-color: var(--theme-accent-color);
+          box-shadow: 0 0 0 3px var(--theme-focus-ring);
+          background: rgba(255,255,255,0.05);
+        }
+        .settings-btn {
+          border: 1px solid var(--theme-border-color);
+          border-radius: 12px;
+          padding: 10px 18px;
+          background: rgba(255,255,255,0.05);
+          color: var(--theme-text-color);
+          cursor: pointer;
+          transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+          white-space: nowrap;
+          font-weight: 500;
+          font-size: 14px;
+        }
+        .settings-btn:hover {
+          transform: translateY(-1px);
+          border-color: rgba(var(--theme-accent-rgb), 0.5);
+          background: rgba(var(--theme-accent-rgb), 0.15);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .settings-btn:active {
+          transform: translateY(1px);
+        }
+        .settings-btn.primary {
+          background: var(--theme-accent-color);
+          color: #fff;
+          border-color: transparent;
+          box-shadow: 0 4px 12px rgba(var(--theme-accent-rgb), 0.3);
+        }
+        .settings-btn.primary:hover {
+          background: rgba(var(--theme-accent-rgb), 0.9);
+          box-shadow: 0 6px 16px rgba(var(--theme-accent-rgb), 0.4);
+        }
+        .theme-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+          gap: 16px;
+        }
+        .theme-card {
+          border-radius: 16px;
+          border: 1px solid var(--theme-border-color);
+          background: rgba(255,255,255,0.02);
+          cursor: pointer;
+          overflow: hidden;
+          transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .theme-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+          border-color: rgba(255,255,255,0.15);
+        }
+        .theme-preview {
+          height: 100px;
+          position: relative;
+        }
+        .theme-preview::before {
+          content: '';
+          position: absolute;
+          left: 12px;
+          right: 12px;
+          bottom: 12px;
+          height: 12px;
+          border-radius: 999px;
+          background: rgba(0,0,0,0.4);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .theme-label {
+          padding: 12px 16px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 14px;
+          font-weight: 600;
+        }
+        .theme-selected {
+          box-shadow: 0 0 0 2px var(--theme-accent-color), 0 8px 24px rgba(var(--theme-accent-rgb), 0.25);
+          border-color: transparent;
+        }
+        .wallpaper-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+          gap: 16px;
+        }
+        .wallpaper-thumb {
+          height: 110px;
+          border-radius: 14px;
+          border: 2px solid transparent;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+          transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+          background-size: cover;
+          background-position: center;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .wallpaper-thumb:hover { 
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+        .wallpaper-thumb.active {
+          border-color: var(--theme-accent-color);
+          box-shadow: 0 0 0 4px rgba(var(--theme-accent-rgb), 0.25), 0 8px 24px rgba(0,0,0,0.2);
+        }
+        .color-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 16px;
+        }
+        .color-field {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          border: 1px solid var(--theme-border-color);
+          border-radius: 14px;
+          padding: 14px 16px;
+          background: rgba(255,255,255,0.02);
+          transition: background 0.2s ease;
+        }
+        .color-field:hover {
+          background: rgba(255,255,255,0.04);
+        }
+        .accent-swatches {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        .swatch {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 2px solid rgba(255,255,255,0.8);
+          cursor: pointer;
+          transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .swatch:hover { 
+          transform: scale(1.15);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+      `}</style>
+      {/* Sidebar */}
+      <div className="settings-sidebar-glass">
+        <div className="settings-user-card">
           <img style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} src={user.avatar} alt={user.name} />
           <div style={{ fontSize: '14px' }}>
             <div style={{ fontWeight: 600 }}>{user.name}</div>
             <div style={{ opacity: 0.6, fontSize: '12px' }}>{user.accountType}</div>
           </div>
         </div>
-        <div className="nav-list">
+        <div className="nav-list" style={{ flex: 1 }}>
           {navItems.map(item => (
             <div 
               key={item.id} 
               onClick={() => handleTabChange(item.id)}
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '12px', 
-                padding: '10px 12px', 
-                borderRadius: '6px', 
-                cursor: 'pointer',
-                marginBottom: '2px',
-                background: activeTab === item.id ? 'rgba(255,255,255,0.05)' : 'transparent'
-              }}
+              className={`settings-nav-item ${activeTab === item.id ? 'active' : ''}`}
             >
               {item.icon}
               <span style={{ fontSize: '13px' }}>{item.label}</span>
@@ -50,85 +381,434 @@ export default function Settings() {
           ))}
         </div>
       </div>
-      <div className="settings-content" style={{ flex: 1, padding: '40px', overflowY: 'auto' }}>
+
+      {/* Content */}
+      <div className="settings-main">
         {subPage ? (
-          <div>
+          <div className="subpage-container">
             <div 
-              style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px', cursor: 'pointer', opacity: 0.8 }}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px', cursor: 'pointer', opacity: 0.85 }}
               onClick={() => setSubPage(null)}
             >
               <MdArrowBack />
               <span>Back</span>
             </div>
-            <h1 style={{ fontSize: '24px', marginBottom: '24px', fontWeight: 600 }}>{subPage.title}</h1>
+            <h1 className="settings-page-title" style={{ fontSize: '24px' }}>{subPage.title}</h1>
+            
+            {/* Display Settings */}
             {subPage.id === 'display' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '8px' }}>
+                <div className="settings-panel">
                   <div style={{ marginBottom: '12px', fontWeight: 500 }}>Brightness</div>
-                  <input type="range" style={{ width: '100%' }} />
+                  <input 
+                    type="range" 
+                    min="10" 
+                    max="100" 
+                    value={brightness}
+                    onChange={(e) => setBrightness(Number(e.target.value))}
+                    style={{ width: '100%', accentColor: 'var(--theme-accent-color)' }} 
+                  />
+                  <div className="settings-muted" style={{ marginTop: '8px' }}>{brightness}%</div>
                 </div>
-                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '8px' }}>
+                <div className="settings-panel">
                   <div style={{ marginBottom: '12px', fontWeight: 500 }}>Night light</div>
-                  <button style={{ padding: '8px 16px', background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', borderRadius: '4px' }}>Turn on now</button>
+                  <button 
+                    className={`settings-btn ${nightLight ? 'primary' : ''}`}
+                    onClick={() => setNightLight(!nightLight)}
+                  >
+                    {nightLight ? 'Turn off now' : 'Turn on now'}
+                  </button>
                 </div>
               </div>
             )}
+
+            {/* Sound Settings */}
             {subPage.id === 'sound' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '8px' }}>
+                <div className="settings-panel">
                   <div style={{ marginBottom: '12px', fontWeight: 500 }}>Output</div>
-                  <select style={{ width: '100%', padding: '8px', background: '#333', color: '#fff', border: '1px solid #555', borderRadius: '4px' }}>
+                  <select 
+                    className="settings-select"
+                    value={outputDevice}
+                    onChange={(e) => setOutputDevice(e.target.value)}
+                  >
                     <option>Speakers (Realtek(R) Audio)</option>
                     <option>Headphones</option>
+                    <option>Bluetooth Audio</option>
                   </select>
                 </div>
-                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '8px' }}>
+                <div className="settings-panel">
                   <div style={{ marginBottom: '12px', fontWeight: 500 }}>Volume</div>
-                  <input type="range" style={{ width: '100%' }} />
+                  <input 
+                    type="range" 
+                    min="0" 
+                    max="100" 
+                    value={volume}
+                    onChange={(e) => setVolume(Number(e.target.value))}
+                    style={{ width: '100%', accentColor: 'var(--theme-accent-color)' }} 
+                  />
+                  <div className="settings-muted" style={{ marginTop: '8px' }}>{volume}%</div>
                 </div>
               </div>
             )}
+
+            {/* Background Settings */}
             {subPage.id === 'background' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '8px' }}>
-                  <div style={{ marginBottom: '12px', fontWeight: 500 }}>Personalize your background</div>
-                  <select style={{ width: '100%', padding: '8px', background: '#333', color: '#fff', border: '1px solid #555', borderRadius: '4px' }}>
-                    <option>Picture</option>
-                    <option>Solid color</option>
-                    <option>Slideshow</option>
-                  </select>
+                <div className="settings-panel">
+                  <div className="settings-section-title">Choose your picture</div>
+                  <div className="wallpaper-grid" style={{ marginBottom: '16px' }}>
+                    {wallpaperOptions.map((url, i) => (
+                      <div 
+                        key={i}
+                        onClick={() => setWallpaper(url)}
+                        className={`wallpaper-thumb ${bgPreview.includes(url) ? 'active' : ''}`}
+                        style={{ backgroundImage: `url(${url})` }}
+                      />
+                    ))}
+                  </div>
+                  
+                  <div className="settings-section-title">Custom background URL</div>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <input 
+                      type="text" 
+                      value={customBgUrl} 
+                      onChange={(e) => setCustomBgUrl(e.target.value)}
+                      placeholder="https://example.com/image.jpg"
+                      className="settings-input"
+                      style={{ flex: 1 }}
+                    />
+                    <button 
+                      onClick={() => setWallpaper(customBgUrl)}
+                      className="settings-btn primary"
+                    >
+                      Apply
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
+
+            {/* Themes & Colors Settings */}
+            {subPage.id === 'themes' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {/* Presets */}
+                <div className="settings-panel">
+                  <div className="settings-row">
+                    <div>
+                      <div className="settings-section-title" style={{ marginBottom: 2 }}>Theme presets</div>
+                      <div className="settings-muted">High quality color systems with glass tuning</div>
+                    </div>
+                    <button className="settings-btn" onClick={resetCustomTheme}>
+                      <MdRestartAlt size={16} style={{ marginRight: 6, verticalAlign: 'text-bottom' }} />
+                      Reset custom
+                    </button>
+                  </div>
+                  <div className="theme-grid">
+                     {Object.entries(availableThemes).map(([key, t]) => (
+                        <div 
+                          key={key}
+                          onClick={() => setThemePreset(key)}
+                          className={`theme-card ${theme === key ? 'theme-selected' : ''}`}
+                        >
+                           <div
+                            className="theme-preview"
+                            style={{
+                              background: `linear-gradient(145deg, ${t.colors['--theme-bg-color']}, rgba(${t.colors['--theme-taskbar-color-rgb'] || '0,0,0'}, 0.9))`,
+                            }}
+                           />
+                           <div className="theme-label">
+                            <span>{t.name}</span>
+                            {theme === key && <span>✓</span>}
+                           </div>
+                        </div>
+                     ))}
+                  </div>
+                </div>
+
+                {/* Custom Colors */}
+                <div className="settings-panel">
+                  <div className="settings-section-title">Custom style options</div>
+                  <div className="settings-muted" style={{ marginBottom: 12 }}>Changes apply desktop-wide and save automatically.</div>
+
+                  <div style={{ marginBottom: 14 }}>
+                    <div style={{ fontSize: 12, opacity: 0.8, marginBottom: 8 }}>Quick accent</div>
+                    <div className="accent-swatches">
+                      {quickAccents.map((accent) => (
+                        <button
+                          key={accent}
+                          className="swatch"
+                          style={{ background: accent }}
+                          onClick={() => {
+                            handleColorChange('--theme-accent-color', accent)
+                            const r = parseInt(accent.slice(1, 3), 16)
+                            const g = parseInt(accent.slice(3, 5), 16)
+                            const b = parseInt(accent.slice(5, 7), 16)
+                            handleColorChange('--theme-accent-rgb', `${r}, ${g}, ${b}`)
+                          }}
+                          title={accent}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="color-grid">
+                    
+                    <div className="color-field">
+                      <div>
+                        <div style={{ fontSize: '13px', marginBottom: '2px' }}>Accent color</div>
+                        <div className="settings-muted">Highlights, focus, active controls</div>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <input 
+                          type="color" 
+                          value={parseRgbaToHex(currentColors['--theme-accent-color'], '#4ca8ff')}
+                          onChange={(e) => {
+                            const hex = e.target.value
+                            handleColorChange('--theme-accent-color', hex)
+                            const r = parseInt(hex.slice(1, 3), 16)
+                            const g = parseInt(hex.slice(3, 5), 16)
+                            const b = parseInt(hex.slice(5, 7), 16)
+                            handleColorChange('--theme-accent-rgb', `${r}, ${g}, ${b}`)
+                          }}
+                          style={{ border: 'none', background: 'none', width: '40px', height: '40px', cursor: 'pointer' }}
+                        />
+                        <span style={{ fontSize: '12px', fontFamily: 'monospace' }}>{currentColors['--theme-accent-color']}</span>
+                      </div>
+                    </div>
+
+                    <div className="color-field">
+                      <div>
+                        <div style={{ fontSize: '13px', marginBottom: '2px' }}>Window color</div>
+                        <div className="settings-muted">App windows and dialog surfaces</div>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <input 
+                          type="color" 
+                          value={parseRgbaToHex(`rgb(${currentColors['--theme-window-color-rgb'] || '24, 28, 38'})`, '#202020')}
+                          onChange={(e) => {
+                            const hex = e.target.value
+                            const r = parseInt(hex.slice(1, 3), 16)
+                            const g = parseInt(hex.slice(3, 5), 16)
+                            const b = parseInt(hex.slice(5, 7), 16)
+                            handleColorChange('--theme-window-color-rgb', `${r}, ${g}, ${b}`)
+                            const alpha = Number(currentColors['--theme-window-opacity'] || 0.76)
+                            handleColorChange('--theme-bg-color', `rgba(${r}, ${g}, ${b}, ${alpha})`)
+                          }}
+                          style={{ border: 'none', background: 'none', width: '40px', height: '40px', cursor: 'pointer' }}
+                        />
+                        <span className="settings-muted">RGB only</span>
+                      </div>
+                    </div>
+
+                    <div className="color-field">
+                      <div>
+                        <div style={{ fontSize: '13px', marginBottom: '2px' }}>Taskbar color</div>
+                        <div className="settings-muted">Bottom bar tint and translucency</div>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <input 
+                          type="color" 
+                          value={parseRgbaToHex(`rgb(${currentColors['--theme-taskbar-color-rgb'] || '11, 20, 36'})`, '#071836')}
+                          onChange={(e) => {
+                            const hex = e.target.value
+                            const r = parseInt(hex.slice(1, 3), 16)
+                            const g = parseInt(hex.slice(3, 5), 16)
+                            const b = parseInt(hex.slice(5, 7), 16)
+                            handleColorChange('--theme-taskbar-color-rgb', `${r}, ${g}, ${b}`)
+                            const alpha = Number(currentColors['--theme-taskbar-opacity'] || 0.8)
+                            handleColorChange('--theme-taskbar-bg', `rgba(${r}, ${g}, ${b}, ${alpha})`)
+                          }}
+                          style={{ border: 'none', background: 'none', width: '40px', height: '40px', cursor: 'pointer' }}
+                        />
+                        <span className="settings-muted">RGB only</span>
+                      </div>
+                    </div>
+
+                    <div className="color-field">
+                      <div>
+                        <div style={{ fontSize: '13px', marginBottom: '2px' }}>Text color</div>
+                        <div className="settings-muted">Labels and content text</div>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                         <input 
+                          type="color" 
+                          value={parseRgbaToHex(currentColors['--theme-text-color'], '#ffffff')}
+                          onChange={(e) => handleColorChange('--theme-text-color', e.target.value)}
+                          style={{ border: 'none', background: 'none', width: '40px', height: '40px', cursor: 'pointer' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="color-field">
+                      <div>
+                        <div style={{ fontSize: '13px', marginBottom: '2px' }}>Window opacity</div>
+                        <div className="settings-muted">How transparent app windows are</div>
+                      </div>
+                      <div style={{ width: 160 }}>
+                        <input
+                          type="range"
+                          min="0.45"
+                          max="0.95"
+                          step="0.01"
+                          value={currentColors['--theme-window-opacity'] || 0.76}
+                          onChange={(e) => {
+                            const value = Number(e.target.value)
+                            handleColorChange('--theme-window-opacity', String(value))
+                            const rgb = currentColors['--theme-window-color-rgb'] || '24, 28, 38'
+                            handleColorChange('--theme-bg-color', `rgba(${rgb}, ${value})`)
+                          }}
+                          style={{ width: '100%', accentColor: 'var(--theme-accent-color)' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="color-field">
+                      <div>
+                        <div style={{ fontSize: '13px', marginBottom: '2px' }}>Taskbar opacity</div>
+                        <div className="settings-muted">Bottom bar transparency</div>
+                      </div>
+                      <div style={{ width: 160 }}>
+                        <input
+                          type="range"
+                          min="0.55"
+                          max="0.98"
+                          step="0.01"
+                          value={currentColors['--theme-taskbar-opacity'] || 0.8}
+                          onChange={(e) => {
+                            const value = Number(e.target.value)
+                            handleColorChange('--theme-taskbar-opacity', String(value))
+                            const rgb = currentColors['--theme-taskbar-color-rgb'] || '11, 20, 36'
+                            handleColorChange('--theme-taskbar-bg', `rgba(${rgb}, ${value})`)
+                          }}
+                          style={{ width: '100%', accentColor: 'var(--theme-accent-color)' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="color-field">
+                      <div>
+                        <div style={{ fontSize: '13px', marginBottom: '2px' }}>Window blur</div>
+                        <div className="settings-muted">Back layer blur strength</div>
+                      </div>
+                      <div style={{ width: 160 }}>
+                        <input
+                          type="range"
+                          min="8"
+                          max="40"
+                          step="1"
+                          value={Number((currentColors['--theme-window-blur'] || '20px').replace('px', ''))}
+                          onChange={(e) => handleColorChange('--theme-window-blur', `${e.target.value}px`)}
+                          style={{ width: '100%', accentColor: 'var(--theme-accent-color)' }}
+                        />
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div style={{ marginTop: 14, display: 'flex', gap: 10 }}>
+                    <button className="settings-btn" onClick={() => setThemePreset('dark')}>
+                      <MdAutoFixHigh size={16} style={{ marginRight: 6, verticalAlign: 'text-bottom' }} />
+                      Apply premium dark baseline
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Notification Settings */}
             {subPage.id === 'notifications' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div className="settings-panel" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <div>
                     <div style={{ fontWeight: 500 }}>Notifications</div>
                     <div style={{ fontSize: '12px', opacity: 0.6 }}>Get notifications from apps and senders</div>
                   </div>
-                  <div style={{ width: '40px', height: '20px', background: '#0078d4', borderRadius: '10px', position: 'relative', cursor: 'pointer' }}>
-                    <div style={{ width: '16px', height: '16px', background: '#fff', borderRadius: '50%', position: 'absolute', top: '2px', right: '2px' }}></div>
+                  <div 
+                    onClick={() => setGlobalNotifications(!globalNotifications)}
+                    style={{ 
+                      width: '40px', height: '20px', 
+                      background: globalNotifications ? 'var(--theme-accent-color)' : 'rgba(255,255,255,0.2)', 
+                      borderRadius: '10px', position: 'relative', cursor: 'pointer',
+                      transition: 'background 0.2s'
+                    }}
+                  >
+                    <div style={{ 
+                      width: '16px', height: '16px', background: '#fff', borderRadius: '50%', 
+                      position: 'absolute', top: '2px', 
+                      left: globalNotifications ? '22px' : '2px',
+                      transition: 'left 0.2s'
+                    }}></div>
                   </div>
                 </div>
-                <div style={{ fontSize: '13px', opacity: 0.8, marginTop: '16px' }}>Notifications from apps and other senders</div>
-                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '16px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                   <span>Snipping Tool</span>
-                   <div style={{ width: '40px', height: '20px', background: '#0078d4', borderRadius: '10px', position: 'relative' }}>
-                      <div style={{ width: '16px', height: '16px', background: '#fff', borderRadius: '50%', position: 'absolute', top: '2px', right: '2px' }}></div>
-                   </div>
+
+                <div className="settings-panel" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div>
+                    <div style={{ fontWeight: 500 }}>Do not disturb</div>
+                    <div style={{ fontSize: '12px', opacity: 0.6 }}>Send notifications directly to notification center</div>
+                  </div>
+                  <div 
+                    onClick={() => setDndMode(!dndMode)}
+                    style={{ 
+                      width: '40px', height: '20px', 
+                      background: dndMode ? 'var(--theme-accent-color)' : 'rgba(255,255,255,0.2)', 
+                      borderRadius: '10px', position: 'relative', cursor: 'pointer',
+                      transition: 'background 0.2s'
+                    }}
+                  >
+                    <div style={{ 
+                      width: '16px', height: '16px', background: '#fff', borderRadius: '50%', 
+                      position: 'absolute', top: '2px', 
+                      left: dndMode ? '22px' : '2px',
+                      transition: 'left 0.2s'
+                    }}></div>
+                  </div>
+                </div>
+
+                <div style={{ fontSize: '13px', opacity: 0.8, marginTop: '16px', fontWeight: 600 }}>Notifications from apps and other senders</div>
+                
+                <div className="settings-panel" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {[
+                    { id: 'snippingTool', label: 'Snipping Tool' },
+                    { id: 'browser', label: 'Web Browser' },
+                    { id: 'explorer', label: 'File Explorer' },
+                    { id: 'system', label: 'System' }
+                  ].map(app => (
+                    <div key={app.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                      <span>{app.label}</span>
+                      <div 
+                        onClick={() => setAppNotifications(prev => ({ ...prev, [app.id]: !prev[app.id] }))}
+                        style={{ 
+                          width: '40px', height: '20px', 
+                          background: appNotifications[app.id] && globalNotifications ? 'var(--theme-accent-color)' : 'rgba(255,255,255,0.2)', 
+                          borderRadius: '10px', position: 'relative', cursor: globalNotifications ? 'pointer' : 'not-allowed',
+                          opacity: globalNotifications ? 1 : 0.5,
+                          transition: 'background 0.2s'
+                        }}
+                      >
+                        <div style={{ 
+                          width: '16px', height: '16px', background: '#fff', borderRadius: '50%', 
+                          position: 'absolute', top: '2px', 
+                          left: appNotifications[app.id] && globalNotifications ? '22px' : '2px',
+                          transition: 'left 0.2s'
+                        }}></div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
           </div>
         ) : (
-          <>
-            <h1 style={{ fontSize: '28px', marginBottom: '32px', fontWeight: 600 }}>{navItems.find(i => i.id === activeTab)?.label}</h1>
+          <div className="main-page-container">
+            <h1 className="settings-page-title">{navItems.find(i => i.id === activeTab)?.label}</h1>
+            
             {activeTab === 'system' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div 
                   onClick={() => setSubPage({ id: 'display', title: 'Display' })}
-                  style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}
+                  className="settings-panel"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}
                 >
                     <div style={{ display: 'flex', gap: '16px' }}>
                       <MdMonitor size={20} />
@@ -141,7 +821,8 @@ export default function Settings() {
                 </div>
                 <div 
                   onClick={() => setSubPage({ id: 'sound', title: 'Sound' })}
-                  style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}
+                  className="settings-panel"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}
                 >
                     <div style={{ display: 'flex', gap: '16px' }}>
                       <MdVolumeUp size={20} />
@@ -152,30 +833,74 @@ export default function Settings() {
                     </div>
                     <MdKeyboardArrowRight size={20} />
                 </div>
-              </div>
-            )}
-            {activeTab === 'personalization' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div 
-                  onClick={() => setSubPage({ id: 'background', title: 'Background' })}
-                  style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}
+                  className="settings-panel"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', opacity: 0.6 }}
                 >
                     <div style={{ display: 'flex', gap: '16px' }}>
-                      <MdPalette size={20} />
+                      <MdInfo size={20} />
                       <div>
-                          <div style={{ fontSize: '14px', fontWeight: 500 }}>Background</div>
-                          <div style={{ fontSize: '12px', opacity: 0.6 }}>Wallpaper, colors, themes</div>
+                          <div style={{ fontSize: '14px', fontWeight: 500 }}>Power & battery</div>
+                          <div style={{ fontSize: '12px' }}>Sleep, battery usage, battery saver</div>
+                      </div>
+                    </div>
+                    <MdKeyboardArrowRight size={20} />
+                </div>
+                <div 
+                  className="settings-panel"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', opacity: 0.6 }}
+                >
+                    <div style={{ display: 'flex', gap: '16px' }}>
+                      <MdInfo size={20} />
+                      <div>
+                          <div style={{ fontSize: '14px', fontWeight: 500 }}>Storage</div>
+                          <div style={{ fontSize: '12px' }}>Storage space, drives, configuration rules</div>
                       </div>
                     </div>
                     <MdKeyboardArrowRight size={20} />
                 </div>
               </div>
             )}
+
+            {activeTab === 'personalization' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div 
+                  onClick={() => setSubPage({ id: 'background', title: 'Background' })}
+                  className="settings-panel"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}
+                >
+                    <div style={{ display: 'flex', gap: '16px' }}>
+                      <MdWallpaper size={20} />
+                      <div>
+                          <div style={{ fontSize: '14px', fontWeight: 500 }}>Background</div>
+                          <div style={{ fontSize: '12px', opacity: 0.6 }}>Wallpaper, custom images</div>
+                      </div>
+                    </div>
+                    <MdKeyboardArrowRight size={20} />
+                </div>
+                <div 
+                  onClick={() => setSubPage({ id: 'themes', title: 'Themes & Colors' })}
+                  className="settings-panel"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}
+                >
+                    <div style={{ display: 'flex', gap: '16px' }}>
+                      <MdColorLens size={20} />
+                      <div>
+                          <div style={{ fontSize: '14px', fontWeight: 500 }}>Themes & Colors</div>
+                          <div style={{ fontSize: '12px', opacity: 0.6 }}>Themes, accent color, taskbar color</div>
+                      </div>
+                    </div>
+                    <MdKeyboardArrowRight size={20} />
+                </div>
+              </div>
+            )}
+
             {activeTab === 'notifications' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div 
                   onClick={() => setSubPage({ id: 'notifications', title: 'Notifications' })}
-                  style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}
+                  className="settings-panel"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}
                 >
                     <div style={{ display: 'flex', gap: '16px' }}>
                       <MdNotifications size={20} />
@@ -188,14 +913,15 @@ export default function Settings() {
                 </div>
               </div>
             )}
+
             {activeTab === 'about' && (
-              <div style={{ background: 'rgba(255,255,255,0.03)', padding: '24px', borderRadius: '8px' }}>
+              <div className="settings-panel" style={{ padding: '24px' }}>
                 <div style={{ fontSize: '18px', fontWeight: 600, marginBottom: '16px' }}>Device specifications</div>
                 <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: '12px', fontSize: '13px' }}>
                     <div style={{ opacity: 0.6 }}>Device name</div>
-                    <div>AJAY-PC</div>
+                    <div>[REDACTED] PC</div>
                     <div style={{ opacity: 0.6 }}>Processor</div>
-                    <div>Intel(R) Core(TM) i7-12700H 2.30 GHz</div>
+                    <div>AMD Ryzen 5 5600H with Radeon Graphics (3.30 GHz)</div>
                     <div style={{ opacity: 0.6 }}>Installed RAM</div>
                     <div>16.0 GB (15.7 GB usable)</div>
                     <div style={{ opacity: 0.6 }}>System type</div>
@@ -203,7 +929,7 @@ export default function Settings() {
                 </div>
               </div>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>
